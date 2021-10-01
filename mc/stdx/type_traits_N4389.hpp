@@ -9,6 +9,6 @@ using std::bool_constant;
 #else
 namespace mc {
 template <bool B>
-using bool_constant = integral_constant<bool, B>;
+using bool_constant = std::integral_constant<bool, B>;
 }
 #endif
