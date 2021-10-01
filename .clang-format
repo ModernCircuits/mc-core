@@ -1,0 +1,11 @@
+---
+BasedOnStyle: WebKit
+AlignConsecutiveAssignments: true
+AlignEscapedNewlines: Right
+AlignOperands: true
+AlignTrailingComments: true
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+Language: Cpp
+Standard: Auto
+UseTab: Never
+...

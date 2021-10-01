@@ -1,0 +1,13 @@
+# Editors
+.atom
+.idea
+.vs
+.vscode
+
+# Build
+build
+build_*
+cmake-build-*
+assets
+docs/doxygen/doc
+/out
