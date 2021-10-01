@@ -45,10 +45,12 @@ find_package(fmt REQUIRED)
 find_package(Microsoft.GSL REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
+find_package(tcb-span REQUIRED)
 
 add_library(mc_stl INTERFACE)
 add_library(mc::mc_stl ALIAS mc_stl)
-target_link_libraries(mc_stl INTERFACE ${PROJECT_SOURCE_DIR})
+target_include_directories(mc_stl INTERFACE ${PROJECT_SOURCE_DIR})
+target_compile_definitions(mc_stl INTERFACE TCB_SPAN_NAMESPACE_NAME=mc)
 target_link_libraries(mc_stl 
     INTERFACE
         Boost::headers
@@ -56,6 +58,7 @@ target_link_libraries(mc_stl
         Microsoft.GSL::Microsoft.GSL
         concurrentqueue::concurrentqueue
         readerwriterqueue::readerwriterqueue
+        tcb-span::tcb-span
 )
 
 
