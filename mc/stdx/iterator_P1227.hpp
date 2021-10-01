@@ -1,15 +1,20 @@
 #pragma once
 
+#include "mc/version.hpp"
+
+#if defined(__cpp_lib_ssize)
+
 #include <iterator>
+
+namespace mc {
+using std::ssize;
+}
+
+#else
 
 #include "mc/preprocessor.hpp"
 #include "mc/type_traits.hpp"
 
-#if defined(__cpp_lib_ssize)
-namespace mc {
-using std::ssize;
-}
-#else
 namespace mc {
 template <typename C>
 MC_NODISCARD constexpr auto ssize(C const& c)

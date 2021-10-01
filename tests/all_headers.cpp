@@ -37,3 +37,4 @@
 #include "mc/utility.hpp"
 #include "mc/variant.hpp"
 #include "mc/vector.hpp"
+#include "mc/version.hpp"

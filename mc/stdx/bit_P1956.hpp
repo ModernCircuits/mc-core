@@ -1,16 +1,20 @@
 #pragma once
 
-#if __has_include(<bit>) && __cplusplus > 201703L
-#include <bit>
-#endif
+#include "mc/version.hpp"
 
 #if defined(__cpp_lib_int_pow2)
+
+#include <bit>
+
 namespace mc {
+
 using std::bit_ceil;
 using std::bit_floor;
 using std::bit_width;
 using std::has_single_bit;
+
 }
+
 #else
 
 #include "mc/preprocessor.hpp"

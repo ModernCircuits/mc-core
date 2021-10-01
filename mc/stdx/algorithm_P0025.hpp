@@ -1,14 +1,14 @@
 #pragma once
 
-#include <algorithm>
-
-#include "mc/preprocessor.hpp"
+#include "mc/version.hpp"
 
 #if defined(__cpp_lib_clamp)
+#include <algorithm>
 namespace mc {
 using std::clamp;
 }
 #else
+#include "mc/preprocessor.hpp"
 namespace mc {
 template <typename T, typename Compare>
 MC_NODISCARD constexpr auto clamp(T const& v, T const& lo, T const& hi, Compare comp) -> T const&

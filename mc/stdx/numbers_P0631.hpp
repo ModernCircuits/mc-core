@@ -1,10 +1,9 @@
 #pragma once
 
-#if __has_include(<numbers>) && __cplusplus > 201703L
-#include <numbers>
-#endif
+#include "mc/version.hpp"
 
 #if defined(__cpp_lib_math_constants)
+#include <numbers>
 namespace mc {
 namespace numbers {
     using std::numbers::e;          // NOLINT(readability-identifier-naming)
@@ -56,5 +55,4 @@ namespace numbers {
     // clang-format on
 } // namespace numbers
 } // namespace mc
-
 #endif

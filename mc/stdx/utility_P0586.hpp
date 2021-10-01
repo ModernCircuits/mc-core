@@ -1,11 +1,11 @@
 #pragma once
 
-#include <utility>
-
-#include "mc/preprocessor.hpp"
-#include "mc/type_traits.hpp"
+#include "mc/version.hpp"
 
 #if defined(__cpp_lib_integer_comparison_functions)
+
+#include <utility>
+
 namespace mc {
 using std::cmp_equal;
 using std::cmp_greater;
@@ -15,6 +15,10 @@ using std::cmp_less_equal;
 using std::cmp_not_equal;
 }
 #else
+
+#include "mc/preprocessor.hpp"
+#include "mc/type_traits.hpp"
+
 namespace mc {
 namespace detail {
     template <typename T, typename U, bool IsSignedT, bool IsSignedU>

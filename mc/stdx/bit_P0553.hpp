@@ -1,10 +1,9 @@
 #pragma once
 
-#if __has_include(<bit>) &&__cplusplus > 201703L
-#include <bit>
-#endif
+#include "mc/version.hpp"
 
 #if defined(__cpp_lib_bitops)
+#include <bit>
 namespace mc {
 using std::countl_one;
 using std::countl_zero;

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "mc/version.hpp"
+
 #include <vector>
 
 #include "container/SmallVector.hpp"

@@ -1,12 +1,9 @@
 #pragma once
 
-#if __has_include(<bit>) && __cplusplus > 201703L
-#include <bit>
-#endif
-
-#include "mc/preprocessor.hpp"
+#include "mc/version.hpp"
 
 #if defined(__cpp_lib_bit_cast)
+#include <bit>
 namespace mc {
 using std::bit_cast;
 }

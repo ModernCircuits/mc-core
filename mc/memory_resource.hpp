@@ -1,10 +1,10 @@
 #pragma once
 
-#if __has_include(<memory_resource>) && __cplusplus > 201402L
-#include <memory_resource>
-#endif
+#include "mc/version.hpp"
 
 #if defined(__cpp_lib_memory_resource)
+
+#include <memory_resource>
 
 namespace mc {
 namespace pmr {

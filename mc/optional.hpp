@@ -1,10 +1,9 @@
 #pragma once
 
-#if __has_include(<optional>) && __cplusplus > 201402L
-#include <optional>
-#endif
+#include "mc/version.hpp"
 
 #if defined(__cpp_lib_optional)
+#include <optional>
 namespace mc {
 using std::optional;
 } // namespace mc

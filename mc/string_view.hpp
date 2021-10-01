@@ -1,6 +1,8 @@
 #pragma once
 
-#if defined(__cpp_lib_string_view) && __cplusplus > 201402L
+#include "mc/version.hpp"
+
+#if defined(__cpp_lib_string_view)
 #include <string_view>
 namespace mc {
 using std::string_view;

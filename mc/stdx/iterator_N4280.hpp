@@ -1,18 +1,23 @@
 #pragma once
 
-#include <iterator>
-
-#include "mc/initializer_list.hpp"
-#include "mc/preprocessor.hpp"
-#include "mc/type_traits.hpp"
+#include "mc/version.hpp"
 
 #if defined(__cpp_lib_nonmember_container_access)
+
+#include <iterator>
+
 namespace mc {
 using std::data;
 using std::empty;
 using std::size;
 }
+
 #else
+
+#include "mc/initializer_list.hpp"
+#include "mc/preprocessor.hpp"
+#include "mc/type_traits.hpp"
+
 namespace mc {
 
 template <typename C>
