@@ -1,7 +1,5 @@
 project(mc_stl_tests)
 
-enable_testing()
-include(CTest)
 find_package(Catch2 REQUIRED)
 
 add_executable(${PROJECT_NAME})
