@@ -21,7 +21,24 @@ conan_cmake_configure(
     GENERATORS
         cmake_find_package
     OPTIONS
-        boost:header_only=True
+        boost:without_context=True
+        boost:without_contract=True
+        boost:without_coroutine=True
+        boost:without_fiber=True
+        boost:without_filesystem=False
+        boost:without_graph=True
+        boost:without_graph_parallel=True
+        boost:without_iostreams=True
+        boost:without_json=False
+        boost:without_log=True
+        boost:without_regex=True
+        boost:without_serialization=True
+        boost:without_test=True
+        boost:without_type_erasure=True
+        boost:without_wave=True
+        boost:system_no_deprecated=True
+        boost:asio_no_deprecated=True
+        boost:filesystem_no_deprecated=True
         catch2:with_main=True
 )
 

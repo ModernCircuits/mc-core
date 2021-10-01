@@ -15,7 +15,7 @@ using std::has_single_bit;
 }
 #else
 
-#include "mc/stdx/bit_P0553.hpp"
+#include "stdx/bit_P0553.hpp"
 
 namespace mc {
 

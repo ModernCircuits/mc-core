@@ -2,4 +2,4 @@
 
 #include <algorithm>
 
-#include "mc/stdx/algorithm_P0025.hpp"
+#include "stdx/algorithm_P0025.hpp"

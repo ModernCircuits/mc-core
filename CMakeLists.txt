@@ -43,7 +43,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR})
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR})
 include(mcConan)
 
-find_package(Boost 1.77 REQUIRED)
+find_package(Boost 1.77 REQUIRED COMPONENTS container filesystem json)
 find_package(fmt REQUIRED)
 find_package(Microsoft.GSL REQUIRED)
 find_package(concurrentqueue REQUIRED)

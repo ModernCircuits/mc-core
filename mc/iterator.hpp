@@ -2,8 +2,8 @@
 
 #include <iterator>
 
-#include "mc/stdx/iterator_N4280.hpp"
-#include "mc/stdx/iterator_P1227.hpp"
+#include "stdx/iterator_N4280.hpp"
+#include "stdx/iterator_P1227.hpp"
 
 namespace mc {
 using std::begin;
