@@ -1,9 +1,9 @@
 #pragma once
 
-#include <type_traits>
 #include <utility>
 
 #include "mc/preprocessor.hpp"
+#include "mc/type_traits.hpp"
 
 #if defined(__cpp_lib_integer_comparison_functions)
 namespace mc {

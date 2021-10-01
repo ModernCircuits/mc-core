@@ -4,8 +4,6 @@
 #include <bit>
 #endif
 
-#include "mc/preprocessor.hpp"
-
 #if defined(__cpp_lib_int_pow2)
 namespace mc {
 using std::bit_ceil;
@@ -15,6 +13,7 @@ using std::has_single_bit;
 }
 #else
 
+#include "mc/preprocessor.hpp"
 #include "mc/stdx/bit_P0553.hpp"
 
 namespace mc {

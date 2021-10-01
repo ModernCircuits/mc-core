@@ -1,9 +1,9 @@
 #pragma once
 
 #include <iterator>
-#include <type_traits>
 
 #include "mc/preprocessor.hpp"
+#include "mc/type_traits.hpp"
 
 #if defined(__cpp_lib_ssize)
 namespace mc {

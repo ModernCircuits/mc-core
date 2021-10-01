@@ -1,7 +1,5 @@
 #pragma once
 
-#include "mc/preprocessor.hpp"
-
 #if __has_include(<bit>) &&__cplusplus > 201703L
 #include <bit>
 #endif
@@ -18,8 +16,9 @@ using std::rotr;
 }
 #else
 
-#include <limits>
-#include <type_traits>
+#include "mc/limits.hpp"
+#include "mc/preprocessor.hpp"
+#include "mc/type_traits.hpp"
 
 namespace mc {
 

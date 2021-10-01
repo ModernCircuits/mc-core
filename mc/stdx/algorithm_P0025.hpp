@@ -1,8 +1,8 @@
 #pragma once
 
-#include "mc/preprocessor.hpp"
-
 #include <algorithm>
+
+#include "mc/preprocessor.hpp"
 
 #if defined(__cpp_lib_clamp)
 namespace mc {
