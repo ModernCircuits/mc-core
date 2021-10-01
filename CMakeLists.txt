@@ -57,6 +57,9 @@ target_compile_definitions(mc_stl INTERFACE TCB_SPAN_NAMESPACE_NAME=mc)
 target_link_libraries(mc_stl 
     INTERFACE
         Boost::headers
+        Boost::container
+        Boost::filesystem
+        Boost::json
         fmt::fmt
         Microsoft.GSL::Microsoft.GSL
         concurrentqueue::concurrentqueue

@@ -20,6 +20,7 @@
 #include "mc/limits.hpp"
 #include "mc/map.hpp"
 #include "mc/memory.hpp"
+#include "mc/memory_resource.hpp"
 #include "mc/numbers.hpp"
 #include "mc/numeric.hpp"
 #include "mc/optional.hpp"
