@@ -25,7 +25,7 @@ MC_NODISCARD constexpr auto clamp(T const& v, T const& lo, T const& hi, Compare 
 template <typename T>
 MC_NODISCARD constexpr auto clamp(T const& v, T const& lo, T const& hi) -> T const&
 {
-    clamp(v, lo, hi, [](auto const& l, auto const& r) { return l < r; });
+    return clamp(v, lo, hi, [](auto const& l, auto const& r) { return l < r; });
 }
 } // namespace mc
 #endif
