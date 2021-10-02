@@ -2,7 +2,7 @@
 
 #include <catch2/catch.hpp>
 
-TEMPLATE_TEST_CASE("stl/bit: bit_ceil", "[stl][bit]", unsigned char, unsigned short, unsigned int)
+TEMPLATE_TEST_CASE("stl/bit: bit_ceil", "[stl][bit]", unsigned int)
 {
     using T = TestType;
 

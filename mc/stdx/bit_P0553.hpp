@@ -24,7 +24,7 @@ namespace mc {
 namespace detail {
     // clang-format off
     template <typename T>
-    constexpr auto bitUnsignedInt = std::is_same<T, unsigned char>::value
+    constexpr auto BitUnsignedInt = std::is_same<T, unsigned char>::value
                                  || std::is_same<T, unsigned short>::value
                                  || std::is_same<T, unsigned int>::value
                                  || std::is_same<T, unsigned long>::value
@@ -34,7 +34,7 @@ namespace detail {
 
 template <typename T>
 MC_NODISCARD constexpr auto countl_zero(T x) noexcept // NOLINT(readability-identifier-naming)
-    -> std::enable_if_t<detail::bitUnsignedInt<T>, int>
+    -> std::enable_if_t<detail::BitUnsignedInt<T>, int>
 {
     auto const totalBits = std::numeric_limits<T>::digits;
     if (x == T(0)) {

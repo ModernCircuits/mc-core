@@ -17,7 +17,7 @@ using std::as_const;
 
 namespace mc {
 template <typename T>
-MC_NODISCARD constexpr auto as_const(T& t) noexcept -> std::add_const_t<T>&
+MC_NODISCARD constexpr auto as_const(T& t) noexcept -> std::add_const_t<T>& // NOLINT(readability-identifier-naming)
 {
     return t;
 }

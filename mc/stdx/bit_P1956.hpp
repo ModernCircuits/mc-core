@@ -24,7 +24,7 @@ namespace mc {
 
 template <typename T>
 MC_NODISCARD constexpr auto bit_width(T x) noexcept // NOLINT(readability-identifier-naming)
-    -> std::enable_if_t<detail::bitUnsignedInt<T>, int>
+    -> std::enable_if_t<detail::BitUnsignedInt<T>, int>
 {
     return std::numeric_limits<T>::digits - countl_zero(x);
 }
@@ -56,7 +56,7 @@ namespace detail {
 
 template <typename T>
 MC_NODISCARD constexpr auto bit_ceil(T x) noexcept // NOLINT(readability-identifier-naming)
-    -> std::enable_if_t<detail::bitUnsignedInt<T>, T>
+    -> std::enable_if_t<detail::BitUnsignedInt<T>, T>
 {
     if (x < T(2)) {
         return T(1);
