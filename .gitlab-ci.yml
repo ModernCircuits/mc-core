@@ -78,20 +78,20 @@ linux:clang-tidy:
     - BUILD_DIR=cmake-build-tidy make tidy-check
   dependencies: [ ]
 
-# linux:gcc:asan:
-#   stage: sanitize
-#   tags:
-#     - mc-linux
-#   variables:
-#     GIT_SUBMODULE_STRATEGY: recursive
-#     CMAKE_BUILD_PARALLEL_LEVEL: 2
-#   script:
-#     - cd $CI_PROJECT_DIR
-#     - cmake -S. -GNinja -Bcmake-build-asan -DCMAKE_BUILD_TYPE=Release -DMC_BUILD_ASAN=ON
-#     - cmake --build cmake-build-asan
-#     - cd cmake-build-asan
-#     - ctest
-#   dependencies: [ ]
+linux:gcc:asan:
+  stage: sanitize
+  tags:
+    - mc-linux
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    CMAKE_BUILD_PARALLEL_LEVEL: 2
+  script:
+    - cd $CI_PROJECT_DIR
+    - cmake -S. -GNinja -Bcmake-build-asan -DCMAKE_BUILD_TYPE=Release -DMC_BUILD_ASAN=ON
+    - cmake --build cmake-build-asan
+    - cd cmake-build-asan
+    - ctest
+  dependencies: [ ]
 
 # linux:gcc:tsan:
 #   stage: sanitize
