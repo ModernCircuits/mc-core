@@ -1,8 +1,5 @@
 project(mc_stl_tests)
 
-find_package(Catch2 REQUIRED)
-include(Catch)
-
 add_executable(${PROJECT_NAME})
 catch_discover_tests(${PROJECT_NAME})
 
