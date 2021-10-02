@@ -15,6 +15,7 @@ stages:
 #     - cd $CI_PROJECT_DIR
 #     - make format-check
 #   dependencies: [ ]
+#   needs: []
 
 win:msvc:release:
   stage: build
@@ -32,6 +33,7 @@ win:msvc:release:
     cmake --build . --config Release --parallel 4
     ctest -C Release
   dependencies: [ ]
+  needs: []
 
 mac:xcode:release:
   stage: build
@@ -48,6 +50,7 @@ mac:xcode:release:
     - cd cmake-build-release
     - ctest
   dependencies: [ ]
+  needs: []
 
 linux:clang:release:
   stage: build
@@ -65,6 +68,7 @@ linux:clang:release:
     - cd cmake-build-release
     - ctest
   dependencies: [ ]
+  needs: []
 
 linux:clang-tidy:
   stage: build
@@ -77,6 +81,7 @@ linux:clang-tidy:
     - cmake -S. -GNinja -Bcmake-build-tidy -DCMAKE_BUILD_TYPE=Release
     - BUILD_DIR=cmake-build-tidy make tidy-check
   dependencies: [ ]
+  needs: []
 
 linux:gcc:asan:
   stage: sanitize
@@ -92,6 +97,7 @@ linux:gcc:asan:
     - cd cmake-build-asan
     - ctest
   dependencies: [ ]
+  needs: []
 
 # linux:gcc:tsan:
 #   stage: sanitize
@@ -107,6 +113,7 @@ linux:gcc:asan:
 #     - cd cmake-build-tsan
 #     - ctest
 #   dependencies: [ ]
+#   needs: []
 
 linux:gcc:coverage:
   stage: coverage
@@ -118,6 +125,7 @@ linux:gcc:coverage:
     GIT_SUBMODULE_STRATEGY: recursive
     CMAKE_BUILD_PARALLEL_LEVEL: 2
   dependencies: [ ]
+  needs: []
   script:
     - make coverage-xml
   coverage: /^\s*lines:\s*\d+.\d+\%/
