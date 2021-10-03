@@ -17,7 +17,25 @@ stages:
 #   dependencies: [ ]
 #   needs: []
 
-win:msvc:release:
+win:msvc:cpp14:
+  stage: build
+  tags:
+    - mc-windows
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    ErrorActionPreference: stop
+  script: |
+    $ErrorActionPreference = "Stop"
+    Set-Location $env:CI_PROJECT_DIR
+    New-Item -Path cmake-build-release -DCMAKE_CXX_STANDARD=14 -ItemType Directory
+    Set-Location cmake-build-release
+    cmake -S .. -DCMAKE_BUILD_TYPE=Release -DMC_BUILD_WERROR=ON
+    cmake --build . --config Release --parallel 4
+    ctest -C Release
+  dependencies: [ ]
+  needs: []
+
+win:msvc:cpp17:
   stage: build
   tags:
     - mc-windows
@@ -29,13 +47,13 @@ win:msvc:release:
     Set-Location $env:CI_PROJECT_DIR
     New-Item -Path cmake-build-release -ItemType Directory
     Set-Location cmake-build-release
-    cmake -S .. -DCMAKE_BUILD_TYPE=Release -DMC_BUILD_WERROR=ON
+    cmake -S .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
     cmake --build . --config Release --parallel 4
     ctest -C Release
   dependencies: [ ]
   needs: []
 
-mac:xcode:release:
+mac:xcode:cpp14:
   stage: build
   tags:
     - mc-macos
@@ -45,14 +63,31 @@ mac:xcode:release:
   script:
     - pip install conan --upgrade
     - cd $CI_PROJECT_DIR
-    - cmake -S. -GNinja -Bcmake-build-release -DCMAKE_BUILD_TYPE=Release -DMC_BUILD_WERROR=ON
+    - cmake -S. -GNinja -Bcmake-build-release -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
     - cmake --build cmake-build-release
     - cd cmake-build-release
     - ctest
   dependencies: [ ]
   needs: []
 
-linux:clang:release:
+mac:xcode:cpp17:
+  stage: build
+  tags:
+    - mc-macos
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    MACOSX_DEPLOYMENT_TARGET: "10.14"
+  script:
+    - pip install conan --upgrade
+    - cd $CI_PROJECT_DIR
+    - cmake -S. -GNinja -Bcmake-build-release -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
+    - cmake --build cmake-build-release
+    - cd cmake-build-release
+    - ctest
+  dependencies: [ ]
+  needs: []
+
+linux:clang:cpp14:
   stage: build
   tags:
     - mc-linux
@@ -63,7 +98,25 @@ linux:clang:release:
   script:
     - pip install conan --upgrade
     - cd $CI_PROJECT_DIR
-    - cmake -S. -GNinja -Bcmake-build-release -DCMAKE_BUILD_TYPE=Release -DMC_BUILD_WERROR=ON
+    - cmake -S. -GNinja -Bcmake-build-release -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
+    - cmake --build cmake-build-release
+    - cd cmake-build-release
+    - ctest
+  dependencies: [ ]
+  needs: []
+
+linux:clang:cpp17:
+  stage: build
+  tags:
+    - mc-linux
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    CC: clang-12
+    CXX: clang++-12
+  script:
+    - pip install conan --upgrade
+    - cd $CI_PROJECT_DIR
+    - cmake -S. -GNinja -Bcmake-build-release -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
     - cmake --build cmake-build-release
     - cd cmake-build-release
     - ctest
@@ -78,7 +131,10 @@ linux:clang-tidy:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
     - cd $CI_PROJECT_DIR
-    - cmake -S. -GNinja -Bcmake-build-tidy -DCMAKE_BUILD_TYPE=Release
+    - cmake -S. -GNinja -Bcmake-build-tidy -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14
+    - BUILD_DIR=cmake-build-tidy make tidy-check
+    - rm -rf cmake-build-tidy
+    - cmake -S. -GNinja -Bcmake-build-tidy -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17
     - BUILD_DIR=cmake-build-tidy make tidy-check
   dependencies: [ ]
   needs: []
