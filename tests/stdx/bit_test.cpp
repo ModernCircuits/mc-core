@@ -2,11 +2,9 @@
 
 #include <catch2/catch.hpp>
 
-TEMPLATE_TEST_CASE("stl/bit: bit_ceil", "[stl][bit]", unsigned int)
+TEMPLATE_TEST_CASE("stl/bit: bit_ceil", "[stl][bit]", unsigned char, unsigned short, unsigned int, unsigned long)
 {
     using T = TestType;
-
-    REQUIRE(mc::bit_ceil(T(0)) == T(1));
     REQUIRE(mc::bit_ceil(T(1)) == T(1));
     REQUIRE(mc::bit_ceil(T(2)) == T(2));
     REQUIRE(mc::bit_ceil(T(3)) == T(4));
