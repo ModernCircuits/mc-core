@@ -13,6 +13,7 @@
 #include "mc/cstdint.hpp"
 #include "mc/cstdlib.hpp"
 #include "mc/cstring.hpp"
+#include "mc/exception.hpp"
 #include "mc/filesystem.hpp"
 #include "mc/format.hpp"
 #include "mc/fstream.hpp"
