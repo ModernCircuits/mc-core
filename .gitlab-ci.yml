@@ -41,7 +41,7 @@ mac:xcode:release:
     - mc-macos
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
-    MACOSX_DEPLOYMENT_TARGET: "10.12"
+    MACOSX_DEPLOYMENT_TARGET: "10.11"
   script:
     - pip install conan --upgrade
     - cd $CI_PROJECT_DIR
