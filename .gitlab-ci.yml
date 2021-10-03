@@ -27,9 +27,9 @@ win:msvc:cpp14:
   script: |
     $ErrorActionPreference = "Stop"
     Set-Location $env:CI_PROJECT_DIR
-    New-Item -Path cmake-build-release -DCMAKE_CXX_STANDARD=14 -ItemType Directory
+    New-Item -Path cmake-build-release -ItemType Directory
     Set-Location cmake-build-release
-    cmake -S .. -DCMAKE_BUILD_TYPE=Release -DMC_BUILD_WERROR=ON
+    cmake -S .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
     cmake --build . --config Release --parallel 4
     ctest -C Release
   dependencies: [ ]

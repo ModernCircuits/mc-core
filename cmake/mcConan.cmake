@@ -31,6 +31,7 @@ conan_cmake_configure(
         boost:without_iostreams=True
         boost:without_json=False
         boost:without_log=True
+        boost:without_python=True
         boost:without_regex=True
         boost:without_serialization=True
         boost:without_test=True
