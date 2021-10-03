@@ -18,7 +18,6 @@ conan_cmake_configure(
         ms-gsl/3.1.0
         readerwriterqueue/1.0.5
         tcb-span/cci.20200603
-        vc/1.4.2
     GENERATORS
         cmake_find_package
     OPTIONS

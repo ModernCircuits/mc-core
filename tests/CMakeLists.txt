@@ -6,19 +6,17 @@ catch_discover_tests(${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
         mc::mc_stl
-        Catch2::Catch2WithMain
         mc::compiler_options
         mc::compiler_warnings
         mc::coverage
+        Catch2::Catch2WithMain
 )
 
 target_sources(${PROJECT_NAME}
     PRIVATE
         all_headers.cpp
         container/ThreadSafeQueue.cpp
-        stdx/bit_test.cpp
+        stdx/bit.cpp
+        stdx/numbers.cpp
 )
 
-
-add_executable(mc_stl_simd simd.cpp)
-target_link_libraries(mc_stl_simd PRIVATE mc::mc_stl mc::compiler_options mc::compiler_warnings mc::coverage)
