@@ -4,3 +4,8 @@
 #include "fmt/format.h"
 #include "fmt/ostream.h"
 #include "fmt/printf.h"
+
+namespace mc {
+using fmt::print;
+using fmt::printf;
+}

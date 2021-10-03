@@ -33,6 +33,7 @@
 #include "mc/queue.hpp"
 #include "mc/random.hpp"
 #include "mc/set.hpp"
+#include "mc/simd.hpp"
 #include "mc/span.hpp"
 #include "mc/sstream.hpp"
 #include "mc/string.hpp"

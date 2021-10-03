@@ -18,3 +18,7 @@ target_sources(${PROJECT_NAME}
         container/ThreadSafeQueue.cpp
         stdx/bit_test.cpp
 )
+
+
+add_executable(mc_stl_simd simd.cpp)
+target_link_libraries(mc_stl_simd PRIVATE mc::mc_stl mc::compiler_options mc::compiler_warnings mc::coverage)
