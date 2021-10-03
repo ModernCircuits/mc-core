@@ -4,8 +4,19 @@ AlignConsecutiveAssignments: true
 AlignEscapedNewlines: Right
 AlignOperands: true
 AlignTrailingComments: true
+AllowShortBlocksOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
+AlwaysBreakTemplateDeclarations: true
+ColumnLimit: 80
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
+FixNamespaceComments: true
+IndentPPDirectives: BeforeHash
 Language: Cpp
+NamespaceIndentation: None
+ReflowComments: true
 Standard: Auto
 UseTab: Never
 ...
