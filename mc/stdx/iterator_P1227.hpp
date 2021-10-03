@@ -25,11 +25,11 @@ MC_NODISCARD constexpr auto ssize(C const& c)
         std::make_signed_t<decltype(c.size())> >;
     return static_cast<R>(c.size());
 }
-template <typename T, std::ptrdiff_t N>
+template <typename T, std::size_t N>
 MC_NODISCARD constexpr auto ssize(T const (&array)[N]) noexcept -> std::ptrdiff_t
 {
     (void)array;
-    return N;
+    return static_cast<std::ptrdiff_t>(N);
 }
 } // namespace mc
 #endif
