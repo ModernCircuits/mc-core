@@ -24,11 +24,11 @@ struct ThreadSafeQueue {
     ThreadSafeQueue(ThreadSafeQueue&& other) = delete;
     auto operator=(ThreadSafeQueue&&) -> ThreadSafeQueue& = delete;
 
-    MC_NODISCARD auto pop() -> boost::optional<value_type>
+    MC_NODISCARD auto pop() -> optional<value_type>
     {
         std::lock_guard<std::mutex> lock(mutex_);
         if (queue_.empty()) {
-            return boost::make_optional(false, value_type {});
+            return optional<value_type> { nullopt };
         }
         value_type tmp = queue_.front();
         queue_.pop();
