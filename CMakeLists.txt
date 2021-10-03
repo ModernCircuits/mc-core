@@ -29,7 +29,7 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
     set(BUILD_SHARED_LIBS OFF)
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-    
+
     enable_testing()
     include(CTest)
 endif ()
@@ -57,8 +57,7 @@ include(Catch)
 add_library(mc_stl INTERFACE)
 add_library(mc::mc_stl ALIAS mc_stl)
 target_include_directories(mc_stl INTERFACE ${PROJECT_SOURCE_DIR})
-target_compile_definitions(mc_stl INTERFACE TCB_SPAN_NAMESPACE_NAME=mc)
-target_link_libraries(mc_stl 
+target_link_libraries(mc_stl
     INTERFACE
         Boost::headers
         Boost::container
