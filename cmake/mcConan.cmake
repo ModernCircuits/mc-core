@@ -54,6 +54,6 @@ conan_cmake_install(
     SETTINGS
         ${settings}
     SETTINGS
-        compiler.cppstd=14
+        compiler.cppstd=${CMAKE_CXX_STANDARD}
 )
 
