@@ -33,7 +33,6 @@ conan_cmake_configure(
         boost:without_log=True
         boost:without_python=True
         boost:without_regex=True
-        boost:without_serialization=True
         boost:without_test=True
         boost:without_type_erasure=True
         boost:without_wave=True

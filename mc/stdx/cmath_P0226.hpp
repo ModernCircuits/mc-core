@@ -19,7 +19,17 @@ using std::sph_bessel;
 using std::sph_neumann;
 } // namespace mc
 #else
-    #include <boost/math/special_functions.hpp>
+    #include <boost/math/special_functions/bessel.hpp>
+    #include <boost/math/special_functions/beta.hpp>
+    #include <boost/math/special_functions/ellint_1.hpp>
+    #include <boost/math/special_functions/ellint_2.hpp>
+    #include <boost/math/special_functions/ellint_3.hpp>
+    #include <boost/math/special_functions/expint.hpp>
+    #include <boost/math/special_functions/hermite.hpp>
+    #include <boost/math/special_functions/laguerre.hpp>
+    #include <boost/math/special_functions/legendre.hpp>
+    #include <boost/math/special_functions/spherical_harmonic.hpp>
+    #include <boost/math/special_functions/zeta.hpp>
 namespace mc {
 using boost::math::beta;
 using boost::math::cyl_bessel_i;

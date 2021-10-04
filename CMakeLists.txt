@@ -47,7 +47,7 @@ include(mcCompilerOptions)
 include(mcCompilerWarnings)
 include(mcCodeCoverage)
 
-find_package(Boost 1.77 REQUIRED COMPONENTS container filesystem json)
+find_package(Boost 1.77 REQUIRED COMPONENTS container filesystem json serialization)
 find_package(fmt REQUIRED)
 find_package(Microsoft.GSL REQUIRED)
 find_package(concurrentqueue REQUIRED)
@@ -68,6 +68,7 @@ target_link_libraries(mc_stl
         Boost::container
         Boost::filesystem
         Boost::json
+        Boost::serialization
         fmt::fmt
         Microsoft.GSL::Microsoft.GSL
         concurrentqueue::concurrentqueue
