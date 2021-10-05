@@ -61,7 +61,13 @@ include(Catch)
 
 add_library(mc_stl INTERFACE)
 add_library(mc::mc_stl ALIAS mc_stl)
-target_include_directories(mc_stl INTERFACE ${PROJECT_SOURCE_DIR})
+set_target_properties(mc_stl PROPERTIES EXPORT_NAME stl)
+
+target_include_directories(mc_stl
+  INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
+            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+
+
 target_link_libraries(mc_stl
     INTERFACE
         Boost::headers
@@ -75,6 +81,11 @@ target_link_libraries(mc_stl
         readerwriterqueue::readerwriterqueue
         tcb-span::tcb-span
 )
+
+include(GNUInstallDirs)
+install(TARGETS mc_stl EXPORT mcstlTargets)
+install(EXPORT mcstlTargets DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake NAMESPACE mc::)
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/mc DESTINATION include)
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     add_subdirectory(tests)
