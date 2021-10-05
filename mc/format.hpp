@@ -6,6 +6,7 @@
 #include "fmt/printf.h"
 
 namespace mc {
+using fmt::format;
 using fmt::print;
 using fmt::printf;
 }

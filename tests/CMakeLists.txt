@@ -17,6 +17,7 @@ target_sources(${PROJECT_NAME}
         all_headers.cpp
         container/ThreadSafeQueue.cpp
         stdx/bit.cpp
+        stdx/format.cpp
         stdx/numbers.cpp
         stdx/numeric.cpp
 )
