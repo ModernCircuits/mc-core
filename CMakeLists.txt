@@ -49,7 +49,6 @@ include(mcCodeCoverage)
 
 find_package(Boost 1.77 REQUIRED COMPONENTS container filesystem json serialization)
 find_package(fmt REQUIRED)
-find_package(Microsoft.GSL REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
 find_package(tcb-span REQUIRED)
@@ -76,7 +75,6 @@ target_link_libraries(mc_stl
         Boost::json
         Boost::serialization
         fmt::fmt
-        Microsoft.GSL::Microsoft.GSL
         concurrentqueue::concurrentqueue
         readerwriterqueue::readerwriterqueue
         tcb-span::tcb-span
