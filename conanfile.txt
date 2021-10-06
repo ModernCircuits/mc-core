@@ -3,7 +3,6 @@ boost/1.77.0
 catch2/2.13.7
 concurrentqueue/1.0.3
 fmt/8.0.1
-libdispatch/5.3.2
 readerwriterqueue/1.0.5
 tcb-span/cci.20200603
 
