@@ -74,13 +74,13 @@ TEMPLATE_TEST_CASE("stl/units: Frequency<floating_point>", "[stl][units]",
     using Kilohertz = mc::Kilohertz<T>;
     using BPM       = mc::BPM<T>;
 
-    REQUIRE(Hertz(1).count() == T(1));
-    REQUIRE(Kilohertz(1).count() == T(1));
-    REQUIRE((+Hertz(1)).count() == T(+1));
-    REQUIRE((-Hertz(1)).count() == T(-1));
+    REQUIRE(Hertz(T(1)).count() == T(1));
+    REQUIRE(Kilohertz(T(1)).count() == T(1));
+    REQUIRE((+Hertz(T(1))).count() == T(+1));
+    REQUIRE((-Hertz(T(1))).count() == T(-1));
 
-    REQUIRE(Hertz { Kilohertz(1) }.count() == T(1'000));
-    REQUIRE(BPM { Hertz(1) }.count() == T(60));
+    REQUIRE(Hertz { Kilohertz(T(1)) }.count() == T(1'000));
+    REQUIRE(BPM { Hertz(T(1)) }.count() == T(60));
 
     REQUIRE(Hertz { T(1) } + Hertz { T(1) } == Hertz { T(2) });
     REQUIRE(Hertz { T(1) } + Hertz { T(2) } == Hertz { T(3) });
