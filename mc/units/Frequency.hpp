@@ -8,7 +8,6 @@
 #include "mc/type_traits.hpp"
 
 namespace mc {
-namespace dsp {
 
 template <typename Rep>
 struct TreatAsFloatingPoint : std::is_floating_point<Rep> {
@@ -18,14 +17,13 @@ template <typename Rep, typename Period = std::ratio<1>>
 struct Frequency {
 private:
     template <typename Rep2>
-    using FrequencyCtor3
-        = std::enable_if<std::is_convertible<Rep2, Rep>::value
-                             && (TreatAsFloatingPoint<Rep>::value
-                                 || !TreatAsFloatingPoint<Rep2>::value),
-            int>;
+    using Ctor3 = std::enable_if<std::is_convertible<Rep2, Rep>::value
+                                     && (TreatAsFloatingPoint<Rep>::value
+                                         || !TreatAsFloatingPoint<Rep2>::value),
+        int>;
 
     template <typename Rep2, typename Period2>
-    using FrequencyCtor4
+    using Ctor4
         = std::enable_if<TreatAsFloatingPoint<Rep>::value
                              || (std::ratio_divide<Period2, Period>::den == 1
                                  && !TreatAsFloatingPoint<Rep2>::value),
@@ -53,7 +51,7 @@ public:
     /// (that is, a Frequency with an integer tick count cannot be
     /// constructed from a floating-point value, but a Frequency with a
     /// floating-point tick count can be constructed from an integer value)
-    template <typename Rep2, typename FrequencyCtor3<Rep2>::type = 0>
+    template <typename Rep2, typename Ctor3<Rep2>::type = 0>
     constexpr explicit Frequency(Rep2 const& r) : ticks_(r)
     {
     }
@@ -61,7 +59,7 @@ public:
     /// \brief Constructs a Frequency by converting d to an appropriate period
     /// and tick count.
     template <typename Rep2, typename Period2,
-        typename FrequencyCtor4<Rep2, Period2>::type = 0>
+        typename Ctor4<Rep2, Period2>::type = 0>
     constexpr Frequency(Frequency<Rep2, Period2> const& other)
         : ticks_(static_cast<Rep>(
             other.count() * std::ratio_divide<Period2, period>::num))
@@ -237,7 +235,7 @@ struct IsFrequency : std::false_type {
 };
 
 template <typename Rep, typename Period>
-struct IsFrequency<mc::dsp::Frequency<Rep, Period>> : std::true_type {
+struct IsFrequency<mc::Frequency<Rep, Period>> : std::true_type {
 };
 
 template <typename ToFrequency, typename CF, typename CR, bool NumIsOne = false,
@@ -347,21 +345,26 @@ MC_NODISCARD constexpr auto abs(Frequency<Rep, Period> const& f)
     return f.count() >= Rep {} ? f : -f;
 }
 
-using Hertz     = Frequency<float>;
-using Kilohertz = Frequency<float, std::ratio<1'000>>;
-using Bpm       = Frequency<float, std::ratio<1, 60>>;
+template <typename T>
+using Hertz = Frequency<T>;
 
-} // namespace dsp
+template <typename T>
+using Kilohertz = Frequency<T, std::ratio<1'000>>;
+
+template <typename T>
+using BPM // NOLINT(readability-identifier-naming)
+    = Frequency<T, std::ratio<1, 60>>;
+
 } // namespace mc
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 struct std::common_type< // NOLINT(readability-identifier-naming)
-    mc::dsp::Frequency<Rep1, Period1>, mc::dsp::Frequency<Rep2, Period2>> {
+    mc::Frequency<Rep1, Period1>, mc::Frequency<Rep2, Period2>> {
 private:
     static constexpr auto num = mc::gcd(Period1::num, Period2::num);
     static constexpr auto den = mc::lcm(Period1::den, Period2::den);
     using common_t            = typename std::common_type<Rep1, Rep2>::type;
 
 public:
-    using type = mc::dsp::Frequency<common_t, std::ratio<num, den>>;
+    using type = mc::Frequency<common_t, std::ratio<num, den>>;
 };

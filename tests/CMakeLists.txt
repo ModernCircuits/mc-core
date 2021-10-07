@@ -16,7 +16,7 @@ target_sources(${PROJECT_NAME}
     PRIVATE
         all_headers.cpp
         container/ThreadSafeQueue.cpp
-        dsp/Frequency.cpp
+        units/Frequency.cpp
         stdx/bit.cpp
         stdx/format.cpp
         stdx/numbers.cpp
