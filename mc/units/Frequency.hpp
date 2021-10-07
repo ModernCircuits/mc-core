@@ -349,7 +349,13 @@ template <typename T>
 using Hertz = Frequency<T>;
 
 template <typename T>
-using Kilohertz = Frequency<T, std::ratio<1'000>>;
+using Kilohertz = Frequency<T, std::kilo>;
+
+template <typename T>
+using Megahertz = Frequency<T, std::mega>;
+
+template <typename T>
+using Gigahertz = Frequency<T, std::giga>;
 
 template <typename T>
 using BPM // NOLINT(readability-identifier-naming)
