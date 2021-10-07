@@ -152,11 +152,8 @@ struct IsFrequency : std::false_type {
 };
 
 template <typename Rep, typename Period>
-struct IsFrequency<Frequency<Rep, Period>> : std::true_type {
+struct IsFrequency<mc::dsp::Frequency<Rep, Period>> : std::true_type {
 };
-
-template <typename T>
-constexpr auto IsFrequencyV = IsFrequency<T>::value;
 
 template <typename ToFrequency, typename CF, typename CR, bool NumIsOne = false,
     bool DenIsOne = false>
@@ -212,7 +209,7 @@ struct FrequencyCastImpl<ToFrequency, CF, CR, true, true> {
 template <typename ToFreq, typename Rep, typename Period>
 MC_NODISCARD constexpr auto frequencyCast(
     Frequency<Rep, Period> const& frequency)
-    -> std::enable_if_t<detail::IsFrequencyV<ToFreq>, ToFreq>
+    -> std::enable_if_t<detail::IsFrequency<ToFreq>::value, ToFreq>
 {
     using detail::FrequencyCastImpl;
     using cf   = std::ratio_divide<Period, typename ToFreq::period>;
