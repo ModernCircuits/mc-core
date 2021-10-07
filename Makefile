@@ -22,7 +22,7 @@ tidy-fix:
 coverage:
 	cmake -S. -GNinja -Bcmake-build-coverage -DCMAKE_BUILD_TYPE=Debug -DMC_BUILD_COVERAGE=TRUE
 	cmake --build cmake-build-coverage
-	cd cmake-build-coverage && ctest -j ${shell nproc}
+	cd cmake-build-coverage && ctest
 
 .PHONY: coverage-html
 coverage-html: coverage
