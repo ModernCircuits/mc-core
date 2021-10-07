@@ -358,8 +358,19 @@ template <typename T>
 using Gigahertz = Frequency<T, std::giga>;
 
 template <typename T>
-using BPM // NOLINT(readability-identifier-naming)
-    = Frequency<T, std::ratio<1, 60>>;
+using BPM = Frequency<T, std::ratio<1, 60>>;
+
+template <typename T, typename R>
+MC_NODISCARD constexpr auto toHertz(Frequency<T, R> const& f) noexcept
+{
+    return frequencyCast<Hertz<T>>(f);
+}
+
+template <typename T, typename R>
+MC_NODISCARD constexpr auto toBPM(Frequency<T, R> const& f) noexcept
+{
+    return frequencyCast<BPM<T>>(f);
+}
 
 } // namespace mc
 

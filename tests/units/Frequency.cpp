@@ -12,8 +12,6 @@ TEMPLATE_TEST_CASE(
 
     REQUIRE(Hertz(1).count() == T(1));
     REQUIRE(Kilohertz(1).count() == T(1));
-    REQUIRE((+Hertz(1)).count() == T(+1));
-    REQUIRE((-Hertz(1)).count() == T(-1));
 
     REQUIRE(Hertz { Kilohertz(1) }.count() == T(1'000));
     REQUIRE(BPM { Hertz(1) }.count() == T(60));
@@ -43,13 +41,17 @@ TEMPLATE_TEST_CASE(
     a /= T(2);
     REQUIRE(a.count() == T(2));
 
-    using mc::frequencyCast;
-    REQUIRE(frequencyCast<Hertz>(Hertz { T(1) }).count() == T(1));
-    REQUIRE(frequencyCast<Hertz>(Kilohertz { T(1) }).count() == T(1'000));
-    REQUIRE(frequencyCast<Kilohertz>(Hertz { T(1'000) }).count() == T(1));
-    REQUIRE(frequencyCast<BPM>(Hertz { T(1) }).count() == T(60));
-    REQUIRE(frequencyCast<Hertz>(BPM { T(120) }).count() == T(2));
-    REQUIRE(frequencyCast<Kilohertz>(BPM { T(120'000) }).count() == T(2));
+    REQUIRE(mc::frequencyCast<Hertz>(Hertz { T(1) }).count() == T(1));
+    REQUIRE(mc::frequencyCast<Hertz>(Kilohertz { T(1) }).count() == T(1'000));
+    REQUIRE(mc::frequencyCast<Kilohertz>(Hertz { T(1'000) }).count() == T(1));
+    REQUIRE(mc::frequencyCast<BPM>(Hertz { T(1) }).count() == T(60));
+    REQUIRE(mc::frequencyCast<Hertz>(BPM { T(120) }).count() == T(2));
+    REQUIRE(mc::frequencyCast<Kilohertz>(BPM { T(120'000) }).count() == T(2));
+
+    using TwoThirdHertz = mc::Frequency<T, std::ratio<2, 3>>;
+    REQUIRE(mc::frequencyCast<Hertz>(TwoThirdHertz { T(3) }).count() == T(2));
+    REQUIRE(mc::frequencyCast<Hertz>(TwoThirdHertz { T(6) }).count() == T(4));
+    REQUIRE(mc::frequencyCast<Hertz>(TwoThirdHertz { T(12) }).count() == T(8));
 
     REQUIRE(mc::floor<Kilohertz>(Hertz { T(4'000) }) == Kilohertz { T(4) });
     REQUIRE(mc::floor<Kilohertz>(Hertz { T(4'999) }) == Kilohertz { T(4) });
@@ -61,6 +63,17 @@ TEMPLATE_TEST_CASE(
     REQUIRE(mc::round<Kilohertz>(Hertz { T(4'999) }) == Kilohertz { T(5) });
     REQUIRE(mc::round<Kilohertz>(Hertz { T(4'500) }) == Kilohertz { T(4) });
     REQUIRE(mc::round<Kilohertz>(Hertz { T(4'499) }) == Kilohertz { T(4) });
+
+    REQUIRE(mc::toHertz(BPM { T(60) }) == Hertz { T(1) });
+    REQUIRE(mc::toHertz(BPM { T(120) }) == Hertz { T(2) });
+    REQUIRE(mc::toHertz(BPM { T(180) }) == Hertz { T(3) });
+
+    REQUIRE(mc::toBPM(Hertz { T(1) }) == BPM { T(60) });
+    REQUIRE(mc::toBPM(Hertz { T(2) }) == BPM { T(120) });
+    REQUIRE(mc::toBPM(Hertz { T(3) }) == BPM { T(180) });
+
+    REQUIRE((+Hertz(1)).count() == T(+1));
+    REQUIRE((-Hertz(1)).count() == T(-1));
 
     REQUIRE(abs(Hertz { T(4) }) == Hertz { T(4) });
     REQUIRE(abs(Hertz { T(-4) }) == Hertz { T(4) });
