@@ -1,5 +1,6 @@
 #include "mc/iterator.hpp"
 
+#include "mc/array.hpp"
 #include "mc/initializer_list.hpp"
 #include "mc/utility.hpp"
 
