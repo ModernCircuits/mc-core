@@ -275,7 +275,7 @@ TEMPLATE_TEST_CASE("math/dense: DynamicMatrixFunctions",
     REQUIRE(invA(2, 1) == T { 1.5 });
     REQUIRE(invA(2, 2) == T { 0.25 });
 
-    auto sub = math::subDynamicMatrix(invertA, 0, 0);
+    auto sub = math::subMatrix(invertA, 0, 0);
     REQUIRE(math::isSquare(sub));
     REQUIRE(sub.rows() == 2);
     REQUIRE(sub(0, 0) == T { 0 });

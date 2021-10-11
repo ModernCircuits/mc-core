@@ -1,17 +1,15 @@
 #pragma once
 
-#include "mc/math/algorithm/linearSolve.hpp"
-#include "mc/math/dense/DynamicVector.hpp"
+#include "mc/algorithm.hpp"
+#include "mc/config.hpp"
+#include "mc/cstddef.hpp"
+#include "mc/cstdint.hpp"
+#include "mc/iterator.hpp"
 #include "mc/math/iterator/data.hpp"
 #include "mc/math/iterator/empty.hpp"
 #include "mc/math/iterator/size.hpp"
-#include "mc/math/matrix/IsDenseMatrix.hpp"
-#include "mc/math/matrix/detail/matrixAdd.hpp"
-#include "mc/math/matrix/detail/matrixCompare.hpp"
-#include "mc/math/matrix/detail/matrixMultiply.hpp"
-#include "mc/math/matrix/detail/matrixStream.hpp"
 #include "mc/math/matrix/detail/matrixSubscriptToIndex.hpp"
-#include "mc/math/matrix/detail/matrixSubtract.hpp"
+#include "mc/math/matrix/determinant.hpp"
 #include "mc/math/matrix/findRowWithMaxElement.hpp"
 #include "mc/math/matrix/inverse.hpp"
 #include "mc/math/matrix/isNonZero.hpp"
@@ -21,17 +19,14 @@
 #include "mc/math/matrix/makeIdentity.hpp"
 #include "mc/math/matrix/multiplyAddRow.hpp"
 #include "mc/math/matrix/multiplyRow.hpp"
+#include "mc/math/matrix/operators.hpp"
+#include "mc/math/matrix/rank.hpp"
+#include "mc/math/matrix/rowEchelon.hpp"
 #include "mc/math/matrix/splitColumns.hpp"
+#include "mc/math/matrix/subMatrix.hpp"
 #include "mc/math/matrix/swapRow.hpp"
-
-#include "mc/algorithm.hpp"
-#include "mc/config.hpp"
-#include "mc/cstddef.hpp"
-#include "mc/cstdint.hpp"
-#include "mc/iostream.hpp"
-#include "mc/iterator.hpp"
+#include "mc/math/traits/IsDenseMatrix.hpp"
 #include "mc/memory.hpp"
-#include "mc/vector.hpp"
 
 namespace mc {
 namespace math {
@@ -70,65 +65,6 @@ private:
     size_type numRows_ {};
     size_type numCols_ {};
 };
-
-template <typename T>
-auto operator==(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r) -> bool;
-
-template <typename T>
-auto operator!=(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r) -> bool;
-
-template <typename T>
-auto operator+(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r)
-    -> DynamicMatrix<T>;
-
-template <typename T>
-auto operator+(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>;
-
-template <typename T>
-auto operator+(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>;
-
-template <typename T>
-auto operator-(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r)
-    -> DynamicMatrix<T>;
-
-template <typename T>
-auto operator-(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>;
-
-template <typename T>
-auto operator-(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>;
-
-template <typename T>
-auto operator*(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r)
-    -> DynamicMatrix<T>;
-
-template <typename T>
-auto operator*(DynamicMatrix<T> const& mat, DynamicVector<T> const& vec)
-    -> DynamicVector<T>;
-
-template <typename T>
-auto operator*(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>;
-
-template <typename T>
-auto operator*(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>;
-
-template <typename T>
-auto operator<<(std::ostream& out, DynamicMatrix<T> const& mat)
-    -> std::ostream&;
-
-template <typename T>
-auto subDynamicMatrix(DynamicMatrix<T> const& mat,
-    typename DynamicMatrix<T>::size_type rowIdx,
-    typename DynamicMatrix<T>::size_type colIdx) -> DynamicMatrix<T>;
-
-template <typename T>
-auto determinant(DynamicMatrix<T> const& mat) ->
-    typename DynamicMatrix<T>::value_type;
-
-template <typename T>
-auto rowEchelon(DynamicMatrix<T>& mat) -> void;
-
-template <typename T>
-auto rank(DynamicMatrix<T> const& mat) -> typename DynamicMatrix<T>::size_type;
 
 /// IMPLEMENTATON
 ///////////////////////////////////////////////////////////////////////////
@@ -239,215 +175,6 @@ template <typename T>
 auto DynamicMatrix<T>::data() const -> T const*
 {
     return data_.get();
-}
-
-template <typename T>
-auto operator==(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r) -> bool
-{
-    return detail::matrixEqual(l, r);
-}
-
-template <typename T>
-auto operator!=(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r) -> bool
-{
-    return detail::matrixNotEqual(l, r);
-}
-
-template <typename T>
-auto operator+(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r)
-    -> DynamicMatrix<T>
-{
-    return detail::matrixAdd(l, r);
-}
-
-template <typename T>
-auto operator+(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>
-{
-    return detail::matrixAdd(m, scaler);
-}
-
-template <typename T>
-auto operator+(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>
-{
-    return detail::matrixAdd(m, scaler);
-}
-
-template <typename T>
-auto operator-(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r)
-    -> DynamicMatrix<T>
-{
-    return detail::matrixSubtract(l, r);
-}
-
-template <typename T>
-auto operator-(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>
-{
-    return detail::matrixSubtract(m, scaler);
-}
-
-template <typename T>
-auto operator-(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>
-{
-    return detail::matrixSubtract(m, scaler);
-}
-
-template <typename T>
-auto operator*(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>
-{
-    return detail::matrixMultiply(m, scaler);
-}
-
-template <typename T>
-auto operator*(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>
-{
-    return detail::matrixMultiply(m, scaler);
-}
-
-template <typename T>
-auto operator*(DynamicMatrix<T> const& mat, DynamicVector<T> const& vec)
-    -> DynamicVector<T>
-{
-    return detail::matrixMultiplyWithVector(mat, vec);
-}
-
-template <typename T>
-auto operator<<(std::ostream& out, DynamicMatrix<T> const& m) -> std::ostream&
-{
-    return detail::matrixOutStream(out, m);
-}
-
-template <typename T>
-auto subDynamicMatrix(DynamicMatrix<T> const& mat,
-    typename DynamicMatrix<T>::size_type rowIdx,
-    typename DynamicMatrix<T>::size_type colIdx) -> DynamicMatrix<T>
-{
-    auto result = DynamicMatrix<T> { mat.rows() - 1, mat.cols() - 1 };
-    for (decltype(mat.rows()) row = 0; row < mat.rows(); ++row) {
-        for (decltype(mat.rows()) col = 0; col < mat.cols(); ++col) {
-            if ((row != rowIdx) && (col != colIdx)) {
-                auto newRow            = row < rowIdx ? row : row - 1;
-                auto newCol            = col < colIdx ? col : col - 1;
-                result(newRow, newCol) = mat(row, col);
-            }
-        }
-    }
-    return result;
-}
-
-template <typename T>
-auto determinant(DynamicMatrix<T> const& mat) ->
-    typename DynamicMatrix<T>::value_type
-{
-    using value_type = typename DynamicMatrix<T>::value_type;
-
-    if (!isSquare(mat)) {
-        throw std::invalid_argument("matrix must be square");
-    }
-
-    if (mat.rows() == 2) {
-        return (mat(0, 0) * mat(1, 1)) - (mat(0, 1) * mat(1, 0));
-    }
-
-    auto sum  = value_type { 0 };
-    auto sign = value_type { 1 };
-    for (decltype(mat.cols()) col = 0; col < mat.cols(); ++col) {
-        auto sub = subDynamicMatrix(mat, 0, col);
-        auto d   = determinant(sub);
-        sum += mat(0, col) * d * sign;
-        sign = -sign;
-    }
-
-    return sum;
-}
-
-template <typename T>
-auto rowEchelon(DynamicMatrix<T>& mat) -> void
-{
-    if (mat.cols() < mat.rows()) {
-        throw std::invalid_argument(
-            "matrix must have at least have as many columns as rows");
-    }
-
-    using size_type                    = typename DynamicMatrix<T>::size_type;
-    static constexpr auto maxLoopCount = size_type { 100 };
-
-    auto count     = size_type { 0 };
-    auto completed = false;
-
-    auto cRow = size_type {};
-    auto cCol = size_type {};
-
-    while ((!completed) && (count < maxLoopCount)) {
-        for (auto diagIdx = size_type { 0 }; diagIdx < mat.rows(); ++diagIdx) {
-            cRow = diagIdx;
-            cCol = diagIdx;
-
-            for (auto rowIdx = cRow + 1; rowIdx < mat.rows(); ++rowIdx) {
-                if (!approx(mat(rowIdx, cCol), T {})) {
-                    auto const rowOneIndex  = cCol;
-                    auto const rowOneValue  = mat(rowOneIndex, cCol);
-                    auto const currentValue = mat(rowIdx, cCol);
-                    if (!approx(rowOneValue, T {})) {
-                        auto const correction = -(currentValue / rowOneValue);
-                        multiplyAddRow(mat, rowOneIndex, rowIdx, correction);
-                    }
-                }
-            }
-        }
-
-        completed = isRowEchelon(mat);
-        count += 1;
-    }
-}
-
-template <typename T>
-auto rank(DynamicMatrix<T> const& mat) -> typename DynamicMatrix<T>::size_type
-{
-    using size_type = typename DynamicMatrix<T>::size_type;
-
-    auto copy = DynamicMatrix<T> { mat };
-    rowEchelon(copy);
-
-    auto numNonZeroRows = size_type {};
-    if (!isRowEchelon(copy)) {
-        auto subMatricies = std::vector<DynamicMatrix<T>> {};
-        subMatricies.push_back(mat);
-
-        auto completed             = false;
-        auto subDynamicMatrixCount = size_type {};
-        while ((subDynamicMatrixCount < subMatricies.size()) && (!completed)) {
-            auto const cur = subMatricies[subDynamicMatrixCount];
-            subDynamicMatrixCount++;
-
-            if (isNonZero(cur)) {
-                if (!approx(determinant(cur), T {})) {
-                    completed      = true;
-                    numNonZeroRows = cur.rows();
-                } else {
-                    if ((cur.rows() > 2) && (cur.cols() > 2)) {
-                        for (auto i = size_type { 0 }; i < cur.rows(); ++i) {
-                            for (auto j = size_type { 0 }; j < cur.cols();
-                                 ++j) {
-                                auto sub = subDynamicMatrix(cur, i, j);
-                                subMatricies.push_back(sub);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    } else {
-        for (auto row = size_type { 0 }; row < copy.rows(); ++row) {
-            auto colSum = size_type {};
-            for (decltype(copy.cols()) col = 0; col < copy.cols(); ++col) {
-                if (!approx(copy(row, col), T {})) { colSum++; }
-            }
-
-            if (colSum > 0) { numNonZeroRows++; }
-        }
-    }
-
-    return numNonZeroRows;
 }
 
 template <typename T>
