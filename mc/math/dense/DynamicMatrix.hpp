@@ -4,6 +4,11 @@
 #include "mc/math/dense/DynamicVector.hpp"
 #include "mc/math/iterator/empty.hpp"
 #include "mc/math/iterator/size.hpp"
+#include "mc/math/matrix/matrixAdd.hpp"
+#include "mc/math/matrix/matrixCompare.hpp"
+#include "mc/math/matrix/matrixMultiply.hpp"
+#include "mc/math/matrix/matrixStream.hpp"
+#include "mc/math/matrix/matrixSubtract.hpp"
 
 #include "mc/algorithm.hpp"
 #include "mc/config.hpp"
@@ -266,91 +271,51 @@ auto DynamicMatrix<T>::operator()(size_type row, size_type col) const
 template <typename T>
 auto operator==(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r) -> bool
 {
-    if ((l.rows() != r.rows()) || (l.cols() != r.cols())) { return false; }
-    for (decltype(l.rows()) row = 0; row < l.rows(); ++row) {
-        for (decltype(l.cols()) col = 0; col < l.cols(); ++col) {
-            if (l(row, col) != r(row, col)) { return false; }
-        }
-    }
-    return true;
+    return matrixEqual(l, r);
 }
 
 template <typename T>
 auto operator!=(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r) -> bool
 {
-    return !(l == r);
+    return matrixNotEqual(l, r);
 }
 
 template <typename T>
 auto operator+(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r)
     -> DynamicMatrix<T>
 {
-    if ((l.rows() != r.rows()) || l.cols() != r.cols()) {
-        throw std::invalid_argument("matrix layout must match");
-    }
-
-    auto tmp = DynamicMatrix<T> { l.rows(), l.cols() };
-    for (decltype(tmp.rows()) row = 0; row < l.rows(); ++row) {
-        for (decltype(tmp.cols()) col = 0; col < r.cols(); ++col) {
-            tmp(row, col) = l(row, col) + r(row, col);
-        }
-    }
-
-    return tmp;
+    return matrixAdd(l, r);
 }
 
 template <typename T>
 auto operator+(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>
 {
-    auto tmp = DynamicMatrix<T> { m.rows(), m.cols() };
-    for (decltype(tmp.rows()) row = 0; row < tmp.rows(); ++row) {
-        for (decltype(tmp.cols()) col = 0; col < tmp.cols(); ++col) {
-            tmp(row, col) = m(row, col) + scaler;
-        }
-    }
-    return tmp;
+    return matrixAdd(m, scaler);
 }
 
 template <typename T>
 auto operator+(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>
 {
-    return m + scaler;
+    return matrixAdd(m, scaler);
 }
 
 template <typename T>
 auto operator-(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r)
     -> DynamicMatrix<T>
 {
-    if ((l.rows() != r.rows()) || l.cols() != r.cols()) {
-        throw std::invalid_argument("matrix layout must match");
-    }
-
-    auto tmp = DynamicMatrix<T> { l.rows(), l.cols() };
-    for (decltype(tmp.rows()) row = 0; row < l.rows(); ++row) {
-        for (decltype(tmp.cols()) col = 0; col < r.cols(); ++col) {
-            tmp(row, col) = l(row, col) - r(row, col);
-        }
-    }
-
-    return tmp;
+    return matrixSubtract(l, r);
 }
 
 template <typename T>
 auto operator-(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>
 {
-    auto tmp = DynamicMatrix<T> { m.rows(), m.cols() };
-    for (decltype(tmp.rows()) row = 0; row < tmp.rows(); ++row) {
-        for (decltype(tmp.cols()) col = 0; col < tmp.cols(); ++col) {
-            tmp(row, col) = m(row, col) - scaler;
-        }
-    }
-    return tmp;
+    return matrixSubtract(m, scaler);
 }
 
 template <typename T>
 auto operator-(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>
 {
-    return m - scaler;
+    return matrixSubtract(m, scaler);
 }
 
 // template<typename T>
@@ -384,52 +349,26 @@ auto operator-(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>
 template <typename T>
 auto operator*(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>
 {
-    auto tmp = DynamicMatrix<T> { m.rows(), m.cols() };
-    for (decltype(tmp.rows()) row = 0; row < tmp.rows(); ++row) {
-        for (decltype(tmp.cols()) col = 0; col < tmp.cols(); ++col) {
-            tmp(row, col) = m(row, col) * scaler;
-        }
-    }
-    return tmp;
+    return matrixMultiply(m, scaler);
 }
 
 template <typename T>
 auto operator*(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>
 {
-    return m * scaler;
+    return matrixMultiply(m, scaler);
 }
 
 template <typename T>
 auto operator*(DynamicMatrix<T> const& mat, DynamicVector<T> const& vec)
     -> DynamicVector<T>
 {
-    if (mat.cols() != vec.size()) {
-        throw std::domain_error("matrix columns and vector size must match");
-    }
-
-    auto result = DynamicVector<T> { vec };
-    for (decltype(mat.rows()) row = 0; row < mat.rows(); ++row) {
-        auto sum = T {};
-        for (decltype(mat.cols()) col = 0; col < mat.cols(); ++col) {
-            sum += mat(row, col) * vec[col];
-        }
-        result[row] = sum;
-    }
-
-    return result;
+    return matrixMultiplyWithVector(mat, vec);
 }
 
 template <typename T>
 auto operator<<(std::ostream& out, DynamicMatrix<T> const& m) -> std::ostream&
 {
-    using size_type = typename DynamicMatrix<T>::size_type;
-    for (size_type row = 0; row < m.rows(); ++row) {
-        for (size_type col = 0; col < m.cols(); ++col) {
-            out << m(row, col) << ' ';
-        }
-        out << '\n';
-    }
-    return out;
+    return matrixOutStream(out, m);
 }
 
 template <typename T>
