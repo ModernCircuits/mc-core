@@ -1,5 +1,17 @@
 #pragma once
 
+#include "mc/math/algorithm/linearSolve.hpp"
+#include "mc/math/dense/DynamicVector.hpp"
+#include "mc/math/iterator/data.hpp"
+#include "mc/math/iterator/empty.hpp"
+#include "mc/math/iterator/size.hpp"
+#include "mc/math/matrix/IsDenseMatrix.hpp"
+#include "mc/math/matrix/detail/matrixAdd.hpp"
+#include "mc/math/matrix/detail/matrixCompare.hpp"
+#include "mc/math/matrix/detail/matrixMultiply.hpp"
+#include "mc/math/matrix/detail/matrixStream.hpp"
+#include "mc/math/matrix/detail/matrixSubscriptToIndex.hpp"
+#include "mc/math/matrix/detail/matrixSubtract.hpp"
 #include "mc/math/matrix/findRowWithMaxElement.hpp"
 #include "mc/math/matrix/inverse.hpp"
 #include "mc/math/matrix/isNonZero.hpp"
@@ -11,18 +23,6 @@
 #include "mc/math/matrix/multiplyRow.hpp"
 #include "mc/math/matrix/splitColumns.hpp"
 #include "mc/math/matrix/swapRow.hpp"
-
-#include "mc/math/matrix/detail/matrixAdd.hpp"
-#include "mc/math/matrix/detail/matrixCompare.hpp"
-#include "mc/math/matrix/detail/matrixMultiply.hpp"
-#include "mc/math/matrix/detail/matrixStream.hpp"
-#include "mc/math/matrix/detail/matrixSubscriptToIndex.hpp"
-#include "mc/math/matrix/detail/matrixSubtract.hpp"
-
-#include "mc/math/algorithm/linearSolve.hpp"
-#include "mc/math/dense/DynamicVector.hpp"
-#include "mc/math/iterator/empty.hpp"
-#include "mc/math/iterator/size.hpp"
 
 #include "mc/algorithm.hpp"
 #include "mc/config.hpp"
@@ -61,6 +61,9 @@ struct DynamicMatrix {
     MC_NODISCARD auto operator()(size_type row, size_type col) -> T&;
     MC_NODISCARD auto operator()(size_type row, size_type col) const
         -> T const&;
+
+    MC_NODISCARD auto data() -> T*;
+    MC_NODISCARD auto data() const -> T const*;
 
 private:
     std::unique_ptr<T[]> data_ { nullptr }; // NOLINT
@@ -224,6 +227,18 @@ auto DynamicMatrix<T>::operator()(size_type row, size_type col) const
     -> value_type const&
 {
     return data_[detail::matrixSubscriptToIndex(row, col, numCols_)];
+}
+
+template <typename T>
+auto DynamicMatrix<T>::data() -> T*
+{
+    return data_.get();
+}
+
+template <typename T>
+auto DynamicMatrix<T>::data() const -> T const*
+{
+    return data_.get();
 }
 
 template <typename T>
@@ -434,5 +449,9 @@ auto rank(DynamicMatrix<T> const& mat) -> typename DynamicMatrix<T>::size_type
 
     return numNonZeroRows;
 }
+
+template <typename T>
+struct IsDenseMatrix<DynamicMatrix<T>> : TrueType {
+};
 } // namespace math
 } // namespace mc
