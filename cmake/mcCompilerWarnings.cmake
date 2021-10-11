@@ -18,7 +18,7 @@ else ()
             -Wreorder
             -Wshadow
             -Wsign-compare
-            -Wsign-conversion
+            -Wno-sign-conversion
             -Wstrict-aliasing
             -Wswitch-enum
             -Wuninitialized
@@ -29,7 +29,7 @@ else ()
                 -Wbool-conversion
                 -Wconditional-uninitialized
                 -Wconstant-conversion
-                -Wconversion
+                # -Wconversion
                 -Wextra-semi
                 -Winconsistent-missing-destructor-override
                 -Wint-conversion

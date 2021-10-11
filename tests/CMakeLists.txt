@@ -18,6 +18,16 @@ target_sources(${PROJECT_NAME}
 
         container/ThreadSafeQueue.cpp
 
+        math/algorithm/correlation.test.cpp
+        math/algorithm/crossProduct.test.cpp
+        math/algorithm/dotProduct.test.cpp
+        math/algorithm/linearSolve.test.cpp
+        math/algorithm/normalized.test.cpp
+        math/algorithm/normalize.test.cpp
+
+        math/dense/DynamicVector.test.cpp
+        math/dense/DynamicMatrix.test.cpp
+
         units/Duration.cpp
         units/Frequency.cpp
 
