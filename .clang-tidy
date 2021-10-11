@@ -7,6 +7,7 @@ Checks: >
   -cert-oop54-cpp,
   -cert-err58-cpp,
   clang-analyzer-*,
+  -clang-analyzer-cplusplus.NewDelete,
   clang-diagnostics-*,
   concurrency-*,
   modernize-*,

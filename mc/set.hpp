@@ -8,17 +8,15 @@
 
 namespace mc {
 namespace pmr {
-    using std::pmr::set;
+using std::pmr::set;
 } // namespace pmr
 } // namespace mc
 
 #else
-
-#include "boost/container/pmr/set.hpp"
-
+    #include "boost/container/pmr/set.hpp"
 namespace mc {
 namespace pmr {
-    using boost::container::pmr::set;
+using boost::container::pmr::set;
 } // namespace pmr
 } // namespace mc
 

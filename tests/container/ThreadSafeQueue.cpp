@@ -4,7 +4,8 @@
 
 #include <catch2/catch.hpp>
 
-TEMPLATE_TEST_CASE("stl/queue: ThreadSafeQueue", "[stl][queue]", int, float, double, std::string)
+TEMPLATE_TEST_CASE("stl/queue: ThreadSafeQueue", "[stl][queue]", int, float,
+    double, std::string)
 {
     SECTION("single thread")
     {
@@ -30,9 +31,7 @@ TEMPLATE_TEST_CASE("stl/queue: ThreadSafeQueue", "[stl][queue]", int, float, dou
         mc::ThreadSafeQueue<TestType> queue {};
         auto iterations = 10'000;
         auto thread     = std::thread([&queue, iterations] {
-            for (auto i = 0; i < iterations; ++i) {
-                queue.push(TestType {});
-            }
+            for (auto i = 0; i < iterations; ++i) { queue.push(TestType {}); }
         });
 
         auto counter = 0;

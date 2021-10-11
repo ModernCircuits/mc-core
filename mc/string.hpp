@@ -6,17 +6,15 @@
 
 namespace mc {
 namespace pmr {
-    using std::pmr::string;
+using std::pmr::string;
 } // namespace pmr
 } // namespace mc
 
 #else
-
-#include "boost/container/pmr/string.hpp"
-
+    #include "boost/container/pmr/string.hpp"
 namespace mc {
 namespace pmr {
-    using boost::container::pmr::string;
+using boost::container::pmr::string;
 } // namespace pmr
 } // namespace mc
 

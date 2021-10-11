@@ -27,9 +27,7 @@ struct ThreadSafeQueue {
     MC_NODISCARD auto pop() -> optional<value_type>
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        if (queue_.empty()) {
-            return optional<value_type> { nullopt };
-        }
+        if (queue_.empty()) { return optional<value_type> { nullopt }; }
         value_type tmp = queue_.front();
         queue_.pop();
         return tmp;

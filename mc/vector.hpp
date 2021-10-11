@@ -11,17 +11,15 @@
 
 namespace mc {
 namespace pmr {
-    using std::pmr::vector;
+using std::pmr::vector;
 } // namespace pmr
 } // namespace mc
 
 #else
-
-#include "boost/container/pmr/vector.hpp"
-
+    #include "boost/container/pmr/vector.hpp"
 namespace mc {
 namespace pmr {
-    using boost::container::pmr::vector;
+using boost::container::pmr::vector;
 } // namespace pmr
 } // namespace mc
 

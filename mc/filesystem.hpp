@@ -3,12 +3,12 @@
 #include "mc/version.hpp"
 
 #if defined(__cpp_lib_filesystem)
-#include <filesystem>
+    #include <filesystem>
 namespace mc {
 namespace filesystem = std::filesystem;
 } // namespace mc
 #else
-#include "boost/filesystem.hpp"
+    #include "boost/filesystem.hpp"
 namespace mc {
 namespace filesystem = boost::filesystem;
 } // namespace mc

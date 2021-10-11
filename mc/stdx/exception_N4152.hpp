@@ -7,7 +7,7 @@ namespace mc {
 using std::uncaught_exceptions;
 }
 #else
-#include <boost/core/uncaught_exceptions.hpp>
+    #include <boost/core/uncaught_exceptions.hpp>
 namespace mc {
 using boost::core::uncaught_exceptions;
 }

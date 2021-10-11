@@ -4,20 +4,18 @@
 
 #if defined(__cpp_lib_nonmember_container_access)
 
-#include <iterator>
+    #include <iterator>
 
 namespace mc {
 using std::data;
 using std::empty;
 using std::size;
-}
+} // namespace mc
 
 #else
-
-#include "mc/initializer_list.hpp"
-#include "mc/preprocessor.hpp"
-#include "mc/type_traits.hpp"
-
+    #include "mc/initializer_list.hpp"
+    #include "mc/preprocessor.hpp"
+    #include "mc/type_traits.hpp"
 namespace mc {
 
 template <typename C>
@@ -51,7 +49,8 @@ MC_NODISCARD constexpr auto data(T (&array)[N]) noexcept -> T*
 }
 
 template <typename E>
-MC_NODISCARD constexpr auto data(std::initializer_list<E> il) noexcept -> E const*
+MC_NODISCARD constexpr auto data(std::initializer_list<E> il) noexcept
+    -> E const*
 {
     return il.begin();
 }

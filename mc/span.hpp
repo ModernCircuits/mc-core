@@ -8,4 +8,4 @@ using tcb::as_writable_bytes;
 using tcb::dynamic_extent;
 using tcb::make_span;
 using tcb::span;
-}
+} // namespace mc

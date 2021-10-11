@@ -3,18 +3,14 @@
 #include "mc/version.hpp"
 
 #if defined(__cpp_lib_ssize)
-
-#include <iterator>
-
+    #include <iterator>
 namespace mc {
 using std::ssize;
 }
 
 #else
-
-#include "mc/preprocessor.hpp"
-#include "mc/type_traits.hpp"
-
+    #include "mc/preprocessor.hpp"
+    #include "mc/type_traits.hpp"
 namespace mc {
 template <typename C>
 MC_NODISCARD constexpr auto ssize(C const& c)
@@ -26,7 +22,8 @@ MC_NODISCARD constexpr auto ssize(C const& c)
     return static_cast<R>(c.size());
 }
 template <typename T, std::size_t N>
-MC_NODISCARD constexpr auto ssize(T const (&array)[N]) noexcept -> std::ptrdiff_t
+MC_NODISCARD constexpr auto ssize(T const (&array)[N]) noexcept
+    -> std::ptrdiff_t
 {
     (void)array;
     return static_cast<std::ptrdiff_t>(N);

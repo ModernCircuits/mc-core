@@ -9,4 +9,4 @@ namespace mc {
 using fmt::format;
 using fmt::print;
 using fmt::printf;
-}
+} // namespace mc
