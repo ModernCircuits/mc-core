@@ -6,6 +6,7 @@
 
 namespace mc {
 namespace math {
+namespace detail {
 
 template <typename Matrix>
 MC_NODISCARD auto matrixMultiply(
@@ -39,5 +40,6 @@ MC_NODISCARD auto matrixMultiplyWithVector(Matrix const& mat, Vector const& vec)
     return result;
 }
 
+} // namespace detail
 } // namespace math
 } // namespace mc

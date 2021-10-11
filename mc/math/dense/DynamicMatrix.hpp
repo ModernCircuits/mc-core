@@ -4,11 +4,13 @@
 #include "mc/math/dense/DynamicVector.hpp"
 #include "mc/math/iterator/empty.hpp"
 #include "mc/math/iterator/size.hpp"
-#include "mc/math/matrix/matrixAdd.hpp"
-#include "mc/math/matrix/matrixCompare.hpp"
-#include "mc/math/matrix/matrixMultiply.hpp"
-#include "mc/math/matrix/matrixStream.hpp"
-#include "mc/math/matrix/matrixSubtract.hpp"
+
+#include "mc/math/matrix/detail/matrixAdd.hpp"
+#include "mc/math/matrix/detail/matrixCompare.hpp"
+#include "mc/math/matrix/detail/matrixMultiply.hpp"
+#include "mc/math/matrix/detail/matrixStream.hpp"
+#include "mc/math/matrix/detail/matrixSubscriptToIndex.hpp"
+#include "mc/math/matrix/detail/matrixSubtract.hpp"
 
 #include "mc/algorithm.hpp"
 #include "mc/config.hpp"
@@ -49,12 +51,6 @@ struct DynamicMatrix {
         -> T const&;
 
 private:
-    MC_NODISCARD auto subscriptToIndex(
-        size_type row, size_type col) const noexcept -> size_type
-    {
-        return (row * numCols_) + col;
-    }
-
     std::unique_ptr<T[]> data_ { nullptr }; // NOLINT
     size_type numRows_ {};
     size_type numCols_ {};
@@ -240,7 +236,7 @@ auto DynamicMatrix<T>::at(size_type row, size_type col) -> value_type&
         throw std::out_of_range("column index out of bounds");
     }
 
-    return data_[subscriptToIndex(row, col)];
+    return data_[detail::matrixSubscriptToIndex(row, col, numCols_)];
 }
 
 template <typename T>
@@ -252,70 +248,70 @@ auto DynamicMatrix<T>::at(size_type row, size_type col) const
         throw std::out_of_range("column index out of bounds");
     }
 
-    return data_[subscriptToIndex(row, col)];
+    return data_[detail::matrixSubscriptToIndex(row, col, numCols_)];
 }
 
 template <typename T>
 auto DynamicMatrix<T>::operator()(size_type row, size_type col) -> value_type&
 {
-    return data_[subscriptToIndex(row, col)];
+    return data_[detail::matrixSubscriptToIndex(row, col, numCols_)];
 }
 
 template <typename T>
 auto DynamicMatrix<T>::operator()(size_type row, size_type col) const
     -> value_type const&
 {
-    return data_[subscriptToIndex(row, col)];
+    return data_[detail::matrixSubscriptToIndex(row, col, numCols_)];
 }
 
 template <typename T>
 auto operator==(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r) -> bool
 {
-    return matrixEqual(l, r);
+    return detail::matrixEqual(l, r);
 }
 
 template <typename T>
 auto operator!=(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r) -> bool
 {
-    return matrixNotEqual(l, r);
+    return detail::matrixNotEqual(l, r);
 }
 
 template <typename T>
 auto operator+(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r)
     -> DynamicMatrix<T>
 {
-    return matrixAdd(l, r);
+    return detail::matrixAdd(l, r);
 }
 
 template <typename T>
 auto operator+(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>
 {
-    return matrixAdd(m, scaler);
+    return detail::matrixAdd(m, scaler);
 }
 
 template <typename T>
 auto operator+(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>
 {
-    return matrixAdd(m, scaler);
+    return detail::matrixAdd(m, scaler);
 }
 
 template <typename T>
 auto operator-(DynamicMatrix<T> const& l, DynamicMatrix<T> const& r)
     -> DynamicMatrix<T>
 {
-    return matrixSubtract(l, r);
+    return detail::matrixSubtract(l, r);
 }
 
 template <typename T>
 auto operator-(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>
 {
-    return matrixSubtract(m, scaler);
+    return detail::matrixSubtract(m, scaler);
 }
 
 template <typename T>
 auto operator-(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>
 {
-    return matrixSubtract(m, scaler);
+    return detail::matrixSubtract(m, scaler);
 }
 
 // template<typename T>
@@ -349,26 +345,26 @@ auto operator-(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>
 template <typename T>
 auto operator*(DynamicMatrix<T> const& m, T scaler) -> DynamicMatrix<T>
 {
-    return matrixMultiply(m, scaler);
+    return detail::matrixMultiply(m, scaler);
 }
 
 template <typename T>
 auto operator*(T scaler, DynamicMatrix<T> const& m) -> DynamicMatrix<T>
 {
-    return matrixMultiply(m, scaler);
+    return detail::matrixMultiply(m, scaler);
 }
 
 template <typename T>
 auto operator*(DynamicMatrix<T> const& mat, DynamicVector<T> const& vec)
     -> DynamicVector<T>
 {
-    return matrixMultiplyWithVector(mat, vec);
+    return detail::matrixMultiplyWithVector(mat, vec);
 }
 
 template <typename T>
 auto operator<<(std::ostream& out, DynamicMatrix<T> const& m) -> std::ostream&
 {
-    return matrixOutStream(out, m);
+    return detail::matrixOutStream(out, m);
 }
 
 template <typename T>

@@ -5,7 +5,7 @@
 
 namespace mc {
 namespace math {
-
+namespace detail {
 template <typename Matrix>
 MC_NODISCARD auto matrixAdd(Matrix const& lhs, Matrix const& rhs) -> Matrix
 {
@@ -36,5 +36,6 @@ MC_NODISCARD auto matrixAdd(Matrix const& m, typename Matrix::value_type scaler)
     return tmp;
 }
 
+} // namespace detail
 } // namespace math
 } // namespace mc

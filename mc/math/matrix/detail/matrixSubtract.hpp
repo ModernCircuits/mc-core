@@ -5,6 +5,7 @@
 
 namespace mc {
 namespace math {
+namespace detail {
 
 template <typename Matrix>
 MC_NODISCARD auto matrixSubtract(Matrix const& lhs, Matrix const& rhs) -> Matrix
@@ -36,5 +37,6 @@ MC_NODISCARD auto matrixSubtract(
     return tmp;
 }
 
+} // namespace detail
 } // namespace math
 } // namespace mc

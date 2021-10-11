@@ -4,6 +4,7 @@
 
 namespace mc {
 namespace math {
+namespace detail {
 
 template <typename Matrix>
 MC_NODISCARD auto matrixEqual(Matrix const& lhs, Matrix const& rhs) -> bool
@@ -25,5 +26,6 @@ MC_NODISCARD auto matrixNotEqual(Matrix const& lhs, Matrix const& rhs) -> bool
     return !matrixEqual(lhs, rhs);
 }
 
+} // namespace detail
 } // namespace math
 } // namespace mc

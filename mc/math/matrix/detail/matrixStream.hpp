@@ -4,6 +4,7 @@
 
 namespace mc {
 namespace math {
+namespace detail {
 template <typename Matrix>
 auto matrixOutStream(std::ostream& out, Matrix const& m) -> std::ostream&
 {
@@ -15,5 +16,6 @@ auto matrixOutStream(std::ostream& out, Matrix const& m) -> std::ostream&
     }
     return out;
 }
+} // namespace detail
 } // namespace math
 } // namespace mc
