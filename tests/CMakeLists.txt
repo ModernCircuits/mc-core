@@ -33,6 +33,7 @@ target_sources(${PROJECT_NAME}
 
         stdx/bit.cpp
         stdx/format.cpp
+        stdx/iterator.cpp
         stdx/numbers.cpp
         stdx/numeric.cpp
 )
