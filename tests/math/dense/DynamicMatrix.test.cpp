@@ -243,7 +243,7 @@ TEMPLATE_TEST_CASE("math/dense: DynamicMatrixFunctions",
     identityA(0, 1) = T { 0 };
     identityA(1, 1) = T { 1 };
 
-    auto identityB  = math::makeIdentity<T>(3);
+    auto identityB  = math::makeIdentity<math::DynamicMatrix<T>>(3);
     identityB(0, 0) = T { 1 };
     identityB(1, 0) = T { 0 };
     identityB(0, 1) = T { 0 };
@@ -285,12 +285,12 @@ TEMPLATE_TEST_CASE("math/dense: DynamicMatrixFunctions",
 
     REQUIRE(math::determinant(invertA) == T { -4 });
 
-    REQUIRE(math::isRowEchelon(math::makeIdentity<T>(2)));
-    REQUIRE(math::isRowEchelon(math::makeIdentity<T>(3)));
-    REQUIRE(math::isRowEchelon(math::makeIdentity<T>(4)));
-    REQUIRE(math::isRowEchelon(math::makeIdentity<T>(5)));
-    REQUIRE(math::isRowEchelon(math::makeIdentity<T>(6)));
-    REQUIRE(math::isRowEchelon(math::makeIdentity<T>(7)));
+    REQUIRE(math::isRowEchelon(math::makeIdentity<math::DynamicMatrix<T>>(2)));
+    REQUIRE(math::isRowEchelon(math::makeIdentity<math::DynamicMatrix<T>>(3)));
+    REQUIRE(math::isRowEchelon(math::makeIdentity<math::DynamicMatrix<T>>(4)));
+    REQUIRE(math::isRowEchelon(math::makeIdentity<math::DynamicMatrix<T>>(5)));
+    REQUIRE(math::isRowEchelon(math::makeIdentity<math::DynamicMatrix<T>>(6)));
+    REQUIRE(math::isRowEchelon(math::makeIdentity<math::DynamicMatrix<T>>(7)));
 
     auto a  = math::DynamicMatrix<T> { 3, 4 };
     a(0, 0) = T { 1 };
