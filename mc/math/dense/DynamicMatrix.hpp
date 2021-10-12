@@ -3,7 +3,6 @@
 #include "mc/algorithm.hpp"
 #include "mc/config.hpp"
 #include "mc/cstddef.hpp"
-#include "mc/cstdint.hpp"
 #include "mc/iterator.hpp"
 #include "mc/math/iterator/data.hpp"
 #include "mc/math/iterator/empty.hpp"
@@ -26,7 +25,7 @@
 #include "mc/math/matrix/subMatrix.hpp"
 #include "mc/math/matrix/swapRow.hpp"
 #include "mc/math/traits/IsDenseMatrix.hpp"
-#include "mc/memory.hpp"
+#include "mc/vector.hpp"
 
 namespace mc {
 namespace math {
@@ -34,13 +33,10 @@ namespace math {
 template <typename T>
 struct DynamicMatrix {
     using value_type = T;
-    using size_type  = std::uint32_t;
+    using size_type  = std::size_t;
 
     DynamicMatrix() noexcept = default;
     DynamicMatrix(size_type rows, size_type cols);
-    DynamicMatrix(DynamicMatrix<T> const& other);
-
-    auto operator=(DynamicMatrix<T> const& other) -> DynamicMatrix<T>&;
 
     auto clear() noexcept -> void;
     auto resize(size_type rows, size_type cols) -> void;
@@ -61,7 +57,7 @@ struct DynamicMatrix {
     MC_NODISCARD auto data() const -> T const*;
 
 private:
-    std::unique_ptr<T[]> data_ { nullptr }; // NOLINT
+    std::vector<T> data_ {};
     size_type numRows_ {};
     size_type numCols_ {};
 };
@@ -72,22 +68,6 @@ template <typename T>
 DynamicMatrix<T>::DynamicMatrix(size_type row, size_type col)
 {
     resize(row, col);
-}
-
-template <typename T>
-DynamicMatrix<T>::DynamicMatrix(DynamicMatrix<T> const& other)
-{
-    (*this) = other;
-}
-
-template <typename T>
-auto DynamicMatrix<T>::operator=(DynamicMatrix<T> const& other)
-    -> DynamicMatrix<T>&
-{
-    resize(other.rows(), other.cols());
-    auto const* ptr = other.data_.get();
-    std::copy(ptr, std::next(ptr, size()), data_.get());
-    return *this;
 }
 
 template <typename T>
@@ -119,14 +99,14 @@ auto DynamicMatrix<T>::resize(size_type row, size_type col) -> void
 {
     numRows_ = row;
     numCols_ = col;
-    data_    = std::make_unique<value_type[]>(size()); // NOLINT
+    data_.resize(size());
     clear();
 }
 
 template <typename T>
 auto DynamicMatrix<T>::clear() noexcept -> void
 {
-    std::fill(data_.get(), std::next(data_.get(), size()), value_type {});
+    std::fill(data_.begin(), data_.end(), value_type {});
 }
 
 template <typename T>
@@ -168,13 +148,13 @@ auto DynamicMatrix<T>::operator()(size_type row, size_type col) const
 template <typename T>
 auto DynamicMatrix<T>::data() -> T*
 {
-    return data_.get();
+    return data_.data();
 }
 
 template <typename T>
 auto DynamicMatrix<T>::data() const -> T const*
 {
-    return data_.get();
+    return data_.data();
 }
 
 template <typename T>
