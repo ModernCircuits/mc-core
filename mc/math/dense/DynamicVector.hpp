@@ -5,6 +5,8 @@
 #include "mc/math/iterator/empty.hpp"
 #include "mc/math/iterator/end.hpp"
 #include "mc/math/iterator/size.hpp"
+#include "mc/math/traits/IsVector.hpp"
+#include "mc/math/vector/operators.hpp"
 
 #include "mc/algorithm.hpp"
 #include "mc/cmath.hpp"
@@ -54,32 +56,6 @@ private:
     std::unique_ptr<T[]> data_ {}; // NOLINT
     size_type size_ {};
 };
-
-template <typename T>
-auto operator==(DynamicVector<T> const& l, DynamicVector<T> const& r) -> bool;
-
-template <typename T>
-auto operator!=(DynamicVector<T> const& l, DynamicVector<T> const& r) -> bool;
-
-template <typename T>
-auto operator+(DynamicVector<T> const& l, DynamicVector<T> const& r)
-    -> DynamicVector<T>;
-
-template <typename T>
-auto operator-(DynamicVector<T> const& l, DynamicVector<T> const& r)
-    -> DynamicVector<T>;
-
-template <typename T>
-auto operator*(DynamicVector<T> const& vec, T const& scaler)
-    -> DynamicVector<T>;
-
-template <typename T>
-auto operator*(T const& scaler, DynamicVector<T> const& vec)
-    -> DynamicVector<T>;
-
-template <typename T>
-auto operator<<(std::ostream& out, DynamicVector<T> const& vec)
-    -> std::ostream&;
 
 // IMPLEMENTATION
 template <typename T>
@@ -192,66 +168,7 @@ auto DynamicVector<T>::operator[](size_type idx) const -> value_type const&
 }
 
 template <typename T>
-auto operator==(DynamicVector<T> const& l, DynamicVector<T> const& r) -> bool
-{
-    return std::equal(begin(l), end(l), begin(r), end(r));
-}
-
-template <typename T>
-auto operator!=(DynamicVector<T> const& l, DynamicVector<T> const& r) -> bool
-{
-    return !(l == r);
-}
-
-template <typename T>
-auto operator+(DynamicVector<T> const& l, DynamicVector<T> const& r)
-    -> DynamicVector<T>
-{
-    if (size(l) != size(r)) {
-        throw std::domain_error("vectors need to be the same size");
-    }
-    auto result = DynamicVector<T> { size(l) };
-    std::transform(
-        cbegin(l), cend(l), cbegin(r), begin(result), std::plus<T> {});
-    return result;
-}
-
-template <typename T>
-auto operator-(DynamicVector<T> const& l, DynamicVector<T> const& r)
-    -> DynamicVector<T>
-{
-    if (size(l) != size(r)) {
-        throw std::domain_error("vectors need to be the same size");
-    }
-    auto result = DynamicVector<T> { size(l) };
-    std::transform(
-        cbegin(l), cend(l), cbegin(r), begin(result), std::minus<T> {});
-    return result;
-}
-
-template <typename T>
-auto operator*(DynamicVector<T> const& vec, T const& scaler) -> DynamicVector<T>
-{
-    auto result = DynamicVector<T> { size(vec) };
-    std::transform(cbegin(vec), cend(vec), begin(result),
-        [scaler](auto v) { return v * scaler; });
-    return result;
-}
-
-template <typename T>
-auto operator*(T const& scaler, DynamicVector<T> const& vec) -> DynamicVector<T>
-{
-    return vec * scaler;
-}
-
-template <typename T>
-auto operator<<(std::ostream& out, DynamicVector<T> const& vec) -> std::ostream&
-{
-    for (decltype(size(vec)) i = 0; i < size(vec); ++i) {
-        out << vec[i] << ' ';
-    }
-    return out;
-}
-
+struct IsVector<DynamicVector<T>> : TrueType {
+};
 } // namespace math
 } // namespace mc
