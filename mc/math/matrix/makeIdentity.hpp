@@ -10,14 +10,10 @@ namespace math {
 template <typename Matrix>
 auto makeIdentity(Matrix& mat) -> void
 {
-    if (!isSquare(mat)) {
-        throw std::invalid_argument("matrix must be square");
-    }
+    if (!isSquare(mat)) { throw std::invalid_argument("matrix must be square"); }
 
     mat.clear();
-    for (decltype(mat.rows()) i = 0; i < mat.rows(); ++i) {
-        mat(i, i) = typename Matrix::value_type { 1 };
-    }
+    for (decltype(mat.rows()) i = 0; i < mat.rows(); ++i) { mat(i, i) = typename Matrix::value_type { 1 }; }
 }
 
 template <typename Matrix>

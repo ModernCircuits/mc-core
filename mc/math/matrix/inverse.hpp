@@ -33,9 +33,7 @@ auto inverse(Matrix const& mat) -> Matrix
     using size_type = typename Matrix::size_type;
     using T         = typename Matrix::value_type;
 
-    if (!isSquare(mat)) {
-        throw std::invalid_argument("matrix must be square");
-    }
+    if (!isSquare(mat)) { throw std::invalid_argument("matrix must be square"); }
 
     static constexpr auto maxLoopCount = size_type { 100 };
 
@@ -50,8 +48,7 @@ auto inverse(Matrix const& mat) -> Matrix
 
     auto result = Matrix { mat.rows(), mat.cols() };
     while ((!completed) && (count < maxLoopCount)) {
-        for (auto diagIdx = size_type { 0 }; diagIdx < augment.rows();
-             ++diagIdx) {
+        for (auto diagIdx = size_type { 0 }; diagIdx < augment.rows(); ++diagIdx) {
             cRow = diagIdx;
             cCol = diagIdx;
 

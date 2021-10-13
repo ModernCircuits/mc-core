@@ -33,27 +33,15 @@ template <typename T, typename U>
 struct IntegerCompareImpl<T, U, true, false> {
     using UT = std::make_unsigned_t<T>;
 
-    static auto equal(T t, U u) noexcept -> bool
-    {
-        return t < 0 ? false : UT(t) == u;
-    }
-    static auto less(T t, U u) noexcept -> bool
-    {
-        return t < 0 ? true : UT(t) < u;
-    }
+    static auto equal(T t, U u) noexcept -> bool { return t < 0 ? false : UT(t) == u; }
+    static auto less(T t, U u) noexcept -> bool { return t < 0 ? true : UT(t) < u; }
 };
 template <typename T, typename U>
 struct IntegerCompareImpl<T, U, false, false> {
     using UU = std::make_unsigned_t<U>;
 
-    static auto equal(T t, U u) noexcept -> bool
-    {
-        return u < 0 ? false : t == UU(u);
-    }
-    static auto less(T t, U u) noexcept -> bool
-    {
-        return u < 0 ? false : t < UU(u);
-    }
+    static auto equal(T t, U u) noexcept -> bool { return u < 0 ? false : t == UU(u); }
+    static auto less(T t, U u) noexcept -> bool { return u < 0 ? false : t < UU(u); }
 };
 } // namespace detail
 
@@ -61,8 +49,7 @@ template <typename T, typename U>
 MC_NODISCARD constexpr auto cmp_equal(T t, U u) noexcept // NOLINT
     -> bool
 {
-    using cmp = detail::IntegerCompareImpl<T, U, std::is_signed<T>::value,
-        std::is_signed<U>::value>;
+    using cmp = detail::IntegerCompareImpl<T, U, std::is_signed<T>::value, std::is_signed<U>::value>;
     return cmp::equal(t, u);
 }
 
@@ -77,8 +64,7 @@ template <typename T, typename U>
 MC_NODISCARD constexpr auto cmp_less(T t, U u) noexcept // NOLINT
     -> bool
 {
-    using cmp = detail::IntegerCompareImpl<T, U, std::is_signed<T>::value,
-        std::is_signed<U>::value>;
+    using cmp = detail::IntegerCompareImpl<T, U, std::is_signed<T>::value, std::is_signed<U>::value>;
     return cmp::less(t, u);
 }
 

@@ -49,8 +49,7 @@ MC_NODISCARD constexpr auto data(T (&array)[N]) noexcept -> T*
 }
 
 template <typename E>
-MC_NODISCARD constexpr auto data(std::initializer_list<E> il) noexcept
-    -> E const*
+MC_NODISCARD constexpr auto data(std::initializer_list<E> il) noexcept -> E const*
 {
     return il.begin();
 }

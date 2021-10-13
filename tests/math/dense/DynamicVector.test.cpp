@@ -8,8 +8,7 @@
 
 namespace math = mc::math;
 
-TEMPLATE_TEST_CASE("math/dense: DynamicVector", "[math][dense][vector]", float,
-    double, long double)
+TEMPLATE_TEST_CASE("math/dense: DynamicVector", "[math][dense][vector]", float, double, long double)
 {
     using T = TestType;
 

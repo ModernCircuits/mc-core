@@ -8,18 +8,13 @@
 namespace mc {
 namespace math {
 template <typename Matrix>
-auto determinant(Matrix const& mat)
-    -> std::enable_if_t<IsMatrix<Matrix>::value, typename Matrix::value_type>
+auto determinant(Matrix const& mat) -> std::enable_if_t<IsMatrix<Matrix>::value, typename Matrix::value_type>
 {
     using value_type = typename Matrix::value_type;
 
-    if (!isSquare(mat)) {
-        throw std::invalid_argument("matrix must be square");
-    }
+    if (!isSquare(mat)) { throw std::invalid_argument("matrix must be square"); }
 
-    if (mat.rows() == 2) {
-        return (mat(0, 0) * mat(1, 1)) - (mat(0, 1) * mat(1, 0));
-    }
+    if (mat.rows() == 2) { return (mat(0, 0) * mat(1, 1)) - (mat(0, 1) * mat(1, 0)); }
 
     auto sum  = value_type { 0 };
     auto sign = value_type { 1 };

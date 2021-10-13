@@ -12,8 +12,7 @@ template <typename Matrix>
 auto rowEchelon(Matrix& mat) -> std::enable_if_t<IsMatrix<Matrix>::value, void>
 {
     if (mat.cols() < mat.rows()) {
-        throw std::invalid_argument(
-            "matrix must have at least have as many columns as rows");
+        throw std::invalid_argument("matrix must have at least have as many columns as rows");
     }
 
     using size_type = typename Matrix::size_type;

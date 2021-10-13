@@ -50,8 +50,7 @@ struct DynamicMatrix {
     MC_NODISCARD auto at(size_type row, size_type col) const -> T const&;
 
     MC_NODISCARD auto operator()(size_type row, size_type col) -> T&;
-    MC_NODISCARD auto operator()(size_type row, size_type col) const
-        -> T const&;
+    MC_NODISCARD auto operator()(size_type row, size_type col) const -> T const&;
 
     MC_NODISCARD auto data() -> T*;
     MC_NODISCARD auto data() const -> T const*;
@@ -113,21 +112,16 @@ template <typename T>
 auto DynamicMatrix<T>::at(size_type row, size_type col) -> value_type&
 {
     if (row >= rows()) { throw std::out_of_range("row index out of bounds"); }
-    if (col >= cols()) {
-        throw std::out_of_range("column index out of bounds");
-    }
+    if (col >= cols()) { throw std::out_of_range("column index out of bounds"); }
 
     return data_[detail::matrixSubscriptToIndex(row, col, numCols_)];
 }
 
 template <typename T>
-auto DynamicMatrix<T>::at(size_type row, size_type col) const
-    -> value_type const&
+auto DynamicMatrix<T>::at(size_type row, size_type col) const -> value_type const&
 {
     if (row >= rows()) { throw std::out_of_range("row index out of bounds"); }
-    if (col >= cols()) {
-        throw std::out_of_range("column index out of bounds");
-    }
+    if (col >= cols()) { throw std::out_of_range("column index out of bounds"); }
 
     return data_[detail::matrixSubscriptToIndex(row, col, numCols_)];
 }
@@ -139,8 +133,7 @@ auto DynamicMatrix<T>::operator()(size_type row, size_type col) -> value_type&
 }
 
 template <typename T>
-auto DynamicMatrix<T>::operator()(size_type row, size_type col) const
-    -> value_type const&
+auto DynamicMatrix<T>::operator()(size_type row, size_type col) const -> value_type const&
 {
     return data_[detail::matrixSubscriptToIndex(row, col, numCols_)];
 }

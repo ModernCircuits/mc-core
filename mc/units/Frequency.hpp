@@ -18,15 +18,13 @@ struct Frequency {
 private:
     template <typename Rep2>
     using Ctor3 = std::enable_if<std::is_convertible<Rep2, Rep>::value
-                                     && (TreatAsFloatingPoint<Rep>::value
-                                         || !TreatAsFloatingPoint<Rep2>::value),
+                                     && (TreatAsFloatingPoint<Rep>::value || !TreatAsFloatingPoint<Rep2>::value),
         int>;
 
     template <typename Rep2, typename Period2>
     using Ctor4
         = std::enable_if<TreatAsFloatingPoint<Rep>::value
-                             || (std::ratio_divide<Period2, Period>::den == 1
-                                 && !TreatAsFloatingPoint<Rep2>::value),
+                             || (std::ratio_divide<Period2, Period>::den == 1 && !TreatAsFloatingPoint<Rep2>::value),
             int>;
 
 public:
@@ -58,11 +56,9 @@ public:
 
     /// \brief Constructs a Frequency by converting d to an appropriate period
     /// and tick count.
-    template <typename Rep2, typename Period2,
-        typename Ctor4<Rep2, Period2>::type = 0>
+    template <typename Rep2, typename Period2, typename Ctor4<Rep2, Period2>::type = 0>
     constexpr Frequency(Frequency<Rep2, Period2> const& other)
-        : ticks_(static_cast<Rep>(
-            other.count() * std::ratio_divide<Period2, period>::num))
+        : ticks_(static_cast<Rep>(other.count() * std::ratio_divide<Period2, period>::num))
     {
     }
 
@@ -73,16 +69,14 @@ public:
     MC_NODISCARD constexpr auto count() const noexcept -> rep { return ticks_; }
 
     /// \brief Returns a copy of this Frequency object
-    MC_NODISCARD constexpr auto operator+() const
-        -> std::common_type_t<Frequency>
+    MC_NODISCARD constexpr auto operator+() const -> std::common_type_t<Frequency>
     {
         return std::common_type_t<Frequency>(*this);
     }
 
     /// \brief Returns a copy of this Frequency object, with the number of
     /// ticks negated.
-    MC_NODISCARD constexpr auto operator-() const
-        -> std::common_type_t<Frequency>
+    MC_NODISCARD constexpr auto operator-() const -> std::common_type_t<Frequency>
     {
         return std::common_type_t<Frequency>(-ticks_);
     }
@@ -92,20 +86,16 @@ private:
 };
 
 template <typename Rep, typename Period>
-constexpr auto operator+=(Frequency<Rep, Period>& lhs,
-    Frequency<Rep, Period> const& rhs) noexcept(noexcept(std::declval<Rep>()
-                                                         + std::declval<Rep>()))
-    -> Frequency<Rep, Period>&
+constexpr auto operator+=(Frequency<Rep, Period>& lhs, Frequency<Rep, Period> const& rhs) noexcept(
+    noexcept(std::declval<Rep>() + std::declval<Rep>())) -> Frequency<Rep, Period>&
 {
     lhs = Frequency<Rep, Period> { lhs.count() + rhs.count() };
     return lhs;
 }
 
 template <typename Rep, typename Period>
-constexpr auto operator-=(Frequency<Rep, Period>& lhs,
-    Frequency<Rep, Period> const& rhs) noexcept(noexcept(std::declval<Rep>()
-                                                         - std::declval<Rep>()))
-    -> Frequency<Rep, Period>&
+constexpr auto operator-=(Frequency<Rep, Period>& lhs, Frequency<Rep, Period> const& rhs) noexcept(
+    noexcept(std::declval<Rep>() - std::declval<Rep>())) -> Frequency<Rep, Period>&
 {
     lhs = Frequency<Rep, Period> { lhs.count() - rhs.count() };
     return lhs;
@@ -113,8 +103,7 @@ constexpr auto operator-=(Frequency<Rep, Period>& lhs,
 
 template <typename Rep, typename Period>
 constexpr auto operator*=(Frequency<Rep, Period>& lhs, Rep const& rhs) noexcept(
-    noexcept(std::declval<Rep>() * std::declval<Rep>()))
-    -> Frequency<Rep, Period>&
+    noexcept(std::declval<Rep>() * std::declval<Rep>())) -> Frequency<Rep, Period>&
 {
     lhs = Frequency<Rep, Period> { lhs.count() * rhs };
     return lhs;
@@ -122,44 +111,38 @@ constexpr auto operator*=(Frequency<Rep, Period>& lhs, Rep const& rhs) noexcept(
 
 template <typename Rep, typename Period>
 constexpr auto operator/=(Frequency<Rep, Period>& lhs, Rep const& rhs) noexcept(
-    noexcept(std::declval<Rep>() / std::declval<Rep>()))
-    -> Frequency<Rep, Period>&
+    noexcept(std::declval<Rep>() / std::declval<Rep>())) -> Frequency<Rep, Period>&
 {
     lhs = Frequency<Rep, Period> { lhs.count() / rhs };
     return lhs;
 }
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-MC_NODISCARD constexpr auto operator+(
-    Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs)
+MC_NODISCARD constexpr auto operator+(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs)
     -> std::common_type_t<Frequency<Rep1, Period1>, Frequency<Rep2, Period2>>
 {
-    using CD = std::common_type_t<Frequency<Rep1, Period1>,
-        Frequency<Rep2, Period2>>;
+    using CD = std::common_type_t<Frequency<Rep1, Period1>, Frequency<Rep2, Period2>>;
     return CD(CD(lhs).count() + CD(rhs).count());
 }
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-MC_NODISCARD constexpr auto operator-(
-    Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs)
+MC_NODISCARD constexpr auto operator-(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs)
     -> std::common_type_t<Frequency<Rep1, Period1>, Frequency<Rep2, Period2>>
 {
-    using CD = std::common_type_t<Frequency<Rep1, Period1>,
-        Frequency<Rep2, Period2>>;
+    using CD = std::common_type_t<Frequency<Rep1, Period1>, Frequency<Rep2, Period2>>;
     return CD(CD(lhs).count() - CD(rhs).count());
 }
 
 template <typename Rep1, typename Period, typename Rep2>
-MC_NODISCARD constexpr auto operator*(Frequency<Rep1, Period> const& d,
-    Rep2 const& s) -> Frequency<std::common_type_t<Rep1, Rep2>, Period>
+MC_NODISCARD constexpr auto operator*(Frequency<Rep1, Period> const& d, Rep2 const& s)
+    -> Frequency<std::common_type_t<Rep1, Rep2>, Period>
 {
     using CD = Frequency<std::common_type_t<Rep1, Rep2>, Period>;
     return CD(CD(d).count() * s);
 }
 
 template <typename Rep1, typename Rep2, typename Period>
-MC_NODISCARD constexpr auto operator*(
-    Rep1 const& s, Frequency<Rep2, Period> const& d)
+MC_NODISCARD constexpr auto operator*(Rep1 const& s, Frequency<Rep2, Period> const& d)
     -> Frequency<std::common_type_t<Rep1, Rep2>, Period>
 {
     using CD = Frequency<std::common_type_t<Rep1, Rep2>, Period>;
@@ -167,64 +150,55 @@ MC_NODISCARD constexpr auto operator*(
 }
 
 template <typename Rep1, typename Period, typename Rep2>
-MC_NODISCARD constexpr auto operator/(Frequency<Rep1, Period> const& d,
-    Rep2 const& s) -> Frequency<std::common_type_t<Rep1, Rep2>, Period>
+MC_NODISCARD constexpr auto operator/(Frequency<Rep1, Period> const& d, Rep2 const& s)
+    -> Frequency<std::common_type_t<Rep1, Rep2>, Period>
 {
     using CD = Frequency<std::common_type_t<Rep1, Rep2>, Period>;
     return CD(CD(d).count() / s);
 }
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-MC_NODISCARD constexpr auto operator/(Frequency<Rep1, Period1> const& lhs,
-    Frequency<Rep2, Period2> const& rhs) -> std::common_type_t<Rep1, Rep2>
+MC_NODISCARD constexpr auto operator/(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs)
+    -> std::common_type_t<Rep1, Rep2>
 {
-    using CD = std::common_type_t<Frequency<Rep1, Period1>,
-        Frequency<Rep2, Period2>>;
+    using CD = std::common_type_t<Frequency<Rep1, Period1>, Frequency<Rep2, Period2>>;
     return CD(lhs).count() / CD(rhs).count();
 }
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-MC_NODISCARD constexpr auto operator==(Frequency<Rep1, Period1> const& lhs,
-    Frequency<Rep2, Period2> const& rhs) -> bool
+MC_NODISCARD constexpr auto operator==(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
-    using CT = std::common_type_t<Frequency<Rep1, Period1>,
-        Frequency<Rep2, Period2>>;
+    using CT = std::common_type_t<Frequency<Rep1, Period1>, Frequency<Rep2, Period2>>;
     return CT(lhs).count() == CT(rhs).count();
 }
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-MC_NODISCARD constexpr auto operator!=(Frequency<Rep1, Period1> const& lhs,
-    Frequency<Rep2, Period2> const& rhs) -> bool
+MC_NODISCARD constexpr auto operator!=(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
     return !(lhs == rhs);
 }
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-MC_NODISCARD constexpr auto operator<(Frequency<Rep1, Period1> const& lhs,
-    Frequency<Rep2, Period2> const& rhs) -> bool
+MC_NODISCARD constexpr auto operator<(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
-    using CT = std::common_type_t<Frequency<Rep1, Period1>,
-        Frequency<Rep2, Period2>>;
+    using CT = std::common_type_t<Frequency<Rep1, Period1>, Frequency<Rep2, Period2>>;
     return CT(lhs).count() < CT(rhs).count();
 }
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-MC_NODISCARD constexpr auto operator<=(Frequency<Rep1, Period1> const& lhs,
-    Frequency<Rep2, Period2> const& rhs) -> bool
+MC_NODISCARD constexpr auto operator<=(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
     return !(rhs < lhs);
 }
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-MC_NODISCARD constexpr auto operator>(Frequency<Rep1, Period1> const& lhs,
-    Frequency<Rep2, Period2> const& rhs) -> bool
+MC_NODISCARD constexpr auto operator>(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
     return rhs < lhs;
 }
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-MC_NODISCARD constexpr auto operator>=(Frequency<Rep1, Period1> const& lhs,
-    Frequency<Rep2, Period2> const& rhs) -> bool
+MC_NODISCARD constexpr auto operator>=(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
     return !(lhs < rhs);
 }
@@ -238,49 +212,41 @@ template <typename Rep, typename Period>
 struct IsFrequency<mc::Frequency<Rep, Period>> : std::true_type {
 };
 
-template <typename ToFrequency, typename CF, typename CR, bool NumIsOne = false,
-    bool DenIsOne = false>
+template <typename ToFrequency, typename CF, typename CR, bool NumIsOne = false, bool DenIsOne = false>
 struct FrequencyCastImpl {
     template <typename Rep, typename Period>
-    constexpr auto operator()(Frequency<Rep, Period> const& frequency) const
-        -> ToFrequency
+    constexpr auto operator()(Frequency<Rep, Period> const& frequency) const -> ToFrequency
     {
         using toRep = typename ToFrequency::rep;
-        return ToFrequency(static_cast<toRep>(static_cast<CR>(frequency.count())
-                                              * static_cast<CR>(CF::num)
-                                              / static_cast<CR>(CF::den)));
+        return ToFrequency(static_cast<toRep>(
+            static_cast<CR>(frequency.count()) * static_cast<CR>(CF::num) / static_cast<CR>(CF::den)));
     }
 };
 
 template <typename ToFrequency, typename CF, typename CR>
 struct FrequencyCastImpl<ToFrequency, CF, CR, true, false> {
     template <typename Rep, typename Period>
-    constexpr auto operator()(Frequency<Rep, Period> const& frequency) const
-        -> ToFrequency
+    constexpr auto operator()(Frequency<Rep, Period> const& frequency) const -> ToFrequency
     {
         using toRep = typename ToFrequency::rep;
-        return ToFrequency(static_cast<toRep>(
-            static_cast<CR>(frequency.count()) / static_cast<CR>(CF::den)));
+        return ToFrequency(static_cast<toRep>(static_cast<CR>(frequency.count()) / static_cast<CR>(CF::den)));
     }
 };
 
 template <typename ToFrequency, typename CF, typename CR>
 struct FrequencyCastImpl<ToFrequency, CF, CR, false, true> {
     template <typename Rep, typename Period>
-    constexpr auto operator()(Frequency<Rep, Period> const& frequency) const
-        -> ToFrequency
+    constexpr auto operator()(Frequency<Rep, Period> const& frequency) const -> ToFrequency
     {
         using toRep = typename ToFrequency::rep;
-        return ToFrequency(static_cast<toRep>(
-            static_cast<CR>(frequency.count()) * static_cast<CR>(CF::num)));
+        return ToFrequency(static_cast<toRep>(static_cast<CR>(frequency.count()) * static_cast<CR>(CF::num)));
     }
 };
 
 template <typename ToFrequency, typename CF, typename CR>
 struct FrequencyCastImpl<ToFrequency, CF, CR, true, true> {
     template <typename Rep, typename Period>
-    constexpr auto operator()(Frequency<Rep, Period> const& frequency) const
-        -> ToFrequency
+    constexpr auto operator()(Frequency<Rep, Period> const& frequency) const -> ToFrequency
     {
         using toRep = typename ToFrequency::rep;
         return ToFrequency(static_cast<toRep>(frequency.count()));
@@ -290,8 +256,7 @@ struct FrequencyCastImpl<ToFrequency, CF, CR, true, true> {
 } // namespace detail
 
 template <typename ToFreq, typename Rep, typename Period>
-MC_NODISCARD constexpr auto frequencyCast(
-    Frequency<Rep, Period> const& frequency)
+MC_NODISCARD constexpr auto frequencyCast(Frequency<Rep, Period> const& frequency)
     -> std::enable_if_t<detail::IsFrequency<ToFreq>::value, ToFreq>
 {
     using detail::FrequencyCastImpl;
@@ -321,9 +286,7 @@ MC_NODISCARD constexpr auto ceil(Frequency<Rep, Period> const& f)
 
 template <typename To, typename Rep, typename Period>
 MC_NODISCARD constexpr auto round(Frequency<Rep, Period> const& f)
-    -> std::enable_if_t<detail::IsFrequency<To>::value
-                            && !TreatAsFloatingPoint<typename To::rep>::value,
-        To>
+    -> std::enable_if_t<detail::IsFrequency<To>::value && !TreatAsFloatingPoint<typename To::rep>::value, To>
 {
     To t0      = floor<To>(f);
     To t1      = t0 + To { 1 };
@@ -339,8 +302,7 @@ MC_NODISCARD constexpr auto round(Frequency<Rep, Period> const& f)
 
 template <typename Rep, typename Period>
 MC_NODISCARD constexpr auto abs(Frequency<Rep, Period> const& f)
-    -> std::enable_if_t<std::numeric_limits<Rep>::is_signed,
-        Frequency<Rep, Period>>
+    -> std::enable_if_t<std::numeric_limits<Rep>::is_signed, Frequency<Rep, Period>>
 {
     return f.count() >= Rep {} ? f : -f;
 }
@@ -376,7 +338,8 @@ MC_NODISCARD constexpr auto toBPM(Frequency<T, R> const& f) noexcept
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 struct std::common_type< // NOLINT(readability-identifier-naming)
-    mc::Frequency<Rep1, Period1>, mc::Frequency<Rep2, Period2>> {
+    mc::Frequency<Rep1, Period1>,
+    mc::Frequency<Rep2, Period2>> {
 private:
     static constexpr auto num = mc::gcd(Period1::num, Period2::num);
     static constexpr auto den = mc::lcm(Period1::den, Period2::den);

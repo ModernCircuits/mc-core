@@ -20,13 +20,12 @@ MC_NODISCARD constexpr auto gcd(M m, N n) noexcept -> std::common_type_t<M, N>
 }
 
 template <typename M, typename N>
-MC_NODISCARD constexpr auto lcm(M m, N n)
-    -> std::enable_if_t<std::is_integral<M>::value            //
-                            && !std::is_same<M, bool>::value  //
-                            && std::is_integral<N>::value     //
-                            && !std::is_same<N, bool>::value, //
-        std::common_type_t<M, N>                              //
-        >
+MC_NODISCARD constexpr auto lcm(M m, N n) -> std::enable_if_t<std::is_integral<M>::value            //
+                                                                  && !std::is_same<M, bool>::value  //
+                                                                  && std::is_integral<N>::value     //
+                                                                  && !std::is_same<N, bool>::value, //
+    std::common_type_t<M, N>                                                                        //
+    >
 {
     if ((m == M {}) || (n == N {})) { return 0; }
     return (m * n) / gcd(m, n);

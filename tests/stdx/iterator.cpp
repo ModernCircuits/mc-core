@@ -6,8 +6,7 @@
 
 #include <catch2/catch.hpp>
 
-TEMPLATE_TEST_CASE(
-    "stl/iterator: data", "[stl][iterator]", char, short, int, float, double)
+TEMPLATE_TEST_CASE("stl/iterator: data", "[stl][iterator]", char, short, int, float, double)
 {
     using T = TestType;
     T cArray[16] {};

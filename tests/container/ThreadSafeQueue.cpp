@@ -4,8 +4,7 @@
 
 #include <catch2/catch.hpp>
 
-TEMPLATE_TEST_CASE("stl/queue: ThreadSafeQueue", "[stl][queue]", int, float,
-    double, std::string)
+TEMPLATE_TEST_CASE("stl/queue: ThreadSafeQueue", "[stl][queue]", int, float, double, std::string)
 {
     SECTION("single thread")
     {

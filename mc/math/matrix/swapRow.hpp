@@ -6,12 +6,9 @@
 namespace mc {
 namespace math {
 template <typename Matrix>
-auto swapRow(Matrix& mat, typename Matrix::size_type a,
-    typename Matrix::size_type b) -> void
+auto swapRow(Matrix& mat, typename Matrix::size_type a, typename Matrix::size_type b) -> void
 {
-    if ((a >= mat.rows()) || (b >= mat.rows())) {
-        throw std::out_of_range("row index out of bounds");
-    }
+    if ((a >= mat.rows()) || (b >= mat.rows())) { throw std::out_of_range("row index out of bounds"); }
 
     for (decltype(mat.cols()) col = 0; col < mat.cols(); ++col) {
         using std::swap;

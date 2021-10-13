@@ -2,9 +2,18 @@
 
 #include <catch2/catch.hpp>
 
-TEMPLATE_TEST_CASE("stl/numeric: lcm", "[stl][numeric]", unsigned char,
-    unsigned short, unsigned int, unsigned long, unsigned long long,
-    signed char, signed short, signed int, signed long, signed long long)
+TEMPLATE_TEST_CASE("stl/numeric: lcm",
+    "[stl][numeric]",
+    unsigned char,
+    unsigned short,
+    unsigned int,
+    unsigned long,
+    unsigned long long,
+    signed char,
+    signed short,
+    signed int,
+    signed long,
+    signed long long)
 {
     using T = TestType;
     REQUIRE(mc::lcm(T(0), T(0)) == T(0));
@@ -17,9 +26,18 @@ TEMPLATE_TEST_CASE("stl/numeric: lcm", "[stl][numeric]", unsigned char,
     REQUIRE(mc::lcm(T(11), T(3)) == T(33));
 }
 
-TEMPLATE_TEST_CASE("stl/numeric: gcd", "[stl][numeric]", unsigned char,
-    unsigned short, unsigned int, unsigned long, unsigned long long,
-    signed char, signed short, signed int, signed long, signed long long)
+TEMPLATE_TEST_CASE("stl/numeric: gcd",
+    "[stl][numeric]",
+    unsigned char,
+    unsigned short,
+    unsigned int,
+    unsigned long,
+    unsigned long long,
+    signed char,
+    signed short,
+    signed int,
+    signed long,
+    signed long long)
 {
     using T = TestType;
     REQUIRE(mc::gcd(T(0), T(0)) == T(0));

@@ -6,8 +6,7 @@
 
 namespace math = mc::math;
 
-TEMPLATE_TEST_CASE("math/dense: DynamicMatrix", "[math][dense][matrix]", float,
-    double, long double)
+TEMPLATE_TEST_CASE("math/dense: DynamicMatrix", "[math][dense][matrix]", float, double, long double)
 {
     using T = TestType;
 
@@ -106,8 +105,7 @@ TEMPLATE_TEST_CASE("math/dense: DynamicMatrix", "[math][dense][matrix]", float,
     REQUIRE(mat(1, 1) == T { 0 });
 }
 
-TEMPLATE_TEST_CASE("math/dense: DynamicMatrixFunctions",
-    "[math][dense][matrix]", float, double, long double)
+TEMPLATE_TEST_CASE("math/dense: DynamicMatrixFunctions", "[math][dense][matrix]", float, double, long double)
 {
     using T = TestType;
 
@@ -152,8 +150,7 @@ TEMPLATE_TEST_CASE("math/dense: DynamicMatrixFunctions",
     REQUIRE(multiAdd(1, 0) == T { 1 });
     REQUIRE(multiAdd(1, 1) == T { 1 });
 
-    REQUIRE_THROWS_AS(
-        math::multiplyAddRow(multiAdd, 2, 0, T { 2 }), std::out_of_range);
+    REQUIRE_THROWS_AS(math::multiplyAddRow(multiAdd, 2, 0, T { 2 }), std::out_of_range);
 
     auto maxRow  = math::DynamicMatrix<T> { 2, 2 };
     maxRow(0, 0) = T { 1 };
@@ -233,8 +230,7 @@ TEMPLATE_TEST_CASE("math/dense: DynamicMatrixFunctions",
     REQUIRE(joinedB.rows() == 2);
     REQUIRE(joinedB.cols() == 4);
 
-    REQUIRE_THROWS_AS(math::join(joinA, math::DynamicMatrix<T> { 3, 1 }),
-        std::invalid_argument);
+    REQUIRE_THROWS_AS(math::join(joinA, math::DynamicMatrix<T> { 3, 1 }), std::invalid_argument);
 
     auto identityA = math::DynamicMatrix<T> { 2, 2 };
     math::makeIdentity(identityA);

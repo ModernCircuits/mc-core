@@ -19,8 +19,7 @@ auto matrixAdd(Matrix const& l, Matrix const& r, TrueType /*isDense*/) -> Matrix
 }
 
 template <typename Matrix>
-auto matrixAdd(Matrix const& m, typename Matrix::value_type scaler,
-    TrueType /*isDense*/) -> Matrix
+auto matrixAdd(Matrix const& m, typename Matrix::value_type scaler, TrueType /*isDense*/) -> Matrix
 {
     auto s    = Matrix { m.rows(), m.cols() };
     auto plus = [scaler](auto v) { return v + scaler; };
@@ -29,34 +28,27 @@ auto matrixAdd(Matrix const& m, typename Matrix::value_type scaler,
 }
 
 template <typename Matrix>
-auto matrixAdd(Matrix const& lhs, Matrix const& rhs, FalseType /*isDense*/)
-    -> Matrix
+auto matrixAdd(Matrix const& lhs, Matrix const& rhs, FalseType /*isDense*/) -> Matrix
 {
     auto tmp = Matrix { lhs.rows(), lhs.cols() };
     for (decltype(tmp.rows()) row = 0; row < lhs.rows(); ++row) {
-        for (decltype(tmp.cols()) col = 0; col < rhs.cols(); ++col) {
-            tmp(row, col) = lhs(row, col) + rhs(row, col);
-        }
+        for (decltype(tmp.cols()) col = 0; col < rhs.cols(); ++col) { tmp(row, col) = lhs(row, col) + rhs(row, col); }
     }
     return tmp;
 }
 
 template <typename Matrix>
-auto matrixAdd(Matrix const& m, typename Matrix::value_type scaler,
-    FalseType /*isDense*/) -> Matrix
+auto matrixAdd(Matrix const& m, typename Matrix::value_type scaler, FalseType /*isDense*/) -> Matrix
 {
     auto tmp = Matrix { m.rows(), m.cols() };
     for (decltype(tmp.rows()) row = 0; row < tmp.rows(); ++row) {
-        for (decltype(tmp.cols()) col = 0; col < tmp.cols(); ++col) {
-            tmp(row, col) = m(row, col) + scaler;
-        }
+        for (decltype(tmp.cols()) col = 0; col < tmp.cols(); ++col) { tmp(row, col) = m(row, col) + scaler; }
     }
     return tmp;
 }
 
 template <typename Matrix>
-MC_NODISCARD auto matrixAdd(Matrix const& lhs, Matrix const& rhs)
-    -> std::enable_if_t<IsMatrix<Matrix>::value, Matrix>
+MC_NODISCARD auto matrixAdd(Matrix const& lhs, Matrix const& rhs) -> std::enable_if_t<IsMatrix<Matrix>::value, Matrix>
 {
     if ((lhs.rows() != rhs.rows()) || lhs.cols() != rhs.cols()) {
         throw std::invalid_argument("matrix layout must match");

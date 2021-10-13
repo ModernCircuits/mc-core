@@ -12,8 +12,7 @@
 namespace mc {
 namespace math {
 template <typename Matrix>
-auto rank(Matrix const& mat)
-    -> std::enable_if_t<IsMatrix<Matrix>::value, typename Matrix::size_type>
+auto rank(Matrix const& mat) -> std::enable_if_t<IsMatrix<Matrix>::value, typename Matrix::size_type>
 {
     using T         = typename Matrix::value_type;
     using size_type = typename Matrix::size_type;
@@ -39,8 +38,7 @@ auto rank(Matrix const& mat)
                 } else {
                     if ((cur.rows() > 2) && (cur.cols() > 2)) {
                         for (auto i = size_type { 0 }; i < cur.rows(); ++i) {
-                            for (auto j = size_type { 0 }; j < cur.cols();
-                                 ++j) {
+                            for (auto j = size_type { 0 }; j < cur.cols(); ++j) {
                                 auto sub = subMatrix(cur, i, j);
                                 subMatricies.push_back(sub);
                             }

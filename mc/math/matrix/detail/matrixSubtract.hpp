@@ -16,23 +16,18 @@ MC_NODISCARD auto matrixSubtract(Matrix const& lhs, Matrix const& rhs) -> Matrix
 
     auto tmp = Matrix { lhs.rows(), lhs.cols() };
     for (decltype(tmp.rows()) row = 0; row < lhs.rows(); ++row) {
-        for (decltype(tmp.cols()) col = 0; col < rhs.cols(); ++col) {
-            tmp(row, col) = lhs(row, col) - rhs(row, col);
-        }
+        for (decltype(tmp.cols()) col = 0; col < rhs.cols(); ++col) { tmp(row, col) = lhs(row, col) - rhs(row, col); }
     }
 
     return tmp;
 }
 
 template <typename Matrix>
-MC_NODISCARD auto matrixSubtract(
-    Matrix const& m, typename Matrix::value_type scaler) -> Matrix
+MC_NODISCARD auto matrixSubtract(Matrix const& m, typename Matrix::value_type scaler) -> Matrix
 {
     auto tmp = Matrix { m.rows(), m.cols() };
     for (decltype(tmp.rows()) row = 0; row < tmp.rows(); ++row) {
-        for (decltype(tmp.cols()) col = 0; col < tmp.cols(); ++col) {
-            tmp(row, col) = m(row, col) - scaler;
-        }
+        for (decltype(tmp.cols()) col = 0; col < tmp.cols(); ++col) { tmp(row, col) = m(row, col) - scaler; }
     }
     return tmp;
 }

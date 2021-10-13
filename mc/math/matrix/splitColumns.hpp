@@ -6,14 +6,11 @@
 namespace mc {
 namespace math {
 template <typename Matrix>
-auto splitColumns(Matrix const& mat, typename Matrix::size_type colIdx)
-    -> std::pair<Matrix, Matrix>
+auto splitColumns(Matrix const& mat, typename Matrix::size_type colIdx) -> std::pair<Matrix, Matrix>
 {
     using size_type = typename Matrix::size_type;
 
-    if (colIdx >= mat.cols()) {
-        throw std::out_of_range("column index out of bounds");
-    }
+    if (colIdx >= mat.cols()) { throw std::out_of_range("column index out of bounds"); }
 
     auto const numRows = mat.rows();
     auto const numColA = colIdx;

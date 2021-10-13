@@ -2,8 +2,7 @@
 
 #include <catch2/catch.hpp>
 
-TEMPLATE_TEST_CASE(
-    "stl/units: Frequency<integral>", "[stl][units]", int, long, long long)
+TEMPLATE_TEST_CASE("stl/units: Frequency<integral>", "[stl][units]", int, long, long long)
 {
     using T         = TestType;
     using Hertz     = mc::Hertz<T>;
@@ -79,8 +78,7 @@ TEMPLATE_TEST_CASE(
     REQUIRE(abs(Hertz { T(-4) }) == Hertz { T(4) });
 }
 
-TEMPLATE_TEST_CASE("stl/units: Frequency<floating_point>", "[stl][units]",
-    float, double, long double)
+TEMPLATE_TEST_CASE("stl/units: Frequency<floating_point>", "[stl][units]", float, double, long double)
 {
     using T         = TestType;
     using Hertz     = mc::Hertz<T>;

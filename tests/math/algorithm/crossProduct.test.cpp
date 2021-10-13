@@ -6,8 +6,7 @@
 
 namespace math = mc::math;
 
-TEMPLATE_TEST_CASE("math/algorithm: crossProduct", "[math][algorithm]", float,
-    double, long double)
+TEMPLATE_TEST_CASE("math/algorithm: crossProduct", "[math][algorithm]", float, double, long double)
 {
     using T = TestType;
 
@@ -35,8 +34,7 @@ TEMPLATE_TEST_CASE("math/algorithm: crossProduct", "[math][algorithm]", float,
     }
 
     try {
-        math::crossProduct(
-            math::DynamicVector<T> { 16 }, math::DynamicVector<T> { 16 });
+        math::crossProduct(math::DynamicVector<T> { 16 }, math::DynamicVector<T> { 16 });
         REQUIRE(false);
     } catch (std::domain_error const& e) {
         constexpr auto const* msg = "only 3-dimensional vector supported";

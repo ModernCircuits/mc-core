@@ -7,9 +7,7 @@ namespace math {
 template <typename Matrix>
 auto join(Matrix const& a, Matrix const& b) -> Matrix
 {
-    if (a.rows() != b.rows()) {
-        throw std::invalid_argument("rows size must match");
-    }
+    if (a.rows() != b.rows()) { throw std::invalid_argument("rows size must match"); }
 
     auto result = Matrix { a.rows(), a.cols() + b.cols() };
     for (typename Matrix::size_type row = 0; row < result.rows(); ++row) {

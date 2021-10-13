@@ -5,8 +5,7 @@
 namespace mc {
 namespace math {
 template <typename Matrix>
-auto subMatrix(Matrix const& mat, typename Matrix::size_type rowIdx,
-    typename Matrix::size_type colIdx)
+auto subMatrix(Matrix const& mat, typename Matrix::size_type rowIdx, typename Matrix::size_type colIdx)
     -> std::enable_if_t<IsMatrix<Matrix>::value, Matrix>
 {
     auto result = Matrix { mat.rows() - 1, mat.cols() - 1 };

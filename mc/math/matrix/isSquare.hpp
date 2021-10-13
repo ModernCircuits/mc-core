@@ -5,8 +5,7 @@
 namespace mc {
 namespace math {
 template <typename Matrix>
-MC_NODISCARD constexpr auto isSquare(Matrix const& mat) noexcept
-    -> decltype(mat.rows() == mat.cols())
+MC_NODISCARD constexpr auto isSquare(Matrix const& mat) noexcept -> decltype(mat.rows() == mat.cols())
 {
     return mat.rows() == mat.cols();
 }

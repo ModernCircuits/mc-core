@@ -6,8 +6,7 @@
 namespace mc {
 namespace math {
 template <typename T>
-struct IsMatrix
-    : BoolConstant<IsDenseMatrix<T>::value || IsSparseMatrix<T>::value> {
+struct IsMatrix : BoolConstant<IsDenseMatrix<T>::value || IsSparseMatrix<T>::value> {
 };
 } // namespace math
 } // namespace mc

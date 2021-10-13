@@ -8,13 +8,11 @@ namespace mc {
 namespace math {
 
 template <typename InputIt1, typename InputIt2>
-constexpr auto correlation(
-    InputIt1 xf, InputIt1 xl, InputIt2 yf, InputIt2 yl) noexcept
+constexpr auto correlation(InputIt1 xf, InputIt1 xl, InputIt2 yf, InputIt2 yl) noexcept
     -> std::common_type_t<typename std::iterator_traits<InputIt1>::value_type,
         typename std::iterator_traits<InputIt2>::value_type>
 {
-    using T = std::common_type_t<
-        typename std::iterator_traits<InputIt1>::value_type,
+    using T = std::common_type_t<typename std::iterator_traits<InputIt1>::value_type,
         typename std::iterator_traits<InputIt2>::value_type>;
 
     auto sumX       = T { 0 };

@@ -4,13 +4,16 @@ AlignConsecutiveAssignments: true
 AlignEscapedNewlines: Right
 AlignOperands: true
 AlignTrailingComments: true
+AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortBlocksOnASingleLine: true
 AllowShortCaseLabelsOnASingleLine: true
 AllowShortFunctionsOnASingleLine: All
 AllowShortIfStatementsOnASingleLine: true
 AllowShortLoopsOnASingleLine: true
 AlwaysBreakTemplateDeclarations: true
-ColumnLimit: 80
+BinPackArguments: false
+BinPackParameters: false
+ColumnLimit: 120
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 FixNamespaceComments: true
 IndentPPDirectives: BeforeHash
