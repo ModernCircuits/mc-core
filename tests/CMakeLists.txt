@@ -29,6 +29,7 @@ target_sources(${PROJECT_NAME}
         math/dense/DynamicMatrix.test.cpp
 
         units/Duration.cpp
+        units/FrameCount.cpp
         units/Frequency.cpp
 
         stdx/bit.cpp
