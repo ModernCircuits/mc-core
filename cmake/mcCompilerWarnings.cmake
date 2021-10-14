@@ -43,7 +43,7 @@ else ()
                 -Wno-poison-system-directories
             >
             $<$<CXX_COMPILER_ID:GNU>:
-                -Wlogical-op
+                # -Wlogical-op
                 -Wno-maybe-uninitialized
                 -Wredundant-decls
             >
