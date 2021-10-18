@@ -1,5 +1,6 @@
 [requires]
 boost/1.77.0
+blaze/3.8
 catch2/2.13.7
 concurrentqueue/1.0.3
 fmt/8.0.1
