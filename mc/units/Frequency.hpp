@@ -1,10 +1,12 @@
 #pragma once
 
+#include "mc/units/fwd/Frequency.hpp"
+#include "mc/units/fwd/TreatAsFloatingPoint.hpp"
+
 #include "mc/cmath.hpp"
 #include "mc/config.hpp"
 #include "mc/limits.hpp"
 #include "mc/numeric.hpp"
-#include "mc/ratio.hpp"
 #include "mc/type_traits.hpp"
 
 namespace mc {
@@ -13,7 +15,7 @@ template <typename Rep>
 struct TreatAsFloatingPoint : std::is_floating_point<Rep> {
 };
 
-template <typename Rep, typename Period = std::ratio<1>>
+template <typename Rep, typename Period>
 struct Frequency {
 private:
     template <typename Rep2>
@@ -31,14 +33,14 @@ public:
     using rep    = Rep;
     using period = typename Period::type;
 
-    /// \brief (1) The default constructor is defaulted.
+    /// \brief Default constructor.
     constexpr Frequency() noexcept = default;
 
-    /// \brief (2) The copy constructor makes a bitwise copy of the tick
+    /// \brief The copy constructor makes a bitwise copy of the tick
     /// count.
     Frequency(Frequency const& /*other*/) = default;
 
-    /// \brief (3) Constructs a Frequency with r ticks.
+    /// \brief Constructs a Frequency with r ticks.
     ///
     /// Note that this constructor only participates in overload resolution
     /// if Rep2 const& (the argument type) is implicitly convertible to rep
@@ -85,6 +87,8 @@ private:
     Rep ticks_ { 0 };
 };
 
+/// \brief Inplace addition
+/// \ingroup group-units
 template <typename Rep, typename Period>
 constexpr auto operator+=(Frequency<Rep, Period>& lhs, Frequency<Rep, Period> const& rhs) noexcept(
     noexcept(std::declval<Rep>() + std::declval<Rep>())) -> Frequency<Rep, Period>&
@@ -93,6 +97,7 @@ constexpr auto operator+=(Frequency<Rep, Period>& lhs, Frequency<Rep, Period> co
     return lhs;
 }
 
+/// \ingroup group-units
 template <typename Rep, typename Period>
 constexpr auto operator-=(Frequency<Rep, Period>& lhs, Frequency<Rep, Period> const& rhs) noexcept(
     noexcept(std::declval<Rep>() - std::declval<Rep>())) -> Frequency<Rep, Period>&
@@ -101,6 +106,7 @@ constexpr auto operator-=(Frequency<Rep, Period>& lhs, Frequency<Rep, Period> co
     return lhs;
 }
 
+/// \ingroup group-units
 template <typename Rep, typename Period>
 constexpr auto operator*=(Frequency<Rep, Period>& lhs, Rep const& rhs) noexcept(
     noexcept(std::declval<Rep>() * std::declval<Rep>())) -> Frequency<Rep, Period>&
@@ -117,6 +123,7 @@ constexpr auto operator/=(Frequency<Rep, Period>& lhs, Rep const& rhs) noexcept(
     return lhs;
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 MC_NODISCARD constexpr auto operator+(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs)
     -> std::common_type_t<Frequency<Rep1, Period1>, Frequency<Rep2, Period2>>
@@ -125,6 +132,7 @@ MC_NODISCARD constexpr auto operator+(Frequency<Rep1, Period1> const& lhs, Frequ
     return CD(CD(lhs).count() + CD(rhs).count());
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 MC_NODISCARD constexpr auto operator-(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs)
     -> std::common_type_t<Frequency<Rep1, Period1>, Frequency<Rep2, Period2>>
@@ -133,6 +141,7 @@ MC_NODISCARD constexpr auto operator-(Frequency<Rep1, Period1> const& lhs, Frequ
     return CD(CD(lhs).count() - CD(rhs).count());
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Period, typename Rep2>
 MC_NODISCARD constexpr auto operator*(Frequency<Rep1, Period> const& d, Rep2 const& s)
     -> Frequency<std::common_type_t<Rep1, Rep2>, Period>
@@ -141,6 +150,7 @@ MC_NODISCARD constexpr auto operator*(Frequency<Rep1, Period> const& d, Rep2 con
     return CD(CD(d).count() * s);
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Rep2, typename Period>
 MC_NODISCARD constexpr auto operator*(Rep1 const& s, Frequency<Rep2, Period> const& d)
     -> Frequency<std::common_type_t<Rep1, Rep2>, Period>
@@ -149,6 +159,7 @@ MC_NODISCARD constexpr auto operator*(Rep1 const& s, Frequency<Rep2, Period> con
     return CD(CD(d).count() * s);
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Period, typename Rep2>
 MC_NODISCARD constexpr auto operator/(Frequency<Rep1, Period> const& d, Rep2 const& s)
     -> Frequency<std::common_type_t<Rep1, Rep2>, Period>
@@ -157,6 +168,7 @@ MC_NODISCARD constexpr auto operator/(Frequency<Rep1, Period> const& d, Rep2 con
     return CD(CD(d).count() / s);
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 MC_NODISCARD constexpr auto operator/(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs)
     -> std::common_type_t<Rep1, Rep2>
@@ -165,6 +177,7 @@ MC_NODISCARD constexpr auto operator/(Frequency<Rep1, Period1> const& lhs, Frequ
     return CD(lhs).count() / CD(rhs).count();
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 MC_NODISCARD constexpr auto operator==(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
@@ -172,12 +185,14 @@ MC_NODISCARD constexpr auto operator==(Frequency<Rep1, Period1> const& lhs, Freq
     return CT(lhs).count() == CT(rhs).count();
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 MC_NODISCARD constexpr auto operator!=(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
     return !(lhs == rhs);
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 MC_NODISCARD constexpr auto operator<(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
@@ -185,18 +200,21 @@ MC_NODISCARD constexpr auto operator<(Frequency<Rep1, Period1> const& lhs, Frequ
     return CT(lhs).count() < CT(rhs).count();
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 MC_NODISCARD constexpr auto operator<=(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
     return !(rhs < lhs);
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 MC_NODISCARD constexpr auto operator>(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
     return rhs < lhs;
 }
 
+/// \ingroup group-units
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 MC_NODISCARD constexpr auto operator>=(Frequency<Rep1, Period1> const& lhs, Frequency<Rep2, Period2> const& rhs) -> bool
 {
@@ -307,27 +325,34 @@ MC_NODISCARD constexpr auto abs(Frequency<Rep, Period> const& f)
     return f.count() >= Rep {} ? f : -f;
 }
 
+/// \ingroup group-units
 template <typename T>
 using Hertz = Frequency<T>;
 
+/// \ingroup group-units
 template <typename T>
 using Kilohertz = Frequency<T, std::kilo>;
 
+/// \ingroup group-units
 template <typename T>
 using Megahertz = Frequency<T, std::mega>;
 
+/// \ingroup group-units
 template <typename T>
 using Gigahertz = Frequency<T, std::giga>;
 
+/// \ingroup group-units
 template <typename T>
 using BPM = Frequency<T, std::ratio<1, 60>>;
 
+/// \ingroup group-units
 template <typename T, typename R>
 MC_NODISCARD constexpr auto toHertz(Frequency<T, R> const& f) noexcept
 {
     return frequencyCast<Hertz<T>>(f);
 }
 
+/// \ingroup group-units
 template <typename T, typename R>
 MC_NODISCARD constexpr auto toBPM(Frequency<T, R> const& f) noexcept
 {
