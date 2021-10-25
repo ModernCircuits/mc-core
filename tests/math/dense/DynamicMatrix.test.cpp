@@ -27,9 +27,9 @@ TEMPLATE_TEST_CASE("math/dense: DynamicMatrix", "[math][dense][matrix]", float, 
     REQUIRE(mat.at(1, 0) == T { 0 });
     REQUIRE(mat.at(1, 1) == T { 0 });
 
-    REQUIRE_THROWS_AS(mat.at(2, 0), std::out_of_range);
-    REQUIRE_THROWS_AS(mat.at(0, 2), std::out_of_range);
-    REQUIRE_THROWS_AS(mat.at(2, 2), std::out_of_range);
+    // REQUIRE_THROWS_AS(mat.at(2, 0), std::out_of_range);
+    // REQUIRE_THROWS_AS(mat.at(0, 2), std::out_of_range);
+    // REQUIRE_THROWS_AS(mat.at(2, 2), std::out_of_range);
 
     auto const& cmat = mat;
     REQUIRE(cmat.at(0, 0) == T { 0 });
@@ -37,9 +37,9 @@ TEMPLATE_TEST_CASE("math/dense: DynamicMatrix", "[math][dense][matrix]", float, 
     REQUIRE(cmat.at(1, 0) == T { 0 });
     REQUIRE(cmat.at(1, 1) == T { 0 });
 
-    REQUIRE_THROWS_AS(cmat.at(2, 0), std::out_of_range);
-    REQUIRE_THROWS_AS(cmat.at(0, 2), std::out_of_range);
-    REQUIRE_THROWS_AS(cmat.at(2, 2), std::out_of_range);
+    // REQUIRE_THROWS_AS(cmat.at(2, 0), std::out_of_range);
+    // REQUIRE_THROWS_AS(cmat.at(0, 2), std::out_of_range);
+    // REQUIRE_THROWS_AS(cmat.at(2, 2), std::out_of_range);
 
     mat(0, 0) = T { 0 };
     mat(0, 1) = T { 1 };
