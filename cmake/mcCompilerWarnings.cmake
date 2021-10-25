@@ -46,6 +46,8 @@ else ()
                 # -Wlogical-op
                 -Wno-maybe-uninitialized
                 -Wredundant-decls
+                -Wno-free-nonheap-object
+                $<$<VERSION_GREATER:CXX_COMPILER_VERSION,"11.0.0">:-Wno-free-nonheap-object>
             >
     )
     if (MC_BUILD_WERROR)
