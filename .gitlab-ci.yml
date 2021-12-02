@@ -25,7 +25,7 @@ win:msvc:cpp14:
     GIT_SUBMODULE_STRATEGY: recursive
     ErrorActionPreference: stop
   script: |
-    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
+    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat amd64"
     $ErrorActionPreference = "Stop"
     Set-Location $env:CI_PROJECT_DIR
     cmake -S . -B cmake-build-release -G "Ninja Multi-Config" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
@@ -42,7 +42,7 @@ win:msvc:cpp17:
     GIT_SUBMODULE_STRATEGY: recursive
     ErrorActionPreference: stop
   script: |
-    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
+    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat amd64"
     $ErrorActionPreference = "Stop"
     Set-Location $env:CI_PROJECT_DIR
     cmake -S . -B cmake-build-release -G "Ninja Multi-Config" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
