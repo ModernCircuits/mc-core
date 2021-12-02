@@ -27,9 +27,8 @@ win:msvc:cpp14:
   script:
     - Set-Location $env:CI_PROJECT_DIR
     - $ErrorActionPreference = "Stop"
-    - '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"'
-    - cmake -S . -B cmake-build-release -G "Ninja Multi-Config" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
-    - cmake --build cmake-build-release --config Release --parallel 3
+    - .gitlab-ci/run-windows-cpp14.bat
+    - cd cmake-build-release
     - ctest -C Release
   dependencies: []
   needs: []
@@ -44,9 +43,8 @@ win:msvc:cpp17:
   script:
     - Set-Location $env:CI_PROJECT_DIR
     - $ErrorActionPreference = "Stop"
-    - '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"'
-    - cmake -S . -B cmake-build-release -G "Ninja Multi-Config" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
-    - cmake --build cmake-build-release --config Release --parallel 3
+    - .gitlab-ci/run-windows-cpp17.bat
+    - cd cmake-build-release
     - ctest -C Release
   dependencies: []
   needs: []
