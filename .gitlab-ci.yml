@@ -25,14 +25,13 @@ win:msvc:cpp14:
     GIT_SUBMODULE_STRATEGY: recursive
     ErrorActionPreference: stop
   script: |
+    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
     $ErrorActionPreference = "Stop"
     Set-Location $env:CI_PROJECT_DIR
-    New-Item -Path cmake-build-release -ItemType Directory
-    Set-Location cmake-build-release
-    cmake -S .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
-    cmake --build . --config Release --parallel 4
+    cmake -S . -B cmake-build-release -G "Ninja Multi-Config" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
+    cmake --build cmake-build-release --config Release --parallel 3
     ctest -C Release
-  dependencies: [ ]
+  dependencies: []
   needs: []
 
 win:msvc:cpp17:
@@ -43,14 +42,13 @@ win:msvc:cpp17:
     GIT_SUBMODULE_STRATEGY: recursive
     ErrorActionPreference: stop
   script: |
+    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
     $ErrorActionPreference = "Stop"
     Set-Location $env:CI_PROJECT_DIR
-    New-Item -Path cmake-build-release -ItemType Directory
-    Set-Location cmake-build-release
-    cmake -S .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
-    cmake --build . --config Release --parallel 4
+    cmake -S . -B cmake-build-release -G "Ninja Multi-Config" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
+    cmake --build cmake-build-release --config Release --parallel 3
     ctest -C Release
-  dependencies: [ ]
+  dependencies: []
   needs: []
 
 mac:xcode:cpp14:
@@ -66,7 +64,7 @@ mac:xcode:cpp14:
     - cmake --build cmake-build-release
     - cd cmake-build-release
     - ctest
-  dependencies: [ ]
+  dependencies: []
   needs: []
 
 mac:xcode:cpp17:
@@ -82,7 +80,7 @@ mac:xcode:cpp17:
     - cmake --build cmake-build-release
     - cd cmake-build-release
     - ctest
-  dependencies: [ ]
+  dependencies: []
   needs: []
 
 linux:clang:cpp14:
@@ -99,7 +97,7 @@ linux:clang:cpp14:
     - cmake --build cmake-build-release
     - cd cmake-build-release
     - ctest
-  dependencies: [ ]
+  dependencies: []
   needs: []
 
 linux:clang:cpp17:
@@ -116,7 +114,7 @@ linux:clang:cpp17:
     - cmake --build cmake-build-release
     - cd cmake-build-release
     - ctest
-  dependencies: [ ]
+  dependencies: []
   needs: []
 
 linux:clang-tidy:
@@ -132,7 +130,7 @@ linux:clang-tidy:
     - rm -rf cmake-build-tidy
     - cmake -S. -GNinja -Bcmake-build-tidy -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17
     - BUILD_DIR=cmake-build-tidy make tidy-check
-  dependencies: [ ]
+  dependencies: []
   needs: []
 
 linux:gcc:asan:
@@ -148,7 +146,7 @@ linux:gcc:asan:
     - cmake --build cmake-build-asan
     - cd cmake-build-asan
     - ctest
-  dependencies: [ ]
+  dependencies: []
   needs: []
 
 # linux:gcc:tsan:
@@ -176,7 +174,7 @@ linux:gcc:coverage:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
     CMAKE_BUILD_PARALLEL_LEVEL: 2
-  dependencies: [ ]
+  dependencies: []
   needs: []
   script:
     - make coverage-xml
