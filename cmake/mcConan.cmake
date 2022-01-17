@@ -32,7 +32,5 @@ else()
             conancenter
         SETTINGS
             ${settings}
-        SETTINGS
-            compiler.cppstd=${CMAKE_CXX_STANDARD}
     )
 endif()

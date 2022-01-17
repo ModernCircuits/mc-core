@@ -32,6 +32,7 @@ catch2:with_main=True
 
 [generators]
 cmake_find_package
+markdown
 
 [imports]
 ., license* -> ./licenses @ folder=True, ignore_case=True
