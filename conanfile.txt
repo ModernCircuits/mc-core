@@ -1,8 +1,8 @@
 [requires]
-boost/1.77.0
-catch2/2.13.7
+boost/1.78.0
+catch2/2.13.8
 concurrentqueue/1.0.3
-fmt/8.0.1
+fmt/8.1.1
 readerwriterqueue/1.0.5
 tcb-span/cci.20200603
 
