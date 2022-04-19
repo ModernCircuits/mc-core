@@ -5,9 +5,8 @@
 .vscode
 
 # Build
-build
-build_*
-cmake-build-*
-assets
-docs/doxygen/doc
+/build
+/build_*
+/cmake-build-*
 /out
+/docs/doxygen/doc
