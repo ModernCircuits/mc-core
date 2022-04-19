@@ -29,13 +29,13 @@ jobs:
         run: pip3 install --upgrade conan
 
       - name: CMake configure -- Release
-        run: cmake -S . -B cmake-build-release -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
+        run: cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
 
       - name: CMake build -- Release
-        run: cmake --build cmake-build-release --config "Release"
+        run: cmake --build build --config "Release"
 
       - name: CTest -- Release
-        run: ctest --test-dir -C Release
+        run: ctest --test-dir build -C Release
 
   macos-cpp17:
     name: macOS C++17
@@ -59,13 +59,13 @@ jobs:
         run: pip3 install --upgrade conan
 
       - name: CMake configure -- Release
-        run: cmake -S . -B cmake-build-release -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
+        run: cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
 
       - name: CMake build -- Release
-        run: cmake --build cmake-build-release --config "Release"
+        run: cmake --build build --config "Release"
 
       - name: CTest -- Release
-        run: ctest --test-dir -C Release
+        run: ctest --test-dir build -C Release
 
   windows-cpp14:
     name: Windows C++14
@@ -84,13 +84,13 @@ jobs:
         run: pip install --upgrade conan
 
       - name: CMake configure -- Release
-        run: cmake -S . -B cmake-build-release -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
+        run: cmake -S . -B build -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
 
       - name: CMake build -- Release
-        run: cmake --build cmake-build-release --config "Release"
+        run: cmake --build build --config "Release"
 
       - name: CTest -- Release
-        run: ctest --test-dir -C Release
+        run: ctest --test-dir build -C Release
 
   windows-cpp17:
     name: Windows C++17
@@ -109,10 +109,10 @@ jobs:
         run: pip install --upgrade conan
 
       - name: CMake configure -- Release
-        run: cmake -S . -B cmake-build-release -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
+        run: cmake -S . -B build -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
 
       - name: CMake build -- Release
-        run: cmake --build cmake-build-release --config "Release"
+        run: cmake --build build --config "Release"
 
       - name: CTest -- Release
-        run: ctest --test-dir -C Release
+        run: ctest --test-dir build -C Release
