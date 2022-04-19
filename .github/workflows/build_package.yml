@@ -29,7 +29,7 @@ jobs:
         run: pip3 install --upgrade conan
 
       - name: CMake configure -- Release
-        run: cmake -S . -B cmake-build-release -G "Ninja Multi-Config" -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
+        run: cmake -S . -B cmake-build-release -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
 
       - name: CMake build -- Release
         run: cmake --build cmake-build-release --config "Release"
@@ -59,7 +59,7 @@ jobs:
         run: pip3 install --upgrade conan
 
       - name: CMake configure -- Release
-        run: cmake -S . -B cmake-build-release -G "Ninja Multi-Config" -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
+        run: cmake -S . -B cmake-build-release -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
 
       - name: CMake build -- Release
         run: cmake --build cmake-build-release --config "Release"
