@@ -26,7 +26,7 @@ jobs:
         run: brew install ninja
 
       - name: Install conan
-        run: pip install --upgrade conan
+        run: pip3 install --upgrade conan
 
       - name: CMake configure -- Release
         run: cmake -S . -B cmake-build-release -G "Ninja Multi-Config" -DCMAKE_CXX_STANDARD=14 -DMC_BUILD_WERROR=ON
@@ -56,7 +56,7 @@ jobs:
         run: brew install ninja
 
       - name: Install conan
-        run: pip install --upgrade conan
+        run: pip3 install --upgrade conan
 
       - name: CMake configure -- Release
         run: cmake -S . -B cmake-build-release -G "Ninja Multi-Config" -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
