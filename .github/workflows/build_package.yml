@@ -135,4 +135,4 @@ jobs:
 
       - name: Run bat script on CMD
         shell: cmd
-        run: .\gitlab-ci\run-windows-cpp17.bat
+        run: .\.gitlab-ci\run-windows-cpp17.bat
