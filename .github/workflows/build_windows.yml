@@ -1,4 +1,4 @@
-name: Build Windows
+name: Windows
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
 
       - name: Run bat script on CMD
         shell: cmd
-        run: .\.gitlab-ci\run-windows-cpp14.bat
+        run: .\scripts\run-windows-cpp14.bat
 
       - name: CTest -- Release
         run: ctest --test-dir cmake-build-release -C Release
@@ -48,7 +48,7 @@ jobs:
 
       - name: Run bat script on CMD
         shell: cmd
-        run: .\.gitlab-ci\run-windows-cpp17.bat
+        run: .\scripts\run-windows-cpp17.bat
 
       - name: CTest -- Release
         run: ctest --test-dir cmake-build-release -C Release
