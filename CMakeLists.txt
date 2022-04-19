@@ -47,7 +47,7 @@ include(mcCompilerOptions)
 include(mcCompilerWarnings)
 include(mcCodeCoverage)
 
-find_package(Boost 1.77 REQUIRED)
+find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
 find_package(fmt REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
@@ -70,6 +70,7 @@ target_include_directories(mc_stl
 target_link_libraries(mc_stl
     INTERFACE
         Boost::headers
+        Boost::container
         concurrentqueue::concurrentqueue
         fmt::fmt
         readerwriterqueue::readerwriterqueue
