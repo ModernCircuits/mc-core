@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   gcc9:
-    name: Build
+    name: GCC-9
     runs-on: ubuntu-20.04
     steps:
       - name: Check out code
@@ -37,7 +37,7 @@ jobs:
         run: ctest --test-dir build -C Release
 
   gcc10:
-    name: Build
+    name: GCC-10
     runs-on: ubuntu-20.04
     steps:
       - name: Check out code
