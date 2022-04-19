@@ -1,10 +1,10 @@
-name: Coverage
+name: ASAN
 
 on: [push, pull_request]
 
 jobs:
-  coverage:
-    name: Coverage
+  linux-gcc-asan:
+    name: Linux ASAN
     runs-on: ubuntu-20.04
     steps:
       - name: Check out code
