@@ -1,21 +1,29 @@
 Checks: >
   *-,
   boost-*,
+
   bugprone-*,
   -bugprone-macro-parentheses,
+
   cert-*,
   -cert-oop54-cpp,
   -cert-err58-cpp,
+
   clang-analyzer-*,
   -clang-analyzer-cplusplus.NewDelete,
   clang-diagnostics-*,
+
   concurrency-*,
+
   modernize-*,
   -modernize-avoid-c-arrays,
   -modernize-concat-nested-namespaces,
+
   performance-*,
+
   readability-*,
   readability-identifier-naming,
+  -readability-identifier-length,
   -readability-function-cognitive-complexity,
   -readability-magic-numbers,
   -readability-uppercase-literal-suffix
