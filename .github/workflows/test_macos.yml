@@ -37,8 +37,8 @@ jobs:
       - name: CTest -- Release
         run: ctest --test-dir build -C Release
 
-  macos-cpp17:
-    name: macOS C++17
+  macos-cpp20:
+    name: macOS C++20
     runs-on: macos-11
     env:
       MACOSX_DEPLOYMENT_TARGET: "11.0"
@@ -59,7 +59,7 @@ jobs:
         run: pip3 install --upgrade conan
 
       - name: CMake configure -- Release
-        run: cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON
+        run: cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=20 -DMC_BUILD_WERROR=ON
 
       - name: CMake build -- Release
         run: cmake --build build --config "Release"

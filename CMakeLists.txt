@@ -71,6 +71,7 @@ target_link_libraries(mc_stl
     INTERFACE
         Boost::headers
         Boost::container
+        Boost::filesystem
         concurrentqueue::concurrentqueue
         fmt::fmt
         readerwriterqueue::readerwriterqueue
