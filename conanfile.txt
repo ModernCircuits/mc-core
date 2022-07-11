@@ -1,5 +1,5 @@
 [requires]
-boost/1.78.0
+boost/1.79.0
 catch2/3.0.1
 concurrentqueue/1.0.3
 fmt/8.1.1
@@ -31,7 +31,7 @@ boost:without_python=True
 boost:without_random=False
 boost:without_regex=False
 boost:without_serialization=True
-boost:without_stacktrace=True
+boost:without_stacktrace=False
 boost:without_system=False
 boost:without_test=True
 boost:without_thread=True
