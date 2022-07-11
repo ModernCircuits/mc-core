@@ -51,7 +51,6 @@ find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
 find_package(fmt REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
-find_package(tcb-span REQUIRED)
 
 find_package(Catch2 REQUIRED)
 set_target_properties(Catch2::Catch2 PROPERTIES IMPORTED_GLOBAL TRUE)
@@ -75,7 +74,6 @@ target_link_libraries(mc_stl
         concurrentqueue::concurrentqueue
         fmt::fmt
         readerwriterqueue::readerwriterqueue
-        tcb-span::tcb-span
 )
 
 include(GNUInstallDirs)

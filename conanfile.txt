@@ -4,7 +4,6 @@ catch2/3.0.1
 concurrentqueue/1.0.3
 fmt/8.1.1
 readerwriterqueue/1.0.6
-tcb-span/cci.20200603
 
 [options]
 boost:without_atomic=False

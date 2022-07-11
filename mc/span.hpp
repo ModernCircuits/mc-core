@@ -1,11 +1,13 @@
 #pragma once
 
-#include "tcb/span.hpp"
+#include <boost/core/span.hpp>
 
 namespace mc {
-using tcb::as_bytes;
-using tcb::as_writable_bytes;
-using tcb::dynamic_extent;
-using tcb::make_span;
-using tcb::span;
+using boost::dynamic_extent;
+using boost::span;
+
+#if defined(__cpp_lib_byte)
+using boost::as_bytes;
+using boost::as_writable_bytes;
+#endif
 } // namespace mc
