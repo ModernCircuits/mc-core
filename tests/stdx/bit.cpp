@@ -1,6 +1,6 @@
 #include "mc/bit.hpp"
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 
 TEMPLATE_TEST_CASE("stl/bit: bit_ceil", "[stl][bit]", unsigned char, unsigned short, unsigned int, unsigned long)
 {

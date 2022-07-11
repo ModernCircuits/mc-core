@@ -4,7 +4,7 @@
 #include "mc/initializer_list.hpp"
 #include "mc/utility.hpp"
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 
 TEMPLATE_TEST_CASE("stl/iterator: data", "[stl][iterator]", char, short, int, float, double)
 {

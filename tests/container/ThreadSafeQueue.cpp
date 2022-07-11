@@ -2,7 +2,7 @@
 
 #include "mc/thread.hpp"
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 
 TEMPLATE_TEST_CASE("stl/queue: ThreadSafeQueue", "[stl][queue]", int, float, double, std::string)
 {

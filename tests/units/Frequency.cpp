@@ -1,6 +1,6 @@
 #include "mc/units/Frequency.hpp"
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 
 TEMPLATE_TEST_CASE("stl/units: Frequency<integral>", "[stl][units]", int, long, long long)
 {

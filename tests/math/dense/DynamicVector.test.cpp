@@ -4,7 +4,7 @@
 #include "mc/sstream.hpp"
 #include "mc/utility.hpp"
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 
 namespace math = mc::math;
 
