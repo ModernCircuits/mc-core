@@ -19,7 +19,7 @@ else()
     conan_cmake_autodetect(settings)
     conan_cmake_install(
         CONANFILE
-            conanfile.txt
+            conanfile.py
         PATH_OR_REFERENCE
             ${CMAKE_CURRENT_SOURCE_DIR}
         BUILD
