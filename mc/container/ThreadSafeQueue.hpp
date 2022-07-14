@@ -18,10 +18,10 @@ struct ThreadSafeQueue {
     ThreadSafeQueue()  = default;
     ~ThreadSafeQueue() = default;
 
-    ThreadSafeQueue(ThreadSafeQueue const&) = delete;
+    ThreadSafeQueue(ThreadSafeQueue const&)                    = delete;
     auto operator=(ThreadSafeQueue const&) -> ThreadSafeQueue& = delete;
 
-    ThreadSafeQueue(ThreadSafeQueue&& other) = delete;
+    ThreadSafeQueue(ThreadSafeQueue&& other)              = delete;
     auto operator=(ThreadSafeQueue&&) -> ThreadSafeQueue& = delete;
 
     MC_NODISCARD auto pop() -> optional<value_type>

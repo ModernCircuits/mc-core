@@ -1,11 +1,11 @@
 BUILD_DIR ?= cmake-build-debug
 
-CLANG_FORMAT_BINARY ?= clang-format
-CLANG_TIDY_BINARY ?= clang-tidy-14
-CLANG_APPLY_BINARY ?= clang-apply-replacements-14
+CLANG_FORMAT_BIN ?= clang-format
+CLANG_TIDY_BIN ?= clang-tidy-14
+CLANG_APPLY_BIN ?= clang-apply-replacements-14
 
-CLANG_TIDY_ARGS += -clang-tidy-binary ${CLANG_TIDY_BINARY}
-CLANG_TIDY_ARGS += -clang-apply-replacements-binary ${CLANG_APPLY_BINARY}
+CLANG_TIDY_ARGS += -clang-tidy-binary ${CLANG_TIDY_BIN}
+CLANG_TIDY_ARGS += -clang-apply-replacements-binary ${CLANG_APPLY_BIN}
 CLANG_TIDY_ARGS += -j $(shell nproc)
 CLANG_TIDY_ARGS += -quiet
 CLANG_TIDY_ARGS += -p $(BUILD_DIR)
@@ -43,10 +43,10 @@ stats:
 
 .PHONY: format
 format:
-	@find mc -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs ${CLANG_FORMAT_BINARY} -i
-	@find tests -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs ${CLANG_FORMAT_BINARY} -i
+	@find mc -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs ${CLANG_FORMAT_BIN} -i
+	@find tests -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs ${CLANG_FORMAT_BIN} -i
 
 .PHONY: format-check
 format-check:
-	@find mc -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs -n 1 -P 1 -I{} -t sh -c '${CLANG_FORMAT_BINARY} -style=file {} | diff - {}'
-	@find tests -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs -n 1 -P 1 -I{} -t sh -c '${CLANG_FORMAT_BINARY} -style=file {} | diff - {}'
+	@find mc -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs -n 1 -P 1 -I{} -t sh -c '${CLANG_FORMAT_BIN} -style=file {} | diff - {}'
+	@find tests -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs -n 1 -P 1 -I{} -t sh -c '${CLANG_FORMAT_BIN} -style=file {} | diff - {}'
