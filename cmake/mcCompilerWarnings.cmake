@@ -2,7 +2,7 @@ add_library(mc_compiler_warnings INTERFACE)
 add_library(mc::compiler_warnings ALIAS mc_compiler_warnings)
 
 if((CMAKE_CXX_COMPILER_ID STREQUAL "MSVC") OR (CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC"))
-    target_compile_options(mc_compiler_warnings INTERFACE /W3)
+    target_compile_options(mc_compiler_warnings INTERFACE /W4)
     if (MC_BUILD_WERROR)
         target_compile_options(mc_compiler_warnings INTERFACE /WX)
     endif (MC_BUILD_WERROR)
