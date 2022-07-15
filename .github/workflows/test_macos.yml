@@ -7,42 +7,15 @@ on:
     branches: [main]
 
 jobs:
-  macos-cpp14:
-    name: macOS C++14
-    runs-on: macos-10.15
-    env:
-      MACOSX_DEPLOYMENT_TARGET: "10.11"
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-          lfs: true
-
-      - name: Checkout LFS objects
-        run: git lfs checkout
-
-      - name: Install ninja
-        run: brew install ninja
-
-      - name: Install conan
-        run: |
-          pip3 install --upgrade conan
-          conan config init
-          conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
-
-      - name: CMake configure -- Release
-        run: |
-          mkdir build
-          cd build
-          conan install --build=missing -pr:b=default -pr:h=default -s compiler.cppstd=14 -s build_type=Release ..
-          conan build ..
-
-  macos-cpp20:
-    name: macOS C++20
+  build_test:
+    name: Build & Test
+    strategy:
+      matrix:
+        osx_target: ["10.11", "10.14", "11.0"]
+        cxx_std: [14, 17, 20]
     runs-on: macos-11
     env:
-      MACOSX_DEPLOYMENT_TARGET: "11.0"
+      MACOSX_DEPLOYMENT_TARGET: "${{ matrix.osx_target }}"
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -66,5 +39,5 @@ jobs:
         run: |
           mkdir build
           cd build
-          conan install --build=missing -pr:b=default -pr:h=default -s compiler.cppstd=20 -s build_type=Release ..
+          conan install --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release ..
           conan build ..
