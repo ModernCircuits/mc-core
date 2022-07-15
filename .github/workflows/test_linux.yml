@@ -14,12 +14,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-        with:
-          submodules: true
-          lfs: true
-
-      - name: Checkout LFS objects
-        run: git lfs checkout
 
       - name: Set up GCC
         uses: egor-tensin/setup-gcc@v1

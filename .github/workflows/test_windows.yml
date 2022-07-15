@@ -7,50 +7,30 @@ on:
     branches: [main]
 
 jobs:
-  windows-cpp17:
-    name: Windows C++17
-    runs-on: windows-2019
+  build_test:
+    name: Build & Test
+    strategy:
+      matrix:
+        cxx_std: [17, 20]
+        runner: ["windows-2019", "windows-2022"]
+      fail-fast: false
+    runs-on: "${{ matrix.runner }}"
     steps:
       - name: Check out code
         uses: actions/checkout@v2
+
+      - name: Set up Visual Studio shell
+        uses: egor-tensin/vs-shell@v2
         with:
-          submodules: true
-          lfs: true
-
-      - name: Checkout LFS objects
-        run: git lfs checkout
-
-      - name: Install conan
-        run: pip install --upgrade conan
-
-      - name: Run bat script on CMD
-        shell: cmd
-        run: .\scripts\run-windows-cpp17.bat
-
-      - name: CTest -- Release
-        run: ctest --test-dir cmake-build-release -C Release
-
-  windows-cpp20:
-    name: Windows C++20
-    runs-on: windows-2022
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-          lfs: true
-
-      - name: Checkout LFS objects
-        run: git lfs checkout
+          arch: x64
 
       - name: Install conan
         run: |
           pip install --upgrade conan
           conan config init
+          conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
       - name: Run bat script on CMD
-        shell: cmd
-        run: .\scripts\run-windows-cpp20.bat
-
-      - name: CTest -- Release
-        run: ctest --test-dir cmake-build-release -C Release
+        run: |
+          conan install -if cmake-build-release --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
+          conan build -bf cmake-build-release .
