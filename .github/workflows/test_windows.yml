@@ -7,29 +7,6 @@ on:
     branches: [main]
 
 jobs:
-  windows-cpp14:
-    name: Windows C++14
-    runs-on: windows-2019
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-          lfs: true
-
-      - name: Checkout LFS objects
-        run: git lfs checkout
-
-      - name: Install conan
-        run: pip install --upgrade conan
-
-      - name: Run bat script on CMD
-        shell: cmd
-        run: .\scripts\run-windows-cpp14.bat
-
-      - name: CTest -- Release
-        run: ctest --test-dir cmake-build-release -C Release
-
   windows-cpp17:
     name: Windows C++17
     runs-on: windows-2019
@@ -49,6 +26,29 @@ jobs:
       - name: Run bat script on CMD
         shell: cmd
         run: .\scripts\run-windows-cpp17.bat
+
+      - name: CTest -- Release
+        run: ctest --test-dir cmake-build-release -C Release
+
+  windows-cpp20:
+    name: Windows C++20
+    runs-on: windows-2022
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          lfs: true
+
+      - name: Checkout LFS objects
+        run: git lfs checkout
+
+      - name: Install conan
+        run: pip install --upgrade conan
+
+      - name: Run bat script on CMD
+        shell: cmd
+        run: .\scripts\run-windows-cpp20.bat
 
       - name: CTest -- Release
         run: ctest --test-dir cmake-build-release -C Release
