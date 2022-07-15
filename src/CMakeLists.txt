@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(core VERSION 0.1.0)
+project(mc-core VERSION 0.1.0)
 
 find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
 find_package(fmt REQUIRED)
@@ -7,18 +7,18 @@ find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
 find_package(xsimd REQUIRED)
 
-add_library(core INTERFACE)
-add_library(mc::core ALIAS core)
-set_target_properties(core PROPERTIES EXPORT_NAME core)
+add_library(mc-core INTERFACE)
+add_library(mc::core ALIAS mc-core)
+set_target_properties(mc-core PROPERTIES EXPORT_NAME core)
 
-target_include_directories(core
+target_include_directories(mc-core
     INTERFACE 
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
 
-target_link_libraries(core
+target_link_libraries(mc-core
     INTERFACE
         Boost::headers
         Boost::container
@@ -31,7 +31,7 @@ target_link_libraries(core
 
 # installation
 include(GNUInstallDirs)
-install(TARGETS core EXPORT mc-coreTargets)
+install(TARGETS mc-core EXPORT mc-coreTargets)
 install(DIRECTORY mc TYPE INCLUDE)
 
 # local build
