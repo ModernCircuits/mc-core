@@ -5,14 +5,17 @@ find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
 find_package(fmt REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
+find_package(xsimd REQUIRED)
 
 add_library(core INTERFACE)
 add_library(mc::core ALIAS core)
 set_target_properties(core PROPERTIES EXPORT_NAME core)
 
 target_include_directories(core
-  INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
-            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+    INTERFACE 
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
 
 
 target_link_libraries(core
@@ -23,6 +26,7 @@ target_link_libraries(core
         concurrentqueue::concurrentqueue
         fmt::fmt
         readerwriterqueue::readerwriterqueue
+        xsimd
 )
 
 # installation

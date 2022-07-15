@@ -19,6 +19,7 @@ class ModernCircuitsSTL(ConanFile):
         "concurrentqueue/1.0.3",
         "fmt/8.1.1",
         "readerwriterqueue/1.0.6",
+        "xsimd/8.1.0",
     ]
 
     default_options = {
