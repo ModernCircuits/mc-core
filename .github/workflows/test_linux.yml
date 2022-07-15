@@ -33,8 +33,16 @@ jobs:
 
       - name: Build dependencies
         run: |
+          conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Debug .
           conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
 
-      - name: Build dependencies
+      - name: Build
         run: |
-          conan build -bf build .
+          cmake -S. -Bbuild -G"Ninja Multi-Config" -DCMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -DCMAKE_CXX_STANDARD="${{ matrix.cxx_std }}" -DMC_BUILD_WERROR=ON
+          cmake --build build --config Debug
+          cmake --build build --config Release
+
+      - name: Test
+        run: |
+          ctest --test-dir build -C Debug --output-on-failure
+          ctest --test-dir build -C Release --output-on-failure
