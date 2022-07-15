@@ -11,11 +11,16 @@ jobs:
     name: Build & Test
     strategy:
       matrix:
-        osx_target: ["10.11", "10.14", "11.0"]
-        cxx_std: [14, 17, 20]
+        target:
+          [
+            { "osx": "10.11", "cxx": 14 },
+            { "osx": "10.14", "cxx": 17 },
+            { "osx": "11.0", "cxx": 20 },
+          ]
+      fail-fast: false
     runs-on: macos-11
     env:
-      MACOSX_DEPLOYMENT_TARGET: "${{ matrix.osx_target }}"
+      MACOSX_DEPLOYMENT_TARGET: "${{ matrix.target.osx }}"
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -39,5 +44,5 @@ jobs:
         run: |
           mkdir build
           cd build
-          conan install --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release ..
+          conan install --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.target.cxx }}" -s build_type=Release ..
           conan build ..
