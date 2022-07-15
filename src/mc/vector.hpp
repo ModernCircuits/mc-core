@@ -2,25 +2,15 @@
 
 #include "mc/version.hpp"
 
-#include <vector>
-
 #include "container/SmallVector.hpp"
 #include "container/StaticVector.hpp"
 
-#if defined(__cpp_lib_memory_resource)
+#include <boost/container/pmr/vector.hpp>
 
-namespace mc {
-namespace pmr {
-using std::pmr::vector;
-} // namespace pmr
-} // namespace mc
+#include <vector>
 
-#else
-    #include "boost/container/pmr/vector.hpp"
 namespace mc {
 namespace pmr {
 using boost::container::pmr::vector;
 } // namespace pmr
 } // namespace mc
-
-#endif

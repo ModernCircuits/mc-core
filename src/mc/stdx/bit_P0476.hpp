@@ -8,7 +8,7 @@ namespace mc {
 using std::bit_cast;
 }
 #else
-    #include "boost/core/bit.hpp"
+    #include <boost/core/bit.hpp>
 namespace mc {
 using boost::core::bit_cast;
 } // namespace mc

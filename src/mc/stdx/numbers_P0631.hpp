@@ -23,7 +23,7 @@ using std::numbers::sqrt3;
 } // namespace numbers
 } // namespace mc
 #else
-    #include "boost/math/constants/constants.hpp"
+    #include <boost/math/constants/constants.hpp>
 namespace mc {
 namespace numbers {
 // clang-format off
