@@ -1,13 +1,16 @@
-from conans import ConanFile, CMake
+import re
+import os
+
+from conan import ConanFile
+from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain
+from conan.tools.files import copy, load
 
 
 class ModernCircuitsSTL(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    generators = "cmake_find_package", "markdown"
 
     requires = [
         "boost/1.79.0",
-        "catch2/3.0.1",
         "concurrentqueue/1.0.3",
         "fmt/8.1.1",
         "readerwriterqueue/1.0.6",
@@ -47,12 +50,28 @@ class ModernCircuitsSTL(ConanFile):
         "boost:without_wave": True,
     }
 
-    def imports(self):
-        self.copy("*.dll", dst="bin", src="bin")
-        self.copy("*.dylib*", dst="bin", src="lib")
-        self.copy("license*", dst="licenses", folder=True, ignore_case=True)
+    def set_version(self):
+        path = os.path.join(self.recipe_folder, "src/CMakeLists.txt")
+        content = load(self, path)
+        regex = r"project\([^\)]+VERSION (\d+\.\d+\.\d+)[^\)]*\)"
+        ver = re.search(regex, content).group(1)
+        self.version = ver.strip()
+
+    def requirements(self):
+        pass
+
+    def build_requirements(self):
+        self.test_requires("catch2/3.0.1")
+
+    def generate(self):
+        tc = CMakeToolchain(self)
+        # tc.variables["UNITS_USE_LIBFMT"] = self._use_libfmt
+        tc.generate()
+        deps = CMakeDeps(self)
+        deps.generate()
 
     def build(self):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
+        cmake.test()
