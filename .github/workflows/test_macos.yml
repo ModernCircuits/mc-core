@@ -28,6 +28,7 @@ jobs:
       - name: Install conan
         run: |
           pip3 install --upgrade conan
+          conan config init
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
       - name: CMake configure -- Release
@@ -58,6 +59,7 @@ jobs:
       - name: Install conan
         run: |
           pip3 install --upgrade conan
+          conan config init
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
       - name: CMake configure -- Release

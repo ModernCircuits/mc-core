@@ -44,7 +44,9 @@ jobs:
         run: git lfs checkout
 
       - name: Install conan
-        run: pip install --upgrade conan
+        run: |
+          pip install --upgrade conan
+          conan config init
 
       - name: Run bat script on CMD
         shell: cmd
