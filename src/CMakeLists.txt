@@ -1,26 +1,21 @@
 cmake_minimum_required(VERSION 3.15)
-project(mc_stl VERSION 0.1.0)
+project(core VERSION 0.1.0)
 
 find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
 find_package(fmt REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
 
-find_package(Catch2 REQUIRED)
-set_target_properties(Catch2::Catch2 PROPERTIES IMPORTED_GLOBAL TRUE)
-set_target_properties(Catch2::Catch2WithMain PROPERTIES IMPORTED_GLOBAL TRUE)
-include(Catch)
+add_library(core INTERFACE)
+add_library(mc::core ALIAS core)
+set_target_properties(core PROPERTIES EXPORT_NAME core)
 
-add_library(mc_stl INTERFACE)
-add_library(mc::mc_stl ALIAS mc_stl)
-set_target_properties(mc_stl PROPERTIES EXPORT_NAME stl)
-
-target_include_directories(mc_stl
+target_include_directories(core
   INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
             $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 
-target_link_libraries(mc_stl
+target_link_libraries(core
     INTERFACE
         Boost::headers
         Boost::container
@@ -30,7 +25,30 @@ target_link_libraries(mc_stl
         readerwriterqueue::readerwriterqueue
 )
 
+# installation
 include(GNUInstallDirs)
-install(TARGETS mc_stl EXPORT mcstlTargets)
-install(EXPORT mcstlTargets DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake NAMESPACE mc::)
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/mc DESTINATION include)
+install(TARGETS core EXPORT mc-coreTargets)
+install(DIRECTORY mc TYPE INCLUDE)
+
+# local build
+export(EXPORT mc-coreTargets NAMESPACE mc::)
+configure_file("mc-coreConfig.cmake" "." COPYONLY)
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(mc-coreConfigVersion.cmake COMPATIBILITY SameMajorVersion)
+
+# installation
+install(
+    EXPORT 
+        mc-coreTargets 
+    DESTINATION 
+        ${CMAKE_INSTALL_LIBDIR}/cmake/core 
+    NAMESPACE 
+        mc::
+)
+
+install(
+    FILES 
+        mc-coreConfig.cmake ${CMAKE_CURRENT_BINARY_DIR}/mc-coreConfigVersion.cmake
+    DESTINATION 
+        ${CMAKE_INSTALL_LIBDIR}/cmake/core
+)

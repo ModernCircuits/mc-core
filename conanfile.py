@@ -7,6 +7,11 @@ from conan.tools.files import copy, load
 
 
 class ModernCircuitsSTL(ConanFile):
+    name = "mc-core"
+    url = "https://github.com/ModernCircuits/mc-core"
+    description = "Wrapper around the STL, Boost & other useful libraries."
+    license = "BSL-1.0"
+
     settings = "os", "compiler", "build_type", "arch"
 
     requires = [
@@ -63,6 +68,13 @@ class ModernCircuitsSTL(ConanFile):
     def build_requirements(self):
         self.test_requires("catch2/3.0.1")
 
+    def export_sources(self):
+        self.copy("doc/*")
+        self.copy("src/*")
+        self.copy("tests/*")
+        self.copy("cmake/*")
+        self.copy("CMakeLists.txt")
+
     def generate(self):
         tc = CMakeToolchain(self)
         # tc.variables["UNITS_USE_LIBFMT"] = self._use_libfmt
@@ -75,3 +87,13 @@ class ModernCircuitsSTL(ConanFile):
         cmake.configure()
         cmake.build()
         cmake.test()
+
+    def package(self):
+        cmake = CMake(self)
+        cmake.install()
+        copy(
+            self,
+            "LICENSE.md",
+            self.source_folder,
+            os.path.join(self.package_folder, "licenses"),
+        )
