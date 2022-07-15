@@ -3,9 +3,13 @@ name: Linux
 on: [push, pull_request]
 
 jobs:
-  gcc9:
-    name: GCC-9 C++17
-    runs-on: ubuntu-20.04
+  gcc:
+    name: GCC
+    strategy:
+      matrix:
+        gcc_version: [9, 10, 11]
+        cxx_std: [14, 17, 20]
+    runs-on: ubuntu-22.04
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -19,7 +23,7 @@ jobs:
       - name: Set up GCC
         uses: egor-tensin/setup-gcc@v1
         with:
-          version: 9
+          version: "${{ matrix.gcc_version }}"
           platform: x64
 
       - name: Install dependencies
@@ -33,38 +37,5 @@ jobs:
         run: |
           mkdir build
           cd build
-          conan install --build=missing -pr:b=default -pr:h=default -s compiler.cppstd=17 -s build_type=Release ..
-          conan build ..
-
-  gcc10:
-    name: GCC-10 C++20
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-          lfs: true
-
-      - name: Checkout LFS objects
-        run: git lfs checkout
-
-      - name: Set up GCC
-        uses: egor-tensin/setup-gcc@v1
-        with:
-          version: 10
-          platform: x64
-
-      - name: Install dependencies
-        run: |
-          sudo apt install -y ninja-build libasound2-dev libjack-jackd2-dev ladspa-sdk libcurl4-openssl-dev libfreetype6-dev libx11-dev libxcomposite-dev libxcursor-dev libxcursor-dev libxext-dev libxinerama-dev libxrandr-dev libxrender-dev libwebkit2gtk-4.0-dev libglu1-mesa-dev mesa-common-dev
-          pip install conan
-          conan config init
-          conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
-
-      - name: CMake configure -- Release
-        run: |
-          mkdir build
-          cd build
-          conan install --build=missing -pr:b=default -pr:h=default -s compiler.cppstd=20 -s build_type=Release ..
+          conan install --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release ..
           conan build ..
