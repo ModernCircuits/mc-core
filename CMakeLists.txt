@@ -10,7 +10,6 @@ option(MC_BUILD_MSAN "Build with memory sanitizer enabled" OFF)
 option(MC_BUILD_WERROR "Build with warnings as errors" OFF)
 
 find_program(CCACHE ccache)
-
 if(CCACHE)
     set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE})
 endif()
@@ -22,13 +21,8 @@ set(CMAKE_C_EXTENSIONS OFF)
 if(NOT "${CMAKE_CXX_STANDARD}")
     set(CMAKE_CXX_STANDARD 14)
 endif()
-
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-
-if(NOT "${CMAKE_OSX_DEPLOYMENT_TARGET}")
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.11")
-endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
