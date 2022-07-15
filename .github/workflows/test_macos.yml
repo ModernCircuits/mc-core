@@ -34,9 +34,10 @@ jobs:
           conan config init
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
-      - name: CMake configure -- Release
+      - name: Build dependencies
         run: |
-          mkdir build
-          cd build
-          conan install --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.target.cxx }}" -s build_type=Release ..
-          conan build ..
+          conan install -if --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.target.cxx }}" -s build_type=Release .
+
+      - name: Build dependencies
+        run: |
+          conan build -bf build .

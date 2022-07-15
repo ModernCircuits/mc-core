@@ -30,7 +30,10 @@ jobs:
           conan config init
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
-      - name: Run bat script on CMD
+      - name: Build dependencies
         run: |
           conan install -if cmake-build-release --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
+
+      - name: Build & Test
+        run: |
           conan build -bf cmake-build-release .
