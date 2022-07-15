@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up GCC
         uses: egor-tensin/setup-gcc@v1
@@ -33,7 +33,7 @@ jobs:
 
       - name: Build dependencies
         run: |
-          conan install -if --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
+          conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
 
       - name: Build dependencies
         run: |

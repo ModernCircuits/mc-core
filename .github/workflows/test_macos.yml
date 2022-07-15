@@ -23,7 +23,7 @@ jobs:
       MACOSX_DEPLOYMENT_TARGET: "${{ matrix.target.osx }}"
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install ninja
         run: brew install ninja
@@ -36,7 +36,7 @@ jobs:
 
       - name: Build dependencies
         run: |
-          conan install -if --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.target.cxx }}" -s build_type=Release .
+          conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.target.cxx }}" -s build_type=Release .
 
       - name: Build dependencies
         run: |
