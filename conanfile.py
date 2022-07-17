@@ -94,7 +94,7 @@ class ModernCircuitsSTL(ConanFile):
         cmake.install()
         copy(
             self,
-            "LICENSE.md",
+            "LICENSE.txt",
             self.source_folder,
             os.path.join(self.package_folder, "licenses"),
         )
