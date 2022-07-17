@@ -20,7 +20,7 @@ jobs:
           sudo ./llvm.sh 14 all
 
       - name: CMake configure -- Release
-        run: cmake -S . -G "Unix Makefiles" -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_WERROR=ON -DCMAKE_C_COMPILER="clang-14" -DCMAKE_CXX_COMPILER="clang++-14"
+        run: cmake -S . -G "Unix Makefiles" -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DMC_CORE_ENABLE_WERROR=ON -DCMAKE_C_COMPILER="clang-14" -DCMAKE_CXX_COMPILER="clang++-14"
 
       - name: Clang-Tidy -- Release
         run: BUILD_DIR=build make tidy-check

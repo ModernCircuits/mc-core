@@ -21,7 +21,7 @@ tidy-fix:
 .PHONY: coverage
 coverage:
 	conan install -if "cmake-build-coverage" --build=missing -pr:b=default -pr:h=default -s compiler.cppstd=14 -s build_type=Debug .
-	cd "cmake-build-coverage" && cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -GNinja -DCMAKE_BUILD_TYPE=Debug -DMC_BUILD_COVERAGE=TRUE
+	cd "cmake-build-coverage" && cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -GNinja -DCMAKE_BUILD_TYPE=Debug -DMC_CORE_ENABLE_COVERAGE=TRUE
 	cmake --build "cmake-build-coverage"
 	cd "cmake-build-coverage" && ctest
 

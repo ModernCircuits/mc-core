@@ -3,9 +3,9 @@ add_library(mc::compiler_warnings ALIAS mc_compiler_warnings)
 
 if((CMAKE_CXX_COMPILER_ID STREQUAL "MSVC") OR (CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC"))
     target_compile_options(mc_compiler_warnings INTERFACE /W4)
-    if (MC_BUILD_WERROR)
+    if (MC_CORE_ENABLE_WERROR)
         target_compile_options(mc_compiler_warnings INTERFACE /WX)
-    endif (MC_BUILD_WERROR)
+    endif (MC_CORE_ENABLE_WERROR)
 else ()
     target_compile_options(mc_compiler_warnings
         INTERFACE
@@ -50,7 +50,7 @@ else ()
                 $<$<VERSION_GREATER:CXX_COMPILER_VERSION,"11.0.0">:-Wno-free-nonheap-object>
             >
     )
-    if (MC_BUILD_WERROR)
+    if (MC_CORE_ENABLE_WERROR)
         target_compile_options(mc_compiler_warnings INTERFACE -Werror)
-    endif (MC_BUILD_WERROR)
+    endif (MC_CORE_ENABLE_WERROR)
 endif ()

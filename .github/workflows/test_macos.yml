@@ -41,7 +41,7 @@ jobs:
 
       - name: Build
         run: |
-          cmake -S. -Bbuild -G"Ninja Multi-Config" -DCMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -DCMAKE_CXX_STANDARD="${{ matrix.target.cxx }}" -DMC_BUILD_WERROR=ON
+          cmake -S. -Bbuild -G"Ninja Multi-Config" -DCMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -DCMAKE_CXX_STANDARD="${{ matrix.target.cxx }}" -DMC_CORE_ENABLE_WERROR=ON
           cmake --build build --config Debug
           cmake --build build --config Release
 

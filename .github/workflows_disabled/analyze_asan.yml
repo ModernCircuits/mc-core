@@ -17,7 +17,7 @@ jobs:
           pip install conan
 
       - name: CMake configure -- Debug
-        run: cmake -S. -GNinja -Bcmake-build-asan -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_STANDARD=17 -DMC_BUILD_ASAN=ON -DMC_BUILD_WERROR=ON
+        run: cmake -S. -GNinja -Bcmake-build-asan -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_STANDARD=17 -DMC_CORE_ENABLE_ASAN=ON -DMC_CORE_ENABLE_WERROR=ON
 
       - name: CMake build -- Debug
         run: cmake --build cmake-build-asan
