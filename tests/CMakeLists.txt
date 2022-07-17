@@ -41,4 +41,3 @@ target_sources(mc-core-tests
         "stdx/numbers.cpp"
         "stdx/numeric.cpp"
 )
-

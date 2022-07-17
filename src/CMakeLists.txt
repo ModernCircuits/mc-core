@@ -12,7 +12,7 @@ add_library(mc::core ALIAS mc-core)
 set_target_properties(mc-core PROPERTIES EXPORT_NAME core)
 
 target_include_directories(mc-core
-    INTERFACE 
+    INTERFACE
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
@@ -42,17 +42,17 @@ write_basic_package_version_file(mc-coreConfigVersion.cmake COMPATIBILITY SameMa
 
 # installation
 install(
-    EXPORT 
-        mc-coreTargets 
-    DESTINATION 
-        ${CMAKE_INSTALL_LIBDIR}/cmake/core 
-    NAMESPACE 
+    EXPORT
+        mc-coreTargets
+    DESTINATION
+        ${CMAKE_INSTALL_LIBDIR}/cmake/core
+    NAMESPACE
         mc::
 )
 
 install(
-    FILES 
+    FILES
         mc-coreConfig.cmake ${CMAKE_CURRENT_BINARY_DIR}/mc-coreConfigVersion.cmake
-    DESTINATION 
+    DESTINATION
         ${CMAKE_INSTALL_LIBDIR}/cmake/core
 )
