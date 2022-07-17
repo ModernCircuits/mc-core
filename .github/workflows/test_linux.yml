@@ -24,7 +24,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt update
-          sudo apt install -y ninja-build cmake lcov gcovr
+          sudo apt install -y ninja-build cmake
 
       - name: Install conan
         run: |

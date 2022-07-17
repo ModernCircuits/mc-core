@@ -22,4 +22,9 @@ jobs:
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
       - name: Run coverage build
-        run: make coverage-html
+        run: make coverage-xml
+
+      - uses: codecov/codecov-action@v3
+        with:
+          files: ./cmake-build-coverage/coverage.xml
+          fail_ci_if_error: true
