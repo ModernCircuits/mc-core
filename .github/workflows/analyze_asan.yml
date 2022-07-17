@@ -1,0 +1,44 @@
+name: ASAN
+
+on: [push, pull_request]
+
+jobs:
+  gcc-asan:
+    name: GCC ASAN
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        cxx_std: [14, 17, 20]
+      fail-fast: false
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y ninja-build cmake
+
+      - name: Install conan
+        run: |
+          pip install conan
+          conan config init
+          conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
+          conan profile show default
+
+      - name: Build dependencies
+        run: |
+          conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Debug .
+
+      - name: Configure CMake
+        run: |
+          cmake -S. -B build -G"Ninja" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -D CMAKE_CXX_STANDARD="${{ matrix.cxx_std }}" -DMC_CORE_ENABLE_ASAN=ON -DMC_CORE_ENABLE_WERROR=ON
+
+      - name: Show compile commands
+        run: cat build/compile_commands.json
+
+      - name: Build
+        run: cmake --build build --config Debug
+
+      - name: Run tests
+        run: ctest --test-dir build -C Debug
