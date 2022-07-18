@@ -36,10 +36,6 @@ public:
     /// \brief Default constructor.
     constexpr Frequency() noexcept = default;
 
-    /// \brief The copy constructor makes a bitwise copy of the tick
-    /// count.
-    Frequency(Frequency const& /*other*/) = default;
-
     /// \brief Constructs a Frequency with r ticks.
     ///
     /// Note that this constructor only participates in overload resolution
@@ -63,9 +59,6 @@ public:
         : ticks_(static_cast<Rep>(other.count() * std::ratio_divide<Period2, period>::num))
     {
     }
-
-    /// \brief Assigns the contents of one Frequency to another.
-    constexpr auto operator=(Frequency const& other) -> Frequency& = default;
 
     /// \brief Returns the number of ticks for this Frequency.
     MC_NODISCARD constexpr auto count() const noexcept -> rep { return ticks_; }

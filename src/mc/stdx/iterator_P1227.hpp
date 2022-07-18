@@ -20,7 +20,7 @@ MC_NODISCARD constexpr auto ssize(C const& c)
     return static_cast<R>(c.size());
 }
 template <typename T, std::size_t N>
-MC_NODISCARD constexpr auto ssize(T const (&array)[N]) noexcept -> std::ptrdiff_t
+MC_NODISCARD constexpr auto ssize(T const (&array)[N]) noexcept -> std::ptrdiff_t // NOLINT(*-avoid-c-arrays)
 {
     (void)array;
     return static_cast<std::ptrdiff_t>(N);

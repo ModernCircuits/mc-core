@@ -92,19 +92,19 @@ auto DynamicVector<T>::cbegin() const noexcept -> T const*
 template <typename T>
 auto DynamicVector<T>::end() noexcept -> T*
 {
-    return data() + size();
+    return std::next(data(), size());
 }
 
 template <typename T>
 auto DynamicVector<T>::end() const noexcept -> T const*
 {
-    return data() + size();
+    return std::next(data(), size());
 }
 
 template <typename T>
 auto DynamicVector<T>::cend() const noexcept -> T const*
 {
-    return data() + size();
+    return std::next(data(), size());
 }
 
 template <typename T>

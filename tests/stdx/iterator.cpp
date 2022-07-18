@@ -9,7 +9,7 @@
 TEMPLATE_TEST_CASE("stl/iterator: data", "[stl][iterator]", char, short, int, float, double)
 {
     using T = TestType;
-    T cArray[16] {};
+    T cArray[16] {}; // NOLINT(*-avoid-c-arrays)
     REQUIRE(mc::data(cArray) == &cArray[0]);
     REQUIRE(mc::size(cArray) == 16U);
     REQUIRE_FALSE(mc::empty(cArray));

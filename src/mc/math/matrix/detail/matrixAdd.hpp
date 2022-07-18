@@ -14,7 +14,7 @@ auto matrixAdd(Matrix const& l, Matrix const& r, TrueType /*isDense*/) -> Matrix
 {
     auto s    = Matrix { l.rows(), l.cols() };
     auto plus = std::plus<typename Matrix::value_type> {};
-    std::transform(data(l), data(l) + size(l), data(r), data(s), plus);
+    std::transform(data(l), std::next(data(l), size(l)), data(r), data(s), plus);
     return s;
 }
 
@@ -23,7 +23,7 @@ auto matrixAdd(Matrix const& m, typename Matrix::value_type scaler, TrueType /*i
 {
     auto s    = Matrix { m.rows(), m.cols() };
     auto plus = [scaler](auto v) { return v + scaler; };
-    std::transform(data(m), data(m) + size(m), data(s), plus);
+    std::transform(data(m), std::next(data(m), size(m)), data(s), plus);
     return s;
 }
 
