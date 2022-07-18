@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  build_test:
-    name: Build & Test
+  cl:
+    name: CL
     strategy:
       matrix:
         cxx_std: [17, 20]
@@ -32,6 +32,44 @@ jobs:
           pip install --upgrade conan
           conan config init
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
+
+      - name: Build dependencies
+        run: |
+          conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
+
+      - name: Build & Test
+        run: |
+          conan build -bf build .
+
+  clang-cl:
+    name: ClangCL
+    strategy:
+      matrix:
+        cxx_std: [17, 20, 23]
+      fail-fast: false
+    runs-on: windows-2022
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Visual Studio shell
+        uses: egor-tensin/vs-shell@v2
+        with:
+          arch: x64
+
+      - name: Install ninja
+        run: choco install ninja
+
+      - name: Install conan
+        run: |
+          pip install --upgrade conan
+          conan config init
+          conan profile update settings.compiler="Visual Studio" default
+          conan profile update settings.compiler.version=17 default
+          conan profile update settings.compiler.toolset=ClangCL default
+          conan profile update settings.compiler.runtime=MD default
+          conan profile update conf.tools.cmake.cmaketoolchain:generator="Visual Studio 17 2022" default
+          conan profile show default
 
       - name: Build dependencies
         run: |
