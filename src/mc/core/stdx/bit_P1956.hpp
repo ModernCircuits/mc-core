@@ -1,9 +1,12 @@
 #pragma once
 
-#include "mc/core/version.hpp"
+#include <mc/core/version.hpp>
+
+#if __has_include(<bit>)
+    #include <bit>
+#endif
 
 #if defined(__cpp_lib_int_pow2)
-    #include <bit>
 namespace mc {
 using std::bit_ceil;
 using std::bit_floor;
