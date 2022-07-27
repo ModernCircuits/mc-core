@@ -17,7 +17,7 @@ Conan
 
 .. code-block:: shell
 
-    export VERSION="0.2.0"
+    export VERSION="0.3.0"
     export CXXSTD=20
     export CHANNEL="modern-circuits/stable"
     export BUILD_TYPE=Release

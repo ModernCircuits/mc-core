@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: BSL-1.0
 
 cmake_minimum_required(VERSION 3.21)
-project(mc-core VERSION 0.2.0 LANGUAGES CXX)
+project(mc-core VERSION 0.3.0 LANGUAGES CXX)
 
 find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
 find_package(fmt REQUIRED)
