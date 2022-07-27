@@ -61,6 +61,16 @@ class ModernCircuitsSTL(ConanFile):
         "boost:without_wave": True,
     }
 
+    exports = ["LICENSE.txt"]
+    exports_sources = [
+        "docs/*",
+        "src/*",
+        "tests/*",
+        "cmake/*",
+        "CMakeLists.txt",
+    ]
+    no_copy_source = True
+
     @property
     def _run_tests(self):
         return get_env("CONAN_RUN_TESTS", False)
@@ -79,13 +89,6 @@ class ModernCircuitsSTL(ConanFile):
         if self._run_tests:
             self.test_requires("catch2/3.0.1")
 
-    def export_sources(self):
-        self.copy("doc/*")
-        self.copy("src/*")
-        self.copy("tests/*")
-        self.copy("cmake/*")
-        self.copy("CMakeLists.txt")
-
     def generate(self):
         tc = CMakeToolchain(self)
         tc.generate()
@@ -101,10 +104,18 @@ class ModernCircuitsSTL(ConanFile):
 
     def package(self):
         copy(
-            self,
-            "LICENSE.txt",
-            self.source_folder,
-            os.path.join(self.package_folder, "licenses"),
+            conanfile=self,
+            pattern="LICENSE.txt",
+            src=self.source_folder,
+            dst=os.path.join(self.package_folder, "licenses"),
         )
+
+        copy(
+            conanfile=self,
+            pattern="*.hpp",
+            src=os.path.join(self.source_folder, "src"),
+            dst=os.path.join(self.package_folder, "include"),
+        )
+
         cmake = CMake(self)
         cmake.install()

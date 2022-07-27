@@ -1,13 +1,16 @@
 # SPDX-License-Identifier: BSL-1.0
 
 cmake_minimum_required(VERSION 3.21)
-project(mc-core VERSION 0.3.0 LANGUAGES CXX)
+project(mc-core VERSION 0.3.3 LANGUAGES CXX)
 
 find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
 find_package(fmt REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
 find_package(xsimd REQUIRED)
+
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
 
 add_library(mc-core INTERFACE)
 add_library(mc::core ALIAS mc-core)
@@ -18,9 +21,9 @@ set_target_properties(mc-core PROPERTIES
     VISIBILITY_INLINES_HIDDEN
         YES
     VERSION
-        "${PROJECT_VERSION}"
+        ${PROJECT_VERSION}
     SOVERSION
-        "${PROJECT_VERSION_MAJOR}"
+        ${PROJECT_VERSION_MAJOR}
     EXPORT_NAME
         core
 )
@@ -43,32 +46,36 @@ target_link_libraries(mc-core
         xsimd
 )
 
-include(GNUInstallDirs)
-install(TARGETS "mc-core" EXPORT "mc-core-targets")
-
-include(CMakePackageConfigHelpers)
-write_basic_package_version_file(
-    mc-core-config-version.cmake
-    VERSION
-        ${PROJECT_VERSION}
-    COMPATIBILITY
-        AnyNewerVersion
+install(
+    TARGETS
+        mc-core
+    EXPORT
+        mc-core-targets
 )
 
-configure_file(mc-core-config.cmake.in mc-core-config.cmake @ONLY)
-install(
-    FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/mc-core-config.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/mc-core-config-version.cmake"
-    DESTINATION
-        "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
-)
-
-install(
+export(
     EXPORT
         mc-core-targets
     NAMESPACE
         mc::
+)
+
+configure_file("mc-core-config.cmake" "." COPYONLY)
+write_basic_package_version_file(mc-core-config-version.cmake COMPATIBILITY SameMajorVersion)
+
+install(
+    EXPORT
+        mc-core-targets
     DESTINATION
-        "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+        ${CMAKE_INSTALL_LIBDIR}/cmake/mc-core
+    NAMESPACE
+        mc::
+)
+
+install(
+    FILES
+        mc-core-config.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/mc-core-config-version.cmake
+    DESTINATION
+        ${CMAKE_INSTALL_LIBDIR}/cmake/mc-core
 )
