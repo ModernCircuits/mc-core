@@ -41,4 +41,9 @@ jobs:
           cmake -S. -B build -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CMAKE_C_COMPILER="clang-14" -D CMAKE_CXX_COMPILER="clang++-14" -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -D CMAKE_CXX_STANDARD=14 -D MC_CORE_ENABLE_WERROR=ON
 
       - name: Clang-Tidy -- Release
-        run: BUILD_DIR=build make tidy-check
+        run: >
+          BUILD_DIR=build
+          PYTHON_BIN=python
+          CLANG_REPLACEMENTS_BIN=clang-apply-replacements-14
+          CLANG_TIDY_BIN=clang-tidy-14
+          make tidy-check

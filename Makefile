@@ -1,22 +1,31 @@
 BUILD_DIR ?= cmake-build-debug
 
+BUILD_DIR ?= build
+PYTHON_BIN ?= python3
 CLANG_FORMAT_BIN ?= clang-format
-CLANG_TIDY_BIN ?= clang-tidy-14
-CLANG_APPLY_BIN ?= clang-apply-replacements-14
+CLANG_REPLACEMENTS_BIN ?= clang-apply-replacements
+CLANG_TIDY_BIN ?= clang-tidy
+RUN_CLANGTIDY_BIN ?= $(shell which run-clang-tidy)
 
-CLANG_TIDY_ARGS += -clang-tidy-binary ${CLANG_TIDY_BIN}
-CLANG_TIDY_ARGS += -clang-apply-replacements-binary ${CLANG_APPLY_BIN}
+CLANG_TIDY_ARGS =  ${PYTHON_BIN}
+CLANG_TIDY_ARGS += ${RUN_CLANGTIDY_BIN}
+CLANG_TIDY_ARGS += -clang-tidy-binary
+CLANG_TIDY_ARGS += ${CLANG_TIDY_BIN}
+CLANG_TIDY_ARGS += -clang-apply-replacements-binary
+CLANG_TIDY_ARGS += ${CLANG_REPLACEMENTS_BIN}
 CLANG_TIDY_ARGS += -j $(shell nproc)
-CLANG_TIDY_ARGS += -quiet
-CLANG_TIDY_ARGS += -p $(BUILD_DIR)
 
 .PHONY: tidy-check
 tidy-check:
-	 ./scripts/run-clang-tidy.py $(CLANG_TIDY_ARGS) -header-filter $(shell realpath ./src) $(shell realpath ./)
+	${CLANG_TIDY_ARGS} -quiet -p $(BUILD_DIR) -header-filter $(shell realpath ./src) $(shell realpath ./src)
 
 .PHONY: tidy-fix
 tidy-fix:
-	 ./scripts/run-clang-tidy.py -fix $(CLANG_TIDY_ARGS) -header-filter $(shell realpath ./src) $(shell realpath ./)
+	${CLANG_TIDY_ARGS} -fix -quiet -p $(BUILD_DIR) -header-filter $(shell realpath ./src) $(shell realpath ./src)
+
+.PHONY: check
+check:
+	pre-commit run --all-files
 
 .PHONY: coverage
 coverage:
