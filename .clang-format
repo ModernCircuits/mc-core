@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: BSL-1.0
 ---
 BasedOnStyle: WebKit
 AlignConsecutiveAssignments: true
@@ -22,4 +23,3 @@ NamespaceIndentation: None
 ReflowComments: true
 Standard: Auto
 UseTab: Never
-...

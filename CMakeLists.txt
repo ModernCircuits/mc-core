@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 3.15)
-cmake_policy(VERSION 3.15)
-project(mc-core-dev VERSION 0.1.0)
+# SPDX-License-Identifier: BSL-1.0
+
+cmake_minimum_required(VERSION 3.21)
+project(mc-core-dev LANGUAGES CXX)
 
 option(MC_CORE_ENABLE_COVERAGE    "Build with coverage enabled"                       OFF)
 option(MC_CORE_ENABLE_ASAN        "Build with address sanitizer enabled"              OFF)

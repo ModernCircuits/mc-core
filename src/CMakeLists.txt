@@ -1,5 +1,7 @@
-cmake_minimum_required(VERSION 3.15)
-project(mc-core VERSION 0.1.0)
+# SPDX-License-Identifier: BSL-1.0
+
+cmake_minimum_required(VERSION 3.21)
+project(mc-core VERSION 0.2.0 LANGUAGES CXX)
 
 find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
 find_package(fmt REQUIRED)
@@ -9,7 +11,19 @@ find_package(xsimd REQUIRED)
 
 add_library(mc-core INTERFACE)
 add_library(mc::core ALIAS mc-core)
-set_target_properties(mc-core PROPERTIES EXPORT_NAME core)
+
+set_target_properties(mc-core PROPERTIES
+    CXX_VISIBILITY_PRESET
+        hidden
+    VISIBILITY_INLINES_HIDDEN
+        YES
+    VERSION
+        "${PROJECT_VERSION}"
+    SOVERSION
+        "${PROJECT_VERSION_MAJOR}"
+    EXPORT_NAME
+        core
+)
 
 target_include_directories(mc-core
     INTERFACE
@@ -29,30 +43,45 @@ target_link_libraries(mc-core
         xsimd
 )
 
-# installation
-include(GNUInstallDirs)
-install(TARGETS mc-core EXPORT mc-coreTargets)
-install(DIRECTORY mc TYPE INCLUDE)
-
-# local build
-export(EXPORT mc-coreTargets NAMESPACE mc::)
-configure_file("mc-coreConfig.cmake" "." COPYONLY)
-include(CMakePackageConfigHelpers)
-write_basic_package_version_file(mc-coreConfigVersion.cmake COMPATIBILITY SameMajorVersion)
-
-# installation
 install(
+    TARGETS
+        "mc-core"
     EXPORT
-        mc-coreTargets
+        "mc-core-targets"
+    LIBRARY DESTINATION
+        "${CMAKE_INSTALL_LIBDIR}"
+    ARCHIVE DESTINATION
+        "${CMAKE_INSTALL_LIBDIR}"
+    RUNTIME DESTINATION
+        "${CMAKE_INSTALL_BINDIR}"
+    INCLUDES DESTINATION
+        "${CMAKE_INSTALL_INCLUDEDIR}"
+)
+
+
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(
+    mc-core-config-version.cmake
+    VERSION
+        ${PROJECT_VERSION}
+    COMPATIBILITY
+        AnyNewerVersion
+)
+
+configure_file(mc-core-config.cmake.in mc-core-config.cmake @ONLY)
+install(
+    FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/mc-core-config.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/mc-core-config-version.cmake"
     DESTINATION
-        ${CMAKE_INSTALL_LIBDIR}/cmake/core
-    NAMESPACE
-        mc::
+        "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
 )
 
 install(
-    FILES
-        mc-coreConfig.cmake ${CMAKE_CURRENT_BINARY_DIR}/mc-coreConfigVersion.cmake
+    EXPORT
+        mc-core-targets
+    NAMESPACE
+        mc::
     DESTINATION
-        ${CMAKE_INSTALL_LIBDIR}/cmake/core
+        "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
 )

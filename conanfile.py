@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: BSL-1.0
+
 import re
 import os
 
@@ -78,23 +80,24 @@ class ModernCircuitsSTL(ConanFile):
 
     def generate(self):
         tc = CMakeToolchain(self)
-        # tc.variables["UNITS_USE_LIBFMT"] = self._use_libfmt
         tc.generate()
         deps = CMakeDeps(self)
         deps.generate()
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure()
+        cmake.configure(build_script_folder="src")
         cmake.build()
-        cmake.test()
 
     def package(self):
-        cmake = CMake(self)
-        cmake.install()
         copy(
             self,
             "LICENSE.txt",
             self.source_folder,
             os.path.join(self.package_folder, "licenses"),
         )
+        cmake = CMake(self)
+        cmake.install()
+
+    def package_info(self):
+        self.cpp_info.libs = ["core"]
