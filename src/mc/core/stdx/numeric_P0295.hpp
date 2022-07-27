@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mc/core/version.hpp"
+#include <mc/core/config.hpp>
 
 #if defined(__cpp_lib_gcd_lcm)
     #include <numeric>
@@ -9,7 +9,6 @@ using std::gcd;
 using std::lcm;
 } // namespace mc
 #else
-    #include "mc/core/preprocessor.hpp"
     #include <type_traits>
 namespace mc {
 template <typename M, typename N>

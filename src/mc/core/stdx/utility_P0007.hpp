@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mc/core/version.hpp"
+#include <mc/core/config.hpp>
 
 #if defined(__cpp_lib_as_const)
 
@@ -12,8 +12,7 @@ using std::as_const;
 
 #else
 
-    #include "mc/core/preprocessor.hpp"
-    #include "mc/core/type_traits.hpp"
+    #include <type_traits.hpp>
 
 namespace mc {
 template <typename T>

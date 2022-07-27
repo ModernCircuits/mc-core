@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mc/core/version.hpp"
+#include <mc/core/config.hpp>
 
 #if 0
     #if defined(__cpp_lib_filesystem)

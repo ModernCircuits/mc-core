@@ -1,5 +1,11 @@
 #pragma once
 
+#if __has_include(<version>)
+    #include <version>
+#else
+    #error "mc-core expects <version> to be available"
+#endif
+
 #if defined(__clang__)
     #include <mc/core/config/compiler_clang.hpp>
 #elif defined(__GNUC__)
@@ -28,14 +34,8 @@
     #error "Unknown platform!"
 #endif
 
-#if defined(_DEBUG)
-    #define MC_DEBUG 1
-#endif
+#include <mc/core/config/preprocessor.hpp>
 
-#if defined(NDEBUG)
-    #define MC_RELEASE 1
-#endif
-
-#if defined(MC_DEBUG) && defined(MC_RELEASE)
-    #error "Both debug & release mode defined"
+#if defined(MC_NAMESPACE_ALIAS)
+namespace MC_NAMESPACE_ALIAS = mc;
 #endif

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mc/core/version.hpp"
+#include <mc/core/config.hpp>
 
 #include <boost/container/pmr/global_resource.hpp>
 #include <boost/container/pmr/memory_resource.hpp>

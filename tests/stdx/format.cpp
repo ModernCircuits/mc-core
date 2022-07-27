@@ -1,4 +1,4 @@
-#include "mc/core/format.hpp"
+#include <mc/core/format.hpp>
 
 #include <catch2/catch_test_macros.hpp>
 

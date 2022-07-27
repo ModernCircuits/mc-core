@@ -1,9 +1,9 @@
 #pragma once
 
-#include "mc/core/version.hpp"
+#include <mc/core/config.hpp>
 
-#include "container/SmallVector.hpp"
-#include "container/StaticVector.hpp"
+#include <mc/core/container/SmallVector.hpp>
+#include <mc/core/container/StaticVector.hpp>
 
 #include <boost/container/pmr/vector.hpp>
 

@@ -34,7 +34,6 @@
 #include <mc/core/numeric.hpp>
 #include <mc/core/optional.hpp>
 #include <mc/core/ostream.hpp>
-#include <mc/core/preprocessor.hpp>
 #include <mc/core/queue.hpp>
 #include <mc/core/random.hpp>
 #include <mc/core/ratio.hpp>

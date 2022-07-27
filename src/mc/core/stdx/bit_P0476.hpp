@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mc/core/version.hpp"
+#include <mc/core/config.hpp>
 
 #if defined(__cpp_lib_bit_cast)
     #include <bit>

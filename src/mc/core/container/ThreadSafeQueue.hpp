@@ -1,10 +1,9 @@
 #pragma once
 
-#include <mc/core/version.hpp>
+#include <mc/core/config.hpp>
 
 #include <mc/core/mutex.hpp>
 #include <mc/core/optional.hpp>
-#include <mc/core/preprocessor.hpp>
 
 #include <queue>
 

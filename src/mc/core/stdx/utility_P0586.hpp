@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mc/core/version.hpp"
+#include <mc/core/config.hpp>
 
 #if defined(__cpp_lib_integer_comparison_functions)
 
@@ -16,8 +16,7 @@ using std::cmp_not_equal;
 } // namespace mc
 #else
 
-    #include "mc/core/preprocessor.hpp"
-    #include "mc/core/type_traits.hpp"
+    #include <type_traits>
 
 namespace mc {
 namespace detail {

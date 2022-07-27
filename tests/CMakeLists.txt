@@ -23,7 +23,6 @@ target_sources(mc-core-tests
 
         "units/Duration.cpp"
         "units/FrameCount.cpp"
-        "units/Frequency.cpp"
 
         "stdx/bit.cpp"
         "stdx/format.cpp"

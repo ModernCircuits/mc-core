@@ -1,6 +1,6 @@
 #pragma once
 
-#include <mc/core/version.hpp>
+#include <mc/core/config.hpp>
 
 #if __has_include(<bit>)
     #include <bit>

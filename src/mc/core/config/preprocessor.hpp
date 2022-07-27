@@ -1,7 +1,5 @@
 #pragma once
 
-#include "mc/core/config.hpp"
-
 #if defined(__has_builtin)
     #define MC_HAS_BUILTIN(...) __has_builtin(__VA_ARGS__)
 #else
@@ -40,4 +38,16 @@
     #endif
 #else
     #define MC_ALIGNAS(bytes)
+#endif
+
+#if defined(_DEBUG)
+    #define MC_DEBUG 1
+#endif
+
+#if defined(NDEBUG)
+    #define MC_RELEASE 1
+#endif
+
+#if defined(MC_DEBUG) && defined(MC_RELEASE)
+    #error "Both debug & release mode defined"
 #endif

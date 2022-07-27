@@ -1,7 +1,7 @@
 #pragma once
 
-#include "mc/core/config.hpp"
-#include "mc/core/cstdint.hpp"
+#include <mc/core/config.hpp>
+#include <mc/core/cstdint.hpp>
 
 namespace mc {
 

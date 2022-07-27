@@ -1,7 +1,7 @@
 #pragma once
 
-#include "mc/core/chrono.hpp"
-#include "mc/core/config.hpp"
+#include <mc/core/chrono.hpp>
+#include <mc/core/config.hpp>
 
 namespace mc {
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mc/core/version.hpp"
+#include <mc/core/config.hpp>
 
 #if defined(__cpp_lib_nonmember_container_access)
 
@@ -13,9 +13,8 @@ using std::size;
 } // namespace mc
 
 #else
-    #include "mc/core/initializer_list.hpp"
-    #include "mc/core/preprocessor.hpp"
-    #include "mc/core/type_traits.hpp"
+    #include <mc/core/initializer_list.hpp>
+    #include <mc/core/type_traits.hpp>
 namespace mc {
 
 template <typename C>

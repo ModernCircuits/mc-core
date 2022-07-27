@@ -1,6 +1,6 @@
-#include "mc/core/queue.hpp"
+#include <mc/core/queue.hpp>
 
-#include "mc/core/thread.hpp"
+#include <mc/core/thread.hpp>
 
 #include <catch2/catch_template_test_macros.hpp>
 

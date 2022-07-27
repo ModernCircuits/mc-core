@@ -3,6 +3,5 @@
 /// \defgroup group-units Units
 /// Unit value types provided by the library.
 
-#include "mc/core/units/Duration.hpp"
-#include "mc/core/units/FrameCount.hpp"
-#include "mc/core/units/Frequency.hpp"
+#include <mc/core/units/Duration.hpp>
+#include <mc/core/units/FrameCount.hpp>
