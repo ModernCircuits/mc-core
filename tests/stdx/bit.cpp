@@ -1,4 +1,4 @@
-#include "mc/bit.hpp"
+#include "mc/core/bit.hpp"
 
 #include <catch2/catch_template_test_macros.hpp>
 

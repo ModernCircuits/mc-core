@@ -1,8 +1,8 @@
-#include "mc/iterator.hpp"
+#include "mc/core/iterator.hpp"
 
-#include "mc/array.hpp"
-#include "mc/initializer_list.hpp"
-#include "mc/utility.hpp"
+#include "mc/core/array.hpp"
+#include "mc/core/initializer_list.hpp"
+#include "mc/core/utility.hpp"
 
 #include <catch2/catch_template_test_macros.hpp>
 

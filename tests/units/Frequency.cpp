@@ -1,4 +1,4 @@
-#include "mc/units/Frequency.hpp"
+#include "mc/core/units/Frequency.hpp"
 
 #include <catch2/catch_template_test_macros.hpp>
 

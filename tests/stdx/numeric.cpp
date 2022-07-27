@@ -1,4 +1,4 @@
-#include "mc/numeric.hpp"
+#include "mc/core/numeric.hpp"
 
 #include <catch2/catch_template_test_macros.hpp>
 
