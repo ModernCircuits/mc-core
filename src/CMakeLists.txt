@@ -43,21 +43,8 @@ target_link_libraries(mc-core
         xsimd
 )
 
-install(
-    TARGETS
-        "mc-core"
-    EXPORT
-        "mc-core-targets"
-    LIBRARY DESTINATION
-        "${CMAKE_INSTALL_LIBDIR}"
-    ARCHIVE DESTINATION
-        "${CMAKE_INSTALL_LIBDIR}"
-    RUNTIME DESTINATION
-        "${CMAKE_INSTALL_BINDIR}"
-    INCLUDES DESTINATION
-        "${CMAKE_INSTALL_INCLUDEDIR}"
-)
-
+include(GNUInstallDirs)
+install(TARGETS "mc-core" EXPORT "mc-core-targets")
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(

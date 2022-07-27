@@ -7,9 +7,14 @@ jobs:
     name: Coverage
     strategy:
       matrix:
-        cxx_std: [14, 17, 20]
+        target:
+          [
+            { "os": "ubuntu-20.04", "cxx": 14 },
+            { "os": "ubuntu-20.04", "cxx": 17 },
+            { "os": "ubuntu-22.04", "cxx": 20 },
+          ]
       fail-fast: false
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.target.os }}
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -26,7 +31,7 @@ jobs:
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
       - name: Run coverage build
-        run: CXX_STD="${{ matrix.cxx_std }}" make coverage-xml
+        run: CXX_STD="${{ matrix.target.cxx }}" make coverage-xml
 
       - uses: codecov/codecov-action@v3
         with:
