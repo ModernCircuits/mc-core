@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: BSL-1.0
+
 #include <mc/core/iterator.hpp>
 
 #include <mc/core/array.hpp>

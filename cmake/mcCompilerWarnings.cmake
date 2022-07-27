@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: BSL-1.0
+
 add_library(mc_compiler_warnings INTERFACE)
 add_library(mc::compiler_warnings ALIAS mc_compiler_warnings)
 

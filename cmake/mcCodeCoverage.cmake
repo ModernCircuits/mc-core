@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: BSL-1.0
+
 # Code Coverage Configuration
 add_library(mc_coverage INTERFACE)
 add_library(mc::coverage ALIAS mc_coverage)

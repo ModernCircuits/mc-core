@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: BSL-1.0
+
 #include <mc/core/algorithm.hpp>
 #include <mc/core/array.hpp>
 #include <mc/core/atomic.hpp>
