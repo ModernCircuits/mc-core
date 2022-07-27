@@ -10,7 +10,7 @@ using std::void_t;
 }
 #else
 namespace mc {
-template <typename...>
+template<typename...>
 using void_t = void;
 }
 #endif

@@ -6,4 +6,4 @@
 
 namespace mc {
 using namespace boost::variant2;
-} // namespace mc
+}  // namespace mc

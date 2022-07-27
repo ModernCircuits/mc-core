@@ -7,6 +7,6 @@
 #include <readerwriterqueue/readerwriterqueue.h>
 
 namespace mc {
-template <typename T>
+template<typename T>
 using LockFreeQueue = moodycamel::ConcurrentQueue<T>;
 }

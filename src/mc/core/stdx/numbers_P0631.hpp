@@ -5,7 +5,8 @@
 #include <mc/core/config.hpp>
 
 #if defined(__cpp_lib_math_constants)
-    #include <numbers>
+#include <numbers>
+
 namespace mc {
 namespace numbers {
 using std::numbers::e;
@@ -21,10 +22,11 @@ using std::numbers::phi;
 using std::numbers::pi;
 using std::numbers::sqrt2;
 using std::numbers::sqrt3;
-} // namespace numbers
-} // namespace mc
+}  // namespace numbers
+}  // namespace mc
 #else
-    #include <boost/math/constants/constants.hpp>
+#include <boost/math/constants/constants.hpp>
+
 namespace mc {
 namespace numbers {
 // clang-format off
@@ -42,6 +44,6 @@ namespace numbers {
     MC_INLINE_VAR constexpr double phi         = boost::math::constants::phi<double>();             // NOLINT(readability-identifier-naming)
     MC_INLINE_VAR constexpr double inv_sqrt3   = 1.0/boost::math::constants::root_three<double>();  // NOLINT(readability-identifier-naming)
 // clang-format on
-} // namespace numbers
-} // namespace mc
+}  // namespace numbers
+}  // namespace mc
 #endif

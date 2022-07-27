@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <queue>
+#include <mc/core/container/lock_free_queue.hpp>
+#include <mc/core/container/thread_safe_queue.hpp>
 
-#include <mc/core/container/LockFreeQueue.hpp>
-#include <mc/core/container/ThreadSafeQueue.hpp>
+#include <queue>

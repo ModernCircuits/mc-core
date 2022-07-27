@@ -4,7 +4,8 @@
 
 #include <catch2/catch_template_test_macros.hpp>
 
-TEMPLATE_TEST_CASE("stl/numeric: lcm",
+TEMPLATE_TEST_CASE(
+    "stl/numeric: lcm",
     "[stl][numeric]",
     unsigned char,
     unsigned short,
@@ -15,7 +16,8 @@ TEMPLATE_TEST_CASE("stl/numeric: lcm",
     signed short,
     signed int,
     signed long,
-    signed long long)
+    signed long long
+)
 {
     using T = TestType;
     REQUIRE(mc::lcm(T(0), T(0)) == T(0));
@@ -28,7 +30,8 @@ TEMPLATE_TEST_CASE("stl/numeric: lcm",
     REQUIRE(mc::lcm(T(11), T(3)) == T(33));
 }
 
-TEMPLATE_TEST_CASE("stl/numeric: gcd",
+TEMPLATE_TEST_CASE(
+    "stl/numeric: gcd",
     "[stl][numeric]",
     unsigned char,
     unsigned short,
@@ -39,7 +42,8 @@ TEMPLATE_TEST_CASE("stl/numeric: gcd",
     signed short,
     signed int,
     signed long,
-    signed long long)
+    signed long long
+)
 {
     using T = TestType;
     REQUIRE(mc::gcd(T(0), T(0)) == T(0));

@@ -15,7 +15,7 @@ TEST_CASE("stl/units: FrameCount", "[stl][units]")
     REQUIRE(mc::FrameCount(0) == 0ULL);
 
     // operations
-    auto fc = mc::FrameCount { 0 };
+    auto fc = mc::FrameCount{0};
     fc += 1ULL;
     REQUIRE(fc == 1ULL);
     fc += 2;

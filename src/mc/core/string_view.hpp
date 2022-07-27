@@ -5,13 +5,15 @@
 #include <mc/core/config.hpp>
 
 #if defined(__cpp_lib_string_view)
-    #include <string_view>
+#include <string_view>
+
 namespace mc {
 using std::string_view;
-} // namespace mc
+}  // namespace mc
 #else
-    #include <boost/utility/string_view.hpp>
+#include <boost/utility/string_view.hpp>
+
 namespace mc {
 using boost::string_view;
-} // namespace mc
+}  // namespace mc
 #endif

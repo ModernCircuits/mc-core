@@ -22,5 +22,5 @@ using boost::container::pmr::pool_options;
 using boost::container::pmr::set_default_resource;
 using boost::container::pmr::synchronized_pool_resource;
 using boost::container::pmr::unsynchronized_pool_resource;
-} // namespace pmr
-} // namespace mc
+}  // namespace pmr
+}  // namespace mc

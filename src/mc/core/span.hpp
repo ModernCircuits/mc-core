@@ -12,4 +12,4 @@ using boost::span;
 using boost::as_bytes;
 using boost::as_writable_bytes;
 #endif
-} // namespace mc
+}  // namespace mc

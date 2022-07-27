@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: BSL-1.0
 
+#include <mc/core/config.hpp>
+
 #include <mc/core/algorithm.hpp>
 #include <mc/core/array.hpp>
 #include <mc/core/atomic.hpp>
@@ -12,7 +14,6 @@
 #include <mc/core/cmath.hpp>
 #include <mc/core/complex.hpp>
 #include <mc/core/concepts.hpp>
-#include <mc/core/config.hpp>
 #include <mc/core/cstddef.hpp>
 #include <mc/core/cstdint.hpp>
 #include <mc/core/cstdlib.hpp>

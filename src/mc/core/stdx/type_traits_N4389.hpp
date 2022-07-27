@@ -5,8 +5,8 @@
 #include <type_traits>
 
 namespace mc {
-template <bool B>
+template<bool B>
 using BoolConstant = std::integral_constant<bool, B>;
 using TrueType     = BoolConstant<true>;
 using FalseType    = BoolConstant<false>;
-} // namespace mc
+}  // namespace mc

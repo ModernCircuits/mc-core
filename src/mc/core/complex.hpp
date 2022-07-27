@@ -5,6 +5,6 @@
 #include <complex>
 
 namespace mc {
-template <typename T>
+template<typename T>
 using Complex = std::complex<T>;
 }

@@ -10,8 +10,9 @@
 #include <queue>
 
 namespace mc {
-template <typename T>
-struct ThreadSafeQueue {
+template<typename T>
+struct ThreadSafeQueue
+{
 
     using value_type = T;
     using size_type  = typename std::queue<T>::size_type;
@@ -28,7 +29,7 @@ struct ThreadSafeQueue {
     MC_NODISCARD auto pop() -> optional<value_type>
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        if (queue_.empty()) { return optional<value_type> { nullopt }; }
+        if (queue_.empty()) { return optional<value_type>{nullopt}; }
         value_type tmp = queue_.front();
         queue_.pop();
         return tmp;
@@ -59,4 +60,4 @@ private:
     std::queue<value_type> queue_;
     std::mutex mutable mutex_;
 };
-} // namespace mc
+}  // namespace mc
