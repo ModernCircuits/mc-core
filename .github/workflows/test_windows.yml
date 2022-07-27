@@ -37,9 +37,14 @@ jobs:
         run: |
           conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
 
-      - name: Build & Test
+      - name: Build
         run: |
           conan build -bf build .
+
+      - name: Test
+        run: |
+          ctest --test-dir build -C Debug --output-on-failure
+          ctest --test-dir build -C Release --output-on-failure
 
   clang-cl:
     name: ClangCL
@@ -75,6 +80,11 @@ jobs:
         run: |
           conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
 
-      - name: Build & Test
+      - name: Build
         run: |
           conan build -bf build .
+
+      - name: Test
+        run: |
+          ctest --test-dir build -C Debug --output-on-failure
+          ctest --test-dir build -C Release --output-on-failure
