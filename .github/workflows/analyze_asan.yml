@@ -27,8 +27,15 @@ jobs:
           conan profile show default
 
       - name: Build dependencies
-        run: |
-          conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Debug .
+        run: >
+          conan install
+          -if build
+          --build=missing
+          -e mc-core:CONAN_RUN_TESTS=True
+          -pr:b=default
+          -pr:h=default
+          -s compiler.cppstd="${{ matrix.cxx_std }}"
+          -s build_type=Debug .
 
       - name: Configure CMake
         run: |

@@ -36,8 +36,8 @@ jobs:
 
       - name: Build dependencies
         run: |
-          conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.target.cxx }}" -s build_type=Debug .
-          conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.target.cxx }}" -s build_type=Release .
+          conan install -if build --build=missing -pr:b=default -pr:h=default -e mc-core:CONAN_RUN_TESTS=True -s compiler.cppstd="${{ matrix.target.cxx }}" -s build_type=Debug .
+          conan install -if build --build=missing -pr:b=default -pr:h=default -e mc-core:CONAN_RUN_TESTS=True -s compiler.cppstd="${{ matrix.target.cxx }}" -s build_type=Release .
 
       - name: Build
         run: |

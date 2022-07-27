@@ -35,7 +35,7 @@ jobs:
 
       - name: Build dependencies
         run: |
-          conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
+          conan install -if build --build=missing -pr:b=default -pr:h=default -e mc-core:CONAN_RUN_TESTS=True -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
 
       - name: Build
         run: |
@@ -43,7 +43,6 @@ jobs:
 
       - name: Test
         run: |
-          ctest --test-dir build -C Debug --output-on-failure
           ctest --test-dir build -C Release --output-on-failure
 
   clang-cl:
@@ -78,7 +77,7 @@ jobs:
 
       - name: Build dependencies
         run: |
-          conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
+          conan install -if build --build=missing -pr:b=default -pr:h=default -e mc-core:CONAN_RUN_TESTS=True -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
 
       - name: Build
         run: |
