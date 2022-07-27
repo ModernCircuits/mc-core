@@ -33,7 +33,7 @@ jobs:
           conan profile show default
 
       - name: Build dependencies
-        run: |
+        run: >
           conan install
           -if build
           --build=missing
