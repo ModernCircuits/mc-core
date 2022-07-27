@@ -62,3 +62,11 @@ format:
 format-check:
 	@find src -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs -n 1 -P 1 -I{} -t sh -c '${CLANG_FORMAT_BIN} -style=file {} | diff - {}'
 	@find tests -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' | xargs -n 1 -P 1 -I{} -t sh -c '${CLANG_FORMAT_BIN} -style=file {} | diff - {}'
+
+.PHONY: format-rst
+format-rst:
+	@find docs -iname '*.rst' -o -iname '*.rstinc' | xargs docstrfmt
+
+.PHONY: format-rst-check
+format-rst-check:
+	@find docs -iname '*.rst' -o -iname '*.rstinc' | xargs docstrfmt -c
