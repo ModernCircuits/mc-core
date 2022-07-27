@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: BSL-1.0
-
 #pragma once
 
 #if __has_include(<version>)

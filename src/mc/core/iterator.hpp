@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: BSL-1.0
-
 #pragma once
 
 #include <mc/core/stdx/iterator_N4280.hpp>
