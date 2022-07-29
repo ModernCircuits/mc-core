@@ -26,8 +26,8 @@ MC_NODISCARD constexpr auto size(C const& c) -> decltype(c.size())
 }
 
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto size(T const (&array)[N]) noexcept
-    -> std::size_t  // NOLINT(*-avoid-c-arrays)
+MC_NODISCARD constexpr auto size(T const (&array)[N]) noexcept  // NOLINT(*-avoid-c-arrays)
+    -> std::size_t
 {
     (void)array;
     return N;
