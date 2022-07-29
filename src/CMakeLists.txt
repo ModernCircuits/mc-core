@@ -7,6 +7,7 @@ find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
 find_package(fmt REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
+find_package(Threads REQUIRED)
 find_package(xsimd REQUIRED)
 
 include(GNUInstallDirs)
@@ -43,6 +44,7 @@ target_link_libraries(mc-core
         concurrentqueue::concurrentqueue
         fmt::fmt
         readerwriterqueue::readerwriterqueue
+        Threads::Threads
         xsimd
 )
 
