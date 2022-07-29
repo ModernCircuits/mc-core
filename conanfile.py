@@ -22,7 +22,7 @@ class ModernCircuitsSTL(ConanFile):
     requires = [
         "boost/1.79.0",
         "concurrentqueue/1.0.3",
-        "fmt/8.1.1",
+        "fmt/9.0.0",
         "readerwriterqueue/1.0.6",
         "xsimd/8.1.0",
     ]
