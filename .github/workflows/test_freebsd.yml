@@ -20,8 +20,7 @@ jobs:
         with:
           usesh: true
           prepare: |
-            pkg install -y cmake ninja py39-pip
-            pip install conan
+            pkg install -y cmake conan
 
           run: |
             pwd
@@ -29,14 +28,8 @@ jobs:
             freebsd-version
 
             conan config init
-            conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
-
-            conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd=17 -s build_type=Debug .
             conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd=17 -s build_type=Release .
 
-            cmake -S. -Bbuild -G"Ninja Multi-Config" -DCMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -DCMAKE_CXX_STANDARD=17 -DMC_CORE_ENABLE_WERROR=ON
-            cmake --build build --config Debug
-            cmake --build build --config Release
-
-            ctest --test-dir build -C Debug --output-on-failure
+            cmake -S. -B build -D CMAKE_BUILD_TYPE=Release -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -D CMAKE_CXX_STANDARD=17 -DMC_CORE_ENABLE_WERROR=ON
+            cmake --build build
             ctest --test-dir build -C Release --output-on-failure
