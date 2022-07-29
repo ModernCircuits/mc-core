@@ -4,6 +4,7 @@ find_package(Catch2 REQUIRED)
 # include(Catch)
 
 add_executable(mc-core-tests)
+add_test(NAME mc-core-tests COMMAND mc-core-tests)
 # catch_discover_tests(mc-core-tests)
 
 target_link_libraries(mc-core-tests
