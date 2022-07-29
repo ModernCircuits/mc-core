@@ -87,7 +87,7 @@ class ModernCircuitsSTL(ConanFile):
 
     def build_requirements(self):
         if self._run_tests:
-            self.test_requires("catch2/3.0.1")
+            self.test_requires("catch2/3.1.0")
 
     def generate(self):
         tc = CMakeToolchain(self)
