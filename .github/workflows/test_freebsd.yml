@@ -20,8 +20,8 @@ jobs:
         with:
           usesh: true
           prepare: |
-            pkg install -y cmake ninja
-            pip3 install conan
+            pkg install -y cmake ninja py39-pip
+            pip install conan
 
           run: |
             pwd
