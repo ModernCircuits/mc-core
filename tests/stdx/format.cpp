@@ -4,4 +4,4 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("stl/format: format", "[stl][format]") { REQUIRE(mc::format("{0}", 42) == "42"); }
+TEST_CASE("core/format: format", "[core][format]") { REQUIRE(mc::format("{0}", 42) == "42"); }
