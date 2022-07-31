@@ -29,40 +29,6 @@ class ModernCircuitsSTL(ConanFile):
         "CMakeLists.txt",
     ]
 
-    default_options = {
-        "boost:without_atomic": False,
-        "boost:without_chrono": True,
-        "boost:without_container": False,
-        "boost:without_context": True,
-        "boost:without_contract": True,
-        "boost:without_coroutine": True,
-        "boost:without_date_time": True,
-        "boost:without_exception": False,
-        "boost:without_fiber": True,
-        "boost:without_filesystem": False,
-        "boost:without_graph": True,
-        "boost:without_graph_parallel": True,
-        "boost:without_iostreams": False,
-        "boost:without_json": False,
-        "boost:without_locale": True,
-        "boost:without_log": True,
-        "boost:without_math": True,
-        "boost:without_mpi": True,
-        "boost:without_nowide": True,
-        "boost:without_program_options": True,
-        "boost:without_python": True,
-        "boost:without_random": False,
-        "boost:without_regex": False,
-        "boost:without_serialization": True,
-        "boost:without_stacktrace": True,
-        "boost:without_system": False,
-        "boost:without_test": True,
-        "boost:without_thread": True,
-        "boost:without_timer": True,
-        "boost:without_type_erasure": True,
-        "boost:without_wave": True,
-    }
-
     @property
     def _run_tests(self):
         return get_env("CONAN_RUN_TESTS", False)
@@ -86,6 +52,39 @@ class ModernCircuitsSTL(ConanFile):
     def build_requirements(self):
         if self._run_tests:
             self.test_requires("catch2/3.1.0")
+
+    def config_options(self):
+        self.options["boost"].without_atomic = False
+        self.options["boost"].without_chrono = True
+        self.options["boost"].without_container = False
+        self.options["boost"].without_context = True
+        self.options["boost"].without_contract = True
+        self.options["boost"].without_coroutine = True
+        self.options["boost"].without_date_time = True
+        self.options["boost"].without_exception = False
+        self.options["boost"].without_fiber = True
+        self.options["boost"].without_filesystem = False
+        self.options["boost"].without_graph = True
+        self.options["boost"].without_graph_parallel = True
+        self.options["boost"].without_iostreams = False
+        self.options["boost"].without_json = False
+        self.options["boost"].without_locale = True
+        self.options["boost"].without_log = True
+        self.options["boost"].without_math = True
+        self.options["boost"].without_mpi = True
+        self.options["boost"].without_nowide = True
+        self.options["boost"].without_program_options = True
+        self.options["boost"].without_python = True
+        self.options["boost"].without_random = False
+        self.options["boost"].without_regex = False
+        self.options["boost"].without_serialization = True
+        self.options["boost"].without_stacktrace = True
+        self.options["boost"].without_system = False
+        self.options["boost"].without_test = True
+        self.options["boost"].without_thread = True
+        self.options["boost"].without_timer = True
+        self.options["boost"].without_type_erasure = True
+        self.options["boost"].without_wave = True
 
     def generate(self):
         tc = CMakeToolchain(self)
