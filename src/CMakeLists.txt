@@ -44,7 +44,7 @@ target_link_libraries(mc-core
         $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::headers>
         $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::container>
         $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::filesystem>
-        
+
         concurrentqueue::concurrentqueue
         fmt::fmt
         readerwriterqueue::readerwriterqueue
@@ -53,10 +53,10 @@ target_link_libraries(mc-core
 )
 
 if(EMSCRIPTEN)
-    set_target_properties(mc-core PROPERTIES 
-        COMPILE_FLAGS 
-            "-s USE_BOOST_HEADERS=1 -s DISABLE_EXCEPTION_CATCHING=0" 
-        LINK_FLAGS 
+    set_target_properties(mc-core PROPERTIES
+        COMPILE_FLAGS
+            "-s USE_BOOST_HEADERS=1 -s DISABLE_EXCEPTION_CATCHING=0"
+        LINK_FLAGS
             "-s USE_BOOST_HEADERS=1 -s DISABLE_EXCEPTION_CATCHING=0"
     )
 endif()
