@@ -5,7 +5,14 @@
 
 #include <catch2/catch_template_test_macros.hpp>
 
-TEMPLATE_TEST_CASE("core/queue: ThreadSafeQueue", "[core][queue]", int, float, double, std::string)
+TEMPLATE_TEST_CASE(
+    "core/queue: ThreadSafeQueue",
+    "[core][queue]",
+    int,
+    float,
+    double,
+    std::string
+)
 {
     SECTION("single thread")
     {

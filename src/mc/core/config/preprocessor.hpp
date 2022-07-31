@@ -19,8 +19,11 @@
 
 #ifdef __COUNTER__
 #if MC_HAS_FEATURE(modules)
-#define MC_ANONYMOUS_VARIABLE(str)                                                                   \
-    MC_CONCATENATE(MC_CONCATENATE(MC_CONCATENATE(str, __COUNTER__), _), __LINE__)
+#define MC_ANONYMOUS_VARIABLE(str)                                             \
+    MC_CONCATENATE(                                                            \
+        MC_CONCATENATE(MC_CONCATENATE(str, __COUNTER__), _),                   \
+        __LINE__                                                               \
+    )
 #else
 #define MC_ANONYMOUS_VARIABLE(str) MC_CONCATENATE(str, __COUNTER__)
 #endif

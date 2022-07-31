@@ -26,7 +26,8 @@ MC_NODISCARD constexpr auto size(C const& c) -> decltype(c.size())
 }
 
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto size(T const (&array)[N]) noexcept  // NOLINT(*-avoid-c-arrays)
+MC_NODISCARD constexpr auto size(T const (&array)[N]
+) noexcept  // NOLINT(*-avoid-c-arrays)
     -> std::size_t
 {
     (void)array;
@@ -46,13 +47,15 @@ MC_NODISCARD constexpr auto data(C const& c) -> decltype(c.data())
 }
 
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto data(T (&array)[N]) noexcept -> T*  // NOLINT(*-avoid-c-arrays)
+MC_NODISCARD constexpr auto data(T (&array)[N]) noexcept
+    -> T*  // NOLINT(*-avoid-c-arrays)
 {
     return array;  // NOLINT(cppcoreguidelines-pro-bounds-array-to-pointer-decay)
 }
 
 template<typename E>
-MC_NODISCARD constexpr auto data(std::initializer_list<E> il) noexcept -> E const*
+MC_NODISCARD constexpr auto data(std::initializer_list<E> il) noexcept
+    -> E const*
 {
     return il.begin();
 }
@@ -64,7 +67,8 @@ MC_NODISCARD constexpr auto empty(const C& c) -> decltype(c.empty())
 }
 
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto empty(const T (&array)[N]) noexcept -> bool  // NOLINT(*-avoid-c-arrays)
+MC_NODISCARD constexpr auto empty(const T (&array)[N]) noexcept
+    -> bool  // NOLINT(*-avoid-c-arrays)
 {
     (void)array;
     return false;

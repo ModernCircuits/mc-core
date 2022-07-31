@@ -15,8 +15,6 @@
 #include <mc/core/config/compiler_msvc.hpp>
 #elif defined(__INTEL_COMPILER)
 #error "Compiler not yet supported"
-#elif defined(__EMSCRIPTEN__)
-#error "Compiler not yet supported"
 #else
 #error "Unknown compiler"
 #endif

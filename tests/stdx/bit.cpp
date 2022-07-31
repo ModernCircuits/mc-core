@@ -5,7 +5,12 @@
 #include <catch2/catch_template_test_macros.hpp>
 
 TEMPLATE_TEST_CASE(
-    "core/bit: bit_ceil", "[core][bit]", unsigned char, unsigned short, unsigned int, unsigned long
+    "core/bit: bit_ceil",
+    "[core][bit]",
+    unsigned char,
+    unsigned short,
+    unsigned int,
+    unsigned long
 )
 {
     using T = TestType;

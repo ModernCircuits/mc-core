@@ -15,15 +15,17 @@ using std::ssize;
 
 namespace mc {
 template<typename C>
-MC_NODISCARD constexpr auto ssize(C const& c)
-    -> std::common_type_t<std::ptrdiff_t, std::make_signed_t<decltype(c.size())> >
+MC_NODISCARD constexpr auto ssize(C const& c
+) -> std::common_type_t<std::ptrdiff_t, std::make_signed_t<decltype(c.size())> >
 {
-    using R = std::common_type_t<std::ptrdiff_t, std::make_signed_t<decltype(c.size())> >;
+    using R = std::
+        common_type_t<std::ptrdiff_t, std::make_signed_t<decltype(c.size())> >;
     return static_cast<R>(c.size());
 }
 
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto ssize(T const (&array)[N]) noexcept  // NOLINT(*-avoid-c-arrays)
+MC_NODISCARD constexpr auto ssize(T const (&array)[N]
+) noexcept  // NOLINT(*-avoid-c-arrays)
     -> std::ptrdiff_t
 {
     (void)array;
