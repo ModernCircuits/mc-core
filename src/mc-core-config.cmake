@@ -2,7 +2,10 @@
 
 include(CMakeFindDependencyMacro)
 
-find_dependency(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
+if(NOT EMSCRIPTEN)
+    find_dependency(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
+endif()
+
 find_dependency(fmt REQUIRED)
 find_dependency(concurrentqueue REQUIRED)
 find_dependency(readerwriterqueue REQUIRED)

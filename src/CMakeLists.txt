@@ -3,7 +3,10 @@
 cmake_minimum_required(VERSION 3.21)
 project(mc-core VERSION 0.3.3 LANGUAGES CXX)
 
-find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
+if(NOT EMSCRIPTEN)
+    find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
+endif()
+
 find_package(fmt REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
@@ -38,15 +41,25 @@ target_include_directories(mc-core
 
 target_link_libraries(mc-core
     INTERFACE
-        Boost::headers
-        Boost::container
-        Boost::filesystem
+        $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::headers>
+        $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::container>
+        $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::filesystem>
+        
         concurrentqueue::concurrentqueue
         fmt::fmt
         readerwriterqueue::readerwriterqueue
         Threads::Threads
         xsimd
 )
+
+if(EMSCRIPTEN)
+    set_target_properties(mc-core PROPERTIES 
+        COMPILE_FLAGS 
+            "-s USE_BOOST_HEADERS=1 -s DISABLE_EXCEPTION_CATCHING=0" 
+        LINK_FLAGS 
+            "-s USE_BOOST_HEADERS=1 -s DISABLE_EXCEPTION_CATCHING=0"
+    )
+endif()
 
 install(
     TARGETS

@@ -19,12 +19,14 @@ class ModernCircuitsSTL(ConanFile):
 
     settings = "os", "compiler", "build_type", "arch"
 
-    requires = [
-        "boost/1.79.0",
-        "concurrentqueue/1.0.3",
-        "fmt/9.0.0",
-        "readerwriterqueue/1.0.6",
-        "xsimd/8.1.0",
+    no_copy_source = True
+    exports = ["LICENSE.txt"]
+    exports_sources = [
+        "docs/*",
+        "src/*",
+        "tests/*",
+        "cmake/*",
+        "CMakeLists.txt",
     ]
 
     default_options = {
@@ -61,16 +63,6 @@ class ModernCircuitsSTL(ConanFile):
         "boost:without_wave": True,
     }
 
-    exports = ["LICENSE.txt"]
-    exports_sources = [
-        "docs/*",
-        "src/*",
-        "tests/*",
-        "cmake/*",
-        "CMakeLists.txt",
-    ]
-    no_copy_source = True
-
     @property
     def _run_tests(self):
         return get_env("CONAN_RUN_TESTS", False)
@@ -83,7 +75,13 @@ class ModernCircuitsSTL(ConanFile):
         self.version = ver.strip()
 
     def requirements(self):
-        pass
+        self.requires("concurrentqueue/1.0.3")
+        self.requires("fmt/9.0.0")
+        self.requires("readerwriterqueue/1.0.6")
+        self.requires("xsimd/8.1.0")
+
+        if self.settings.os != "Emscripten":
+            self.requires("boost/1.79.0")
 
     def build_requirements(self):
         if self._run_tests:

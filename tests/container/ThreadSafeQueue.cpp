@@ -26,6 +26,7 @@ TEMPLATE_TEST_CASE("stl/queue: ThreadSafeQueue", "[stl][queue]", int, float, dou
         CHECK(queue.size() == 2);
     }
 
+#if not defined(MC_EMSCRIPTEN)
     SECTION("two thread")
     {
         mc::ThreadSafeQueue<TestType> queue{};
@@ -45,4 +46,5 @@ TEMPLATE_TEST_CASE("stl/queue: ThreadSafeQueue", "[stl][queue]", int, float, dou
 
         thread.join();
     }
+#endif
 }

@@ -31,6 +31,8 @@
 #include <mc/core/config/platform_android.hpp>
 #elif defined(__FreeBSD__) || (__OpenBSD__)
 #include <mc/core/config/platform_bsd.hpp>
+#elif defined(__EMSCRIPTEN__)
+#include <mc/core/config/platform_emscripten.hpp>
 #else
 #error "Unknown platform!"
 #endif

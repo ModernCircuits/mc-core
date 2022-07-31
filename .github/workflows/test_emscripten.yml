@@ -1,0 +1,41 @@
+name: Emscripten
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  emcc:
+    name: EMCC
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y ninja-build cmake
+
+      - name: Install conan
+        run: |
+          pip install conan
+          conan config init
+          conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
+
+      - name: Build dependencies
+        run: >
+          conan install
+          -if build
+          --build=missing
+          -pr:b=default
+          -pr:h="profiles/emscripten.profile"
+          -s compiler.cppstd=20
+          -s build_type=Release
+          -e mc-core:CONAN_RUN_TESTS=True
+          .
+
+      - name: Build & Test
+        run: conan build -bf build .

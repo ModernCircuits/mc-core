@@ -16,6 +16,8 @@ using std::rotl;
 using std::rotr;
 }  // namespace mc
 #else
+// Boost via Emscripten is at 1.75. Bit header missing
+#if __has_include(<boost/core/bit.hpp>)
 #include <boost/core/bit.hpp>
 
 namespace mc {
@@ -27,4 +29,5 @@ using boost::core::popcount;
 using boost::core::rotl;
 using boost::core::rotr;
 }  // namespace mc
+#endif
 #endif
