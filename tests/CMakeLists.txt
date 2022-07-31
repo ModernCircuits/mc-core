@@ -30,4 +30,5 @@ target_sources(mc-core-tests
         "stdx/iterator.cpp"
         "stdx/numbers.cpp"
         "stdx/numeric.cpp"
+        "stdx/scope.cpp"
 )
