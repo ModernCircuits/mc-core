@@ -52,12 +52,17 @@ target_link_libraries(mc-core
         xsimd
 )
 
+
 if(EMSCRIPTEN)
-    set_target_properties(mc-core PROPERTIES
-        COMPILE_FLAGS
-            "-s USE_BOOST_HEADERS=1 -s DISABLE_EXCEPTION_CATCHING=0"
-        LINK_FLAGS
-            "-s USE_BOOST_HEADERS=1 -s DISABLE_EXCEPTION_CATCHING=0"
+    target_compile_options(mc-core
+        INTERFACE
+            "SHELL:-s USE_BOOST_HEADERS=1"
+            "SHELL:-s DISABLE_EXCEPTION_CATCHING=0"
+    )
+    target_link_options(mc-core
+        INTERFACE
+            "SHELL:-s USE_BOOST_HEADERS=1"
+            "SHELL:-s DISABLE_EXCEPTION_CATCHING=0"
     )
 endif()
 
