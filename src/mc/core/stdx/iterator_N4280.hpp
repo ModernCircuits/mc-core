@@ -19,6 +19,8 @@ using std::size;
 
 namespace mc {
 
+// NOLINTBEGIN(*-avoid-c-arrays)
+
 template<typename C>
 MC_NODISCARD constexpr auto size(C const& c) -> decltype(c.size())
 {
@@ -26,9 +28,7 @@ MC_NODISCARD constexpr auto size(C const& c) -> decltype(c.size())
 }
 
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto size(T const (&array)[N]
-) noexcept  // NOLINT(*-avoid-c-arrays)
-    -> std::size_t
+MC_NODISCARD constexpr auto size(T const (&array)[N]) noexcept -> std::size_t
 {
     (void)array;
     return N;
@@ -47,8 +47,7 @@ MC_NODISCARD constexpr auto data(C const& c) -> decltype(c.data())
 }
 
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto data(T (&array)[N]) noexcept
-    -> T*  // NOLINT(*-avoid-c-arrays)
+MC_NODISCARD constexpr auto data(T (&array)[N]) noexcept -> T*
 {
     return array;  // NOLINT(cppcoreguidelines-pro-bounds-array-to-pointer-decay)
 }
@@ -67,8 +66,7 @@ MC_NODISCARD constexpr auto empty(const C& c) -> decltype(c.empty())
 }
 
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto empty(const T (&array)[N]) noexcept
-    -> bool  // NOLINT(*-avoid-c-arrays)
+MC_NODISCARD constexpr auto empty(const T (&array)[N]) noexcept -> bool
 {
     (void)array;
     return false;
@@ -79,5 +77,8 @@ MC_NODISCARD constexpr auto empty(std::initializer_list<E> il) noexcept -> bool
 {
     return il.size() == 0;
 }
+
+// NOLINTEND(*-avoid-c-arrays)
+
 }  // namespace mc
 #endif

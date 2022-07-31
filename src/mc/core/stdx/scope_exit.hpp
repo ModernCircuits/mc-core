@@ -11,18 +11,18 @@ template<typename Callback>
 struct ScopeExit
 {
     explicit ScopeExit(Callback&& callback)
-        : callback_{static_cast<Callback&&>(callback)}
+        : _callback{static_cast<Callback&&>(callback)}
     {}
 
     ~ScopeExit()
     {
-        if (_active) { callback_(); }
+        if (_active) { _callback(); }
     }
 
     auto release() -> void { _active = false; }
 
 private:
-    Callback callback_;
+    Callback _callback;
     bool _active{true};
 };
 

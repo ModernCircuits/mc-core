@@ -23,13 +23,15 @@ MC_NODISCARD constexpr auto ssize(C const& c
     return static_cast<R>(c.size());
 }
 
+// NOLINTBEGIN(*-avoid-c-arrays)
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto ssize(T const (&array)[N]
-) noexcept  // NOLINT(*-avoid-c-arrays)
+MC_NODISCARD constexpr auto ssize(T const (&array)[N]) noexcept
     -> std::ptrdiff_t
 {
     (void)array;
     return static_cast<std::ptrdiff_t>(N);
 }
+
+// NOLINTEND(*-avoid-c-arrays)
 }  // namespace mc
 #endif

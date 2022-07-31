@@ -29,22 +29,22 @@ private:
 template<typename FunctionT, bool ExecuteOnException>
 struct ScopeFail
 {
-    explicit ScopeFail(FunctionT const& fn) : func_{fn} {}
+    explicit ScopeFail(FunctionT const& fn) : _func{fn} {}
 
-    explicit ScopeFail(FunctionT&& fn) : func_{std::move(fn)} {}
+    explicit ScopeFail(FunctionT&& fn) : _func{std::move(fn)} {}
 
     ~ScopeFail() noexcept(ExecuteOnException)
     {
-        if (ExecuteOnException == ec_.newUncaughtException() && _active) {
-            func_();
+        if (ExecuteOnException == _ec.newUncaughtException() && _active) {
+            _func();
         }
     }
 
     auto release() -> void { _active = false; }
 
 private:
-    FunctionT func_;
-    UncaughtExceptionCounter ec_{};
+    FunctionT _func;
+    UncaughtExceptionCounter _ec{};
     bool _active{true};
 };
 
