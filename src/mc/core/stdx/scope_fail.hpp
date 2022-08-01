@@ -19,11 +19,11 @@ struct UncaughtExceptionCounter
 
     MC_NODISCARD auto newUncaughtException() const noexcept -> bool
     {
-        return uncaught_exceptions() > exceptionCount_;
+        return uncaught_exceptions() > _exceptionCount;
     }
 
 private:
-    decltype(uncaught_exceptions()) exceptionCount_{uncaught_exceptions()};
+    decltype(uncaught_exceptions()) _exceptionCount{uncaught_exceptions()};
 };
 
 template<typename FunctionT, bool ExecuteOnException>
