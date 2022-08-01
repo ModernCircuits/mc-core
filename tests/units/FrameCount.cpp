@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSL-1.0
 
-#include <mc/core/units/FrameCount.hpp>
+#include <mc/core/units.hpp>
 
 #include <catch2/catch_test_macros.hpp>
 

@@ -44,6 +44,7 @@ target_link_libraries(mc-core
         $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::headers>
         $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::container>
         $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::filesystem>
+        $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::json>
 
         concurrentqueue::concurrentqueue
         fmt::fmt
