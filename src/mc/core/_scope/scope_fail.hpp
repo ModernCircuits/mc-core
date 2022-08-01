@@ -3,7 +3,7 @@
 
 #include <mc/core/config.hpp>
 
-#include <mc/core/_exception/exception_N4152.hpp>
+#include <mc/core/_exception/uncaught_exceptions.hpp>
 
 #include <utility>
 
