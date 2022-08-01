@@ -6,4 +6,4 @@
 namespace mc {
 template<typename T, std::size_t InlineCapacity>
 using SmallVector = boost::container::small_vector<T, InlineCapacity>;
-}
+}  // namespace mc
