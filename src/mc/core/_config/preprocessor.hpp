@@ -15,7 +15,7 @@
 
 #ifndef MC_ANONYMOUS_VARIABLE
 #define MC_CONCATENATE_IMPL(s1, s2) s1##s2
-#define MC_CONCATENATE(s1, s2) MC_CONCATENATE_IMPL(s1, s2)
+#define MC_CONCATENATE(s1, s2)      MC_CONCATENATE_IMPL(s1, s2)
 
 #ifdef __COUNTER__
 #if MC_HAS_FEATURE(modules)
