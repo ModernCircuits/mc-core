@@ -10,11 +10,6 @@ option(MC_CORE_ENABLE_TSAN        "Build with thread sanitizer enabled"         
 option(MC_CORE_ENABLE_MSAN        "Build with memory sanitizer enabled"               OFF)
 option(MC_CORE_ENABLE_WERROR      "Build with warnings as errors"                     OFF)
 
-find_program(CCACHE ccache)
-if(CCACHE)
-    set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE})
-endif()
-
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)

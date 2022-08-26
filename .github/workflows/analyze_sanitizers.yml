@@ -1,4 +1,4 @@
-name: ASAN
+name: Sanitizers
 
 on:
   push:
@@ -7,13 +7,19 @@ on:
     branches: [main]
 
 jobs:
-  gcc-asan:
-    name: GCC ASAN
+  gcc:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        cxx_std: [14, 17, 20]
+        std: [14, 17, 20]
+        sanitizer:
+          [
+            { "name": "asan", "flags": "MC_CORE_ENABLE_ASAN=ON" },
+            { "name": "tsan", "flags": "MC_CORE_ENABLE_TSAN=ON" },
+            { "name": "ubsan", "flags": "MC_CORE_ENABLE_UBSAN=ON" },
+          ]
       fail-fast: false
+    name: GCC ${{ matrix.sanitizer.name }}
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -38,12 +44,12 @@ jobs:
           -e mc-core:CONAN_RUN_TESTS=True
           -pr:b=default
           -pr:h=default
-          -s compiler.cppstd="${{ matrix.cxx_std }}"
+          -s compiler.cppstd="${{ matrix.std }}"
           -s build_type=Debug .
 
       - name: Configure CMake
         run: |
-          cmake -S. -B build -G"Ninja" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -D CMAKE_CXX_STANDARD="${{ matrix.cxx_std }}" -DMC_CORE_ENABLE_ASAN=ON -DMC_CORE_ENABLE_WERROR=ON
+          cmake -S. -B build -G"Ninja" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -D CMAKE_CXX_STANDARD="${{ matrix.std }}" -D "${{ matrix.sanitizer.flags }}" -DMC_CORE_ENABLE_WERROR=ON
 
       - name: Show compile commands
         run: cat build/compile_commands.json
