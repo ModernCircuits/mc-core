@@ -5,7 +5,6 @@ Checks: >
   boost-*,
 
   bugprone-*,
-  -bugprone-macro-parentheses,
 
   cert-*,
   -cert-err58-cpp,
@@ -44,7 +43,7 @@ CheckOptions:
     value: camelBack
   - key: readability-identifier-naming.ClassConstantCase
     value: camelBack
-  - key: readability-identifier-naming.PrivateMemberSuffix
+  - key: readability-identifier-naming.PrivateMemberPrefix
     value: _
   - key: readability-identifier-naming.EnumCase
     value: CamelCase

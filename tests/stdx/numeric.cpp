@@ -5,8 +5,8 @@
 #include <catch2/catch_template_test_macros.hpp>
 
 TEMPLATE_TEST_CASE(
-    "stl/numeric: lcm",
-    "[stl][numeric]",
+    "core/numeric: lcm",
+    "[core][numeric]",
     unsigned char,
     unsigned short,
     unsigned int,
@@ -31,8 +31,8 @@ TEMPLATE_TEST_CASE(
 }
 
 TEMPLATE_TEST_CASE(
-    "stl/numeric: gcd",
-    "[stl][numeric]",
+    "core/numeric: gcd",
+    "[core][numeric]",
     unsigned char,
     unsigned short,
     unsigned int,

@@ -1,12 +1,16 @@
 # SPDX-License-Identifier: BSL-1.0
 
 cmake_minimum_required(VERSION 3.21)
-project(mc-core VERSION 0.3.3 LANGUAGES CXX)
+project(mc-core VERSION 0.3.4 LANGUAGES CXX)
 
-find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
+if(NOT EMSCRIPTEN)
+    find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
+endif()
+
 find_package(fmt REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
+find_package(Threads REQUIRED)
 find_package(xsimd REQUIRED)
 
 include(GNUInstallDirs)
@@ -37,14 +41,31 @@ target_include_directories(mc-core
 
 target_link_libraries(mc-core
     INTERFACE
-        Boost::headers
-        Boost::container
-        Boost::filesystem
+        $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::headers>
+        $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::container>
+        $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::filesystem>
+        $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::json>
+
         concurrentqueue::concurrentqueue
         fmt::fmt
         readerwriterqueue::readerwriterqueue
+        Threads::Threads
         xsimd
 )
+
+
+if(EMSCRIPTEN)
+    target_compile_options(mc-core
+        INTERFACE
+            "SHELL:-s USE_BOOST_HEADERS=1"
+            "SHELL:-s DISABLE_EXCEPTION_CATCHING=0"
+    )
+    target_link_options(mc-core
+        INTERFACE
+            "SHELL:-s USE_BOOST_HEADERS=1"
+            "SHELL:-s DISABLE_EXCEPTION_CATCHING=0"
+    )
+endif()
 
 install(
     TARGETS

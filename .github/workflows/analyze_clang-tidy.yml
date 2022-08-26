@@ -48,8 +48,16 @@ jobs:
           -s build_type=Release .
 
       - name: Configure CMake
-        run: |
-          cmake -S. -B build -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CMAKE_C_COMPILER="clang-14" -D CMAKE_CXX_COMPILER="clang++-14" -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -D CMAKE_CXX_STANDARD=14 -D MC_CORE_ENABLE_WERROR=ON
+        run: >
+          cmake -S.
+          -B build
+          -G "Unix Makefiles"
+          -D CMAKE_BUILD_TYPE=Release
+          -D CMAKE_C_COMPILER="clang-14"
+          -D CMAKE_CXX_COMPILER="clang++-14"
+          -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake"
+          -D CMAKE_CXX_STANDARD=14
+          -D MC_CORE_ENABLE_WERROR=ON
 
       - name: Clang-Tidy -- Release
         run: >

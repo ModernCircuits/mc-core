@@ -4,7 +4,7 @@
 
 #include <catch2/catch_template_test_macros.hpp>
 
-TEMPLATE_TEST_CASE("stl/units: toMilliseconds", "[stl][units]", int, long)
+TEMPLATE_TEST_CASE("core/units: toMilliseconds", "[core][units]", int, long)
 {
     using T            = TestType;
     using Seconds      = mc::Seconds<T>;
@@ -15,7 +15,7 @@ TEMPLATE_TEST_CASE("stl/units: toMilliseconds", "[stl][units]", int, long)
     CHECK(mc::toMilliseconds(Milliseconds{2}).count() == T(2));
 }
 
-TEMPLATE_TEST_CASE("stl/units: toSeconds", "[stl][units]", int, long)
+TEMPLATE_TEST_CASE("core/units: toSeconds", "[core][units]", int, long)
 {
     using T            = TestType;
     using Seconds      = mc::Seconds<T>;

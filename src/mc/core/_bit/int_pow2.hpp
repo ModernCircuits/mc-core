@@ -13,6 +13,8 @@ using std::bit_width;
 using std::has_single_bit;
 }  // namespace mc
 #else
+// Boost via Emscripten is at 1.75. Bit header missing
+#if __has_include(<boost/core/bit.hpp>)
 #include <boost/core/bit.hpp>
 
 namespace mc {
@@ -21,4 +23,5 @@ using boost::core::bit_floor;
 using boost::core::bit_width;
 using boost::core::has_single_bit;
 }  // namespace mc
+#endif
 #endif

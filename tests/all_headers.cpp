@@ -28,6 +28,7 @@
 #include <mc/core/iomanip.hpp>
 #include <mc/core/iostream.hpp>
 #include <mc/core/iterator.hpp>
+#include <mc/core/json.hpp>
 #include <mc/core/limits.hpp>
 #include <mc/core/map.hpp>
 #include <mc/core/memory.hpp>
@@ -40,6 +41,7 @@
 #include <mc/core/queue.hpp>
 #include <mc/core/random.hpp>
 #include <mc/core/ratio.hpp>
+#include <mc/core/scope.hpp>
 #include <mc/core/set.hpp>
 #include <mc/core/simd.hpp>
 #include <mc/core/span.hpp>

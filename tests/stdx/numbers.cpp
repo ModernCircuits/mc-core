@@ -5,7 +5,7 @@
 #include <catch2/catch_approx.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("stl/numbers: constants", "[stl][numbers]")
+TEST_CASE("core/numbers: constants", "[core][numbers]")
 {
     REQUIRE(mc::numbers::e == Catch::Approx(2.7182818284590452353));
     REQUIRE(mc::numbers::log2e == Catch::Approx(1.4426950408889634073));

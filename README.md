@@ -4,6 +4,7 @@
 [![macOS](https://github.com/ModernCircuits/mc-core/actions/workflows/test_macos.yml/badge.svg)](https://github.com/ModernCircuits/mc-core/actions/workflows/test_macos.yml)
 [![Windows](https://github.com/ModernCircuits/mc-core/actions/workflows/test_windows.yml/badge.svg)](https://github.com/ModernCircuits/mc-core/actions/workflows/test_windows.yml)
 [![Linux](https://github.com/ModernCircuits/mc-core/actions/workflows/test_linux.yml/badge.svg)](https://github.com/ModernCircuits/mc-core/actions/workflows/test_linux.yml)
+[![Emscripten](https://github.com/ModernCircuits/mc-core/actions/workflows/test_emscripten.yml/badge.svg)](https://github.com/ModernCircuits/mc-core/actions/workflows/test_emscripten.yml)
 
 [![codecov](https://codecov.io/gh/ModernCircuits/mc-core/branch/main/graph/badge.svg?token=F82MD2JEWC)](https://codecov.io/gh/ModernCircuits/mc-core)
 [![Coverage](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_coverage.yml/badge.svg)](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_coverage.yml)
