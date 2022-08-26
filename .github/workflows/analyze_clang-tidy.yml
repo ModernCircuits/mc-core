@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  clang-tidy-14:
-    name: Clang-Tidy-14
+  clang-tidy-15:
+    name: Clang-Tidy-15
     runs-on: ubuntu-22.04
     steps:
       - name: Check out code
@@ -23,7 +23,7 @@ jobs:
         run: |
           wget https://apt.llvm.org/llvm.sh
           chmod +x llvm.sh
-          sudo ./llvm.sh 14 all
+          sudo ./llvm.sh 15 all
 
       - name: Install Conan
         run: |
@@ -31,9 +31,9 @@ jobs:
           conan config init
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
           conan profile update settings.compiler=clang default
-          conan profile update settings.compiler.version=14 default
-          conan profile update env.CXX=/usr/bin/clang++-14 default
-          conan profile update env.CC=/usr/bin/clang-14 default
+          conan profile update settings.compiler.version=15 default
+          conan profile update env.CXX=/usr/bin/clang++-15 default
+          conan profile update env.CC=/usr/bin/clang-15 default
           conan profile show default
 
       - name: Build dependencies
@@ -44,7 +44,7 @@ jobs:
           -e mc-core:CONAN_RUN_TESTS=True
           -pr:b=default
           -pr:h=default
-          -s compiler.cppstd=14
+          -s compiler.cppstd=15
           -s build_type=Release .
 
       - name: Configure CMake
@@ -53,16 +53,16 @@ jobs:
           -B build
           -G "Unix Makefiles"
           -D CMAKE_BUILD_TYPE=Release
-          -D CMAKE_C_COMPILER="clang-14"
-          -D CMAKE_CXX_COMPILER="clang++-14"
+          -D CMAKE_C_COMPILER="clang-15"
+          -D CMAKE_CXX_COMPILER="clang++-15"
           -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake"
-          -D CMAKE_CXX_STANDARD=14
+          -D CMAKE_CXX_STANDARD=15
           -D MC_CORE_ENABLE_WERROR=ON
 
       - name: Clang-Tidy -- Release
         run: >
           BUILD_DIR=build
           PYTHON_BIN=python
-          CLANG_REPLACEMENTS_BIN=clang-apply-replacements-14
-          CLANG_TIDY_BIN=clang-tidy-14
+          CLANG_REPLACEMENTS_BIN=clang-apply-replacements-15
+          CLANG_TIDY_BIN=clang-tidy-15
           make tidy-check

@@ -17,6 +17,7 @@ Checks: >
   cppcoreguidelines-*,
   -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-macro-usage,
+  -cppcoreguidelines-special-member-functions,
 
   misc-*,
   -misc-no-recursion,
