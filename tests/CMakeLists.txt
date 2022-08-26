@@ -17,7 +17,7 @@ target_link_libraries(mc-core-tests
 
 target_sources(mc-core-tests
     PRIVATE
-        "all_headers.cpp"
+        "core.cpp"
 
         "container/ThreadSafeQueue.cpp"
 
