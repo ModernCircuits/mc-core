@@ -1,4 +1,4 @@
 // SPDX-License-Identifier: BSL-1.0
 #pragma once
 
-#define MC_LINUX 1
+#define MC_LINUX

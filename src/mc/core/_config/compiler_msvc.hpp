@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BSL-1.0
 #pragma once
 
-#define MC_COMPILER_MSVC 1
+#define MC_COMPILER_MSVC
 
 #define MC_LIKELY(x)
 #define MC_UNLIKELY(x)

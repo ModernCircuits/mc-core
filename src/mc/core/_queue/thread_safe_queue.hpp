@@ -27,7 +27,7 @@ struct ThreadSafeQueue
 
     MC_NODISCARD auto pop() -> optional<value_type>
     {
-        std::lock_guard<std::mutex> lock(_mutex);
+        std::lock_guard<std::mutex> const lock(_mutex);
         if (_queue.empty()) { return optional<value_type>{nullopt}; }
         value_type tmp = _queue.front();
         _queue.pop();
@@ -36,19 +36,19 @@ struct ThreadSafeQueue
 
     auto push(value_type const& item) -> void
     {
-        std::lock_guard<std::mutex> lock(_mutex);
+        std::lock_guard<std::mutex> const lock(_mutex);
         _queue.push(item);
     }
 
     auto push(value_type&& item) -> void
     {
-        std::lock_guard<std::mutex> lock(_mutex);
+        std::lock_guard<std::mutex> const lock(_mutex);
         _queue.push(std::move(item));
     }
 
     MC_NODISCARD auto size() const -> size_type
     {
-        std::lock_guard<std::mutex> lock(_mutex);
+        std::lock_guard<std::mutex> const lock(_mutex);
         return _queue.size();
     }
 

@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: BSL-1.0
 #pragma once
 
-#define MC_WINDOWS 1
+#define MC_WINDOWS
 
 #ifdef _WIN64
-#define MC_64BIT 1
+#define MC_64BIT
 #else
-#define MC_32BIT 1
+#define MC_32BIT
 #endif

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BSL-1.0
 #pragma once
 
-#define MC_COMPILER_GCC 1
+#define MC_COMPILER_GCC
 
 #define MC_LIKELY(x)   __builtin_expect(x, 1)
 #define MC_UNLIKELY(x) __builtin_expect(x, 0)

@@ -45,11 +45,11 @@
 #endif
 
 #if defined(_DEBUG)
-#define MC_DEBUG 1
+#define MC_DEBUG
 #endif
 
 #if defined(NDEBUG)
-#define MC_RELEASE 1
+#define MC_RELEASE
 #endif
 
 #if defined(MC_DEBUG) && defined(MC_RELEASE)

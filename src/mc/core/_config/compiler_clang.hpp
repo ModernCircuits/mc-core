@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: BSL-1.0
 #pragma once
 
+#define MC_COMPILER_CLANG
+
 #ifndef __has_extension
 #define __has_extension __has_feature
 #endif
@@ -12,8 +14,6 @@
 #ifndef __has_cpp_attribute
 #define __has_cpp_attribute(x) 0
 #endif
-
-#define MC_COMPILER_CLANG 1
 
 #define MC_LIKELY(x)   __builtin_expect(x, 1)
 #define MC_UNLIKELY(x) __builtin_expect(x, 0)
