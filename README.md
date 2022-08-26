@@ -10,6 +10,6 @@
 [![Coverage](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_coverage.yml/badge.svg)](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_coverage.yml)
 [![Pre-Commit Hooks](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_pre-commit_hooks.yml/badge.svg)](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_pre-commit_hooks.yml)
 [![Clang-Tidy](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_clang-tidy.yml/badge.svg)](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_clang-tidy.yml)
-[![ASAN](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_asan.yml/badge.svg)](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_asan.yml)
+[![Sanitizers](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_sanitizers.yml/badge.svg)](https://github.com/ModernCircuits/mc-core/actions/workflows/analyze_sanitizers.yml)
 
 Wrapper around the STL, Boost & other useful libraries. Used internally at [Modern Circuits](https://modern-circuits.com).
