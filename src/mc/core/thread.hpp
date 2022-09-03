@@ -2,3 +2,7 @@
 #pragma once
 
 #include <thread>
+
+namespace mc {
+using Thread = std::thread;
+}

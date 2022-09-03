@@ -4,3 +4,7 @@
 #include <mc/core/_exception/uncaught_exceptions.hpp>
 
 #include <exception>
+
+namespace mc {
+using Exception = std::exception;
+}

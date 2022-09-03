@@ -25,10 +25,10 @@ struct ThreadSafeQueue
     ThreadSafeQueue(ThreadSafeQueue&& other)              = delete;
     auto operator=(ThreadSafeQueue&&) -> ThreadSafeQueue& = delete;
 
-    MC_NODISCARD auto pop() -> optional<value_type>
+    MC_NODISCARD auto pop() -> Optional<value_type>
     {
         std::lock_guard<std::mutex> const lock(_mutex);
-        if (_queue.empty()) { return optional<value_type>{nullopt}; }
+        if (_queue.empty()) { return Optional<value_type>{nullopt}; }
         value_type tmp = _queue.front();
         _queue.pop();
         return tmp;

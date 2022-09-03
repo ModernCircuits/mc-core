@@ -8,7 +8,10 @@
 #include <string>
 
 namespace mc {
+
+using String = std::string;
+
 namespace pmr {
-using boost::container::pmr::string;
+using String = boost::container::pmr::string;
 }  // namespace pmr
 }  // namespace mc

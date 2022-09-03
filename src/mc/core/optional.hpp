@@ -7,18 +7,21 @@
 #include <optional>
 
 namespace mc {
-using std::make_optional;
+template<typename T>
+using Optional = std::optional<T>;
+
+using NullOpt = std::nullopt_t;
+
 using std::nullopt;
-using std::nullopt_t;
-using std::optional;
 }  // namespace mc
 #else
 #include <boost/optional.hpp>
 
 namespace mc {
-using boost::make_optional;
-using boost::optional;
-using nullopt_t = boost::none_t;
+template<typename T>
+using Optional = boost::optional<T>;
+
+using NullOpt = boost::none_t;
 
 // NOLINTNEXTLINE(readability-identifier-naming)
 constexpr auto const nullopt = boost::none;
