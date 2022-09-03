@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: BSL-1.0
 
 #include <mc/core/cmath.hpp>
+#include <mc/core/numbers.hpp>
 
 #include <catch2/catch_template_test_macros.hpp>
 
