@@ -52,6 +52,7 @@ target_sources(mc-core-tests
         "src/mc/core.test.cpp"
 
         "src/mc/core/bit.test.cpp"
+        "src/mc/core/cmath.test.cpp"
         "src/mc/core/format.test.cpp"
         "src/mc/core/iterator.test.cpp"
         "src/mc/core/numbers.test.cpp"
