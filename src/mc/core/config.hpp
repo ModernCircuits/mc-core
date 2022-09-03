@@ -37,6 +37,14 @@
 
 #include <mc/core/_config/preprocessor.hpp>
 
+#if defined(__cpp_if_consteval)
+#define MC_IF_CONSTEVAL                                                        \
+    if                                                                         \
+    consteval
+#else
+#define MC_IF_CONSTEVAL if (__builtin_is_constant_evaluated())
+#endif
+
 #if defined(MC_NAMESPACE_ALIAS)
 namespace MC_NAMESPACE_ALIAS = mc;
 #endif
