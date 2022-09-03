@@ -8,6 +8,7 @@ if(NOT EMSCRIPTEN)
 endif()
 
 find_package(fmt REQUIRED)
+find_package(gcem REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
 find_package(Threads REQUIRED)
@@ -48,6 +49,7 @@ target_link_libraries(mc-core
 
         concurrentqueue::concurrentqueue
         fmt::fmt
+        gcem::gcem
         readerwriterqueue::readerwriterqueue
         Threads::Threads
         xsimd

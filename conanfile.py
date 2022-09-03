@@ -42,6 +42,7 @@ class ModernCircuitsSTL(ConanFile):
     def requirements(self):
         self.requires("concurrentqueue/1.0.3")
         self.requires("fmt/9.1.0")
+        self.requires("gcem/1.14.1")
         self.requires("readerwriterqueue/1.0.6")
         self.requires("xsimd/8.1.0")
 
