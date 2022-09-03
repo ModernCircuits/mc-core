@@ -4,14 +4,7 @@
 
 #include <catch2/catch_template_test_macros.hpp>
 
-TEMPLATE_TEST_CASE(
-    "bit.hpp: bit_ceil",
-    "[bit]",
-    unsigned char,
-    unsigned short,
-    unsigned int,
-    unsigned long
-)
+TEMPLATE_TEST_CASE("bit.hpp: bit_ceil", "[bit]", uint8_t, uint32_t, uint64_t)
 {
     using T = TestType;
     REQUIRE(mc::bit_ceil(T(1)) == T(1));

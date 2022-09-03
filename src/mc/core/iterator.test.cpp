@@ -7,15 +7,7 @@
 
 #include <catch2/catch_template_test_macros.hpp>
 
-TEMPLATE_TEST_CASE(
-    "iterator.hpp: data",
-    "[iterator]",
-    char,
-    short,
-    int,
-    float,
-    double
-)
+TEMPLATE_TEST_CASE("iterator.hpp: data", "[iterator]", char, short, int)
 {
     using T = TestType;
     T cArray[16]{};  // NOLINT(*-avoid-c-arrays)

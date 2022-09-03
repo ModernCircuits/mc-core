@@ -4,20 +4,7 @@
 
 #include <catch2/catch_template_test_macros.hpp>
 
-TEMPLATE_TEST_CASE(
-    "numeric.hpp: lcm",
-    "[numeric]",
-    unsigned char,
-    unsigned short,
-    unsigned int,
-    unsigned long,
-    unsigned long long,
-    signed char,
-    signed short,
-    signed int,
-    signed long,
-    signed long long
-)
+TEMPLATE_TEST_CASE("numeric.hpp: lcm", "[numeric]", uint8_t, uint32_t, uint64_t)
 {
     using T = TestType;
     REQUIRE(mc::lcm(T(0), T(0)) == T(0));
@@ -30,20 +17,7 @@ TEMPLATE_TEST_CASE(
     REQUIRE(mc::lcm(T(11), T(3)) == T(33));
 }
 
-TEMPLATE_TEST_CASE(
-    "numeric.hpp: gcd",
-    "[numeric]",
-    unsigned char,
-    unsigned short,
-    unsigned int,
-    unsigned long,
-    unsigned long long,
-    signed char,
-    signed short,
-    signed int,
-    signed long,
-    signed long long
-)
+TEMPLATE_TEST_CASE("numeric.hpp: gcd", "[numeric]", uint8_t, uint32_t, uint64_t)
 {
     using T = TestType;
     REQUIRE(mc::gcd(T(0), T(0)) == T(0));

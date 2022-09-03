@@ -5,32 +5,25 @@
 
 #include <catch2/catch_template_test_macros.hpp>
 
-TEMPLATE_TEST_CASE(
-    "queue.hpp: ThreadSafeQueue",
-    "[queue]",
-    int,
-    float,
-    double,
-    std::string
-)
+TEMPLATE_TEST_CASE("queue.hpp: ThreadSafeQueue", "[queue]", int, std::string)
 {
     SECTION("single thread")
     {
         mc::ThreadSafeQueue<TestType> queue{};
-        CHECK(queue.size() == 0);
-        CHECK_FALSE(queue.pop().has_value());
+        REQUIRE(queue.size() == 0);
+        REQUIRE_FALSE(queue.pop().has_value());
 
         queue.push(TestType{});
-        CHECK(queue.size() == 1);
+        REQUIRE(queue.size() == 1);
 
         auto val = queue.pop();
-        CHECK(queue.size() == 0);
-        CHECK(val.has_value());
-        CHECK(val.value() == TestType{});
+        REQUIRE(queue.size() == 0);
+        REQUIRE(val.has_value());
+        REQUIRE(val.value() == TestType{});
 
         queue.push(TestType{});
         queue.push(TestType{});
-        CHECK(queue.size() == 2);
+        REQUIRE(queue.size() == 2);
     }
 
 #if not defined(MC_EMSCRIPTEN)
@@ -47,7 +40,7 @@ TEMPLATE_TEST_CASE(
             auto val = queue.pop();
             if (val.has_value()) {
                 counter += 1;
-                CHECK(val.value() == TestType{});
+                REQUIRE(val.value() == TestType{});
             }
         }
 

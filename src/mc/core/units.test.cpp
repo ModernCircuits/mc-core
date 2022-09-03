@@ -10,9 +10,9 @@ TEMPLATE_TEST_CASE("units.hpp: toMilliseconds", "[units]", int, long)
     using Seconds      = mc::Seconds<T>;
     using Milliseconds = mc::Milliseconds<T>;
 
-    CHECK(mc::toMilliseconds(Seconds{1}).count() == T(1'000));
-    CHECK(mc::toMilliseconds(Seconds{2}).count() == T(2'000));
-    CHECK(mc::toMilliseconds(Milliseconds{2}).count() == T(2));
+    REQUIRE(mc::toMilliseconds(Seconds{1}).count() == T(1'000));
+    REQUIRE(mc::toMilliseconds(Seconds{2}).count() == T(2'000));
+    REQUIRE(mc::toMilliseconds(Milliseconds{2}).count() == T(2));
 }
 
 TEMPLATE_TEST_CASE("units.hpp: toSeconds", "[units]", int, long)
@@ -21,6 +21,6 @@ TEMPLATE_TEST_CASE("units.hpp: toSeconds", "[units]", int, long)
     using Seconds      = mc::Seconds<T>;
     using Milliseconds = mc::Milliseconds<T>;
 
-    CHECK(mc::toSeconds(Seconds{1}).count() == T(1));
-    CHECK(mc::toSeconds(Milliseconds{1'000}).count() == T(1));
+    REQUIRE(mc::toSeconds(Seconds{1}).count() == T(1));
+    REQUIRE(mc::toSeconds(Milliseconds{1'000}).count() == T(1));
 }
