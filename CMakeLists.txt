@@ -31,4 +31,32 @@ include(mcCompilerWarnings)
 include(mcCodeCoverage)
 
 add_subdirectory(src)
-add_subdirectory(tests)
+
+find_package(Catch2 REQUIRED)
+include(Catch)
+
+add_executable(mc-core-tests)
+catch_discover_tests(mc-core-tests)
+
+target_link_libraries(mc-core-tests
+    PRIVATE
+        mc::core
+        mc::compiler_options
+        mc::compiler_warnings
+        mc::coverage
+        Catch2::Catch2WithMain
+)
+
+target_sources(mc-core-tests
+    PRIVATE
+        "src/mc/core.test.cpp"
+
+        "src/mc/core/bit.test.cpp"
+        "src/mc/core/format.test.cpp"
+        "src/mc/core/iterator.test.cpp"
+        "src/mc/core/numbers.test.cpp"
+        "src/mc/core/numeric.test.cpp"
+        "src/mc/core/queue.test.cpp"
+        "src/mc/core/scope.test.cpp"
+        "src/mc/core/units.test.cpp"
+)

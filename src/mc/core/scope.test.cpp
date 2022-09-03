@@ -4,7 +4,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("core/scope: ScopeExit", "[core][scope]")
+TEST_CASE("scope.hpp: ScopeExit", "[scope]")
 {
     auto counter = 0;
     REQUIRE(counter == 0);
@@ -20,7 +20,7 @@ TEST_CASE("core/scope: ScopeExit", "[core][scope]")
     REQUIRE(counter == 3);
 }
 
-TEST_CASE("core/scope: ScopeFail", "[core][scope]")
+TEST_CASE("scope.hpp: ScopeFail", "[scope]")
 {
     auto counter = 0;
     REQUIRE(counter == 0);

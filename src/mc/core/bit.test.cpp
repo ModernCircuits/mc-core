@@ -5,8 +5,8 @@
 #include <catch2/catch_template_test_macros.hpp>
 
 TEMPLATE_TEST_CASE(
-    "core/bit: bit_ceil",
-    "[core][bit]",
+    "bit.hpp: bit_ceil",
+    "[bit]",
     unsigned char,
     unsigned short,
     unsigned int,

@@ -8,8 +8,8 @@
 #include <catch2/catch_template_test_macros.hpp>
 
 TEMPLATE_TEST_CASE(
-    "core/iterator: data",
-    "[core][iterator]",
+    "iterator.hpp: data",
+    "[iterator]",
     char,
     short,
     int,
