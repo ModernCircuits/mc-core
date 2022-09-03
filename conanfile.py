@@ -24,7 +24,6 @@ class ModernCircuitsSTL(ConanFile):
     exports_sources = [
         "docs/*",
         "src/*",
-        "tests/*",
         "cmake/*",
         "CMakeLists.txt",
     ]
