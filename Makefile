@@ -38,11 +38,11 @@ coverage:
 
 .PHONY: coverage-html
 coverage-html: coverage
-	gcovr --html --html-details -e ".*test\.cpp" --exclude-unreachable-branches -o coverage.html -r src -j ${shell nproc} -s cmake-build-coverage
+	gcovr --html --html-details -e ".*test\.cpp" --exclude-unreachable-branches -r src -j ${shell nproc} -s cmake-build-coverage -o cmake-build-coverage/coverage.html
 
 .PHONY: coverage-xml
 coverage-xml: coverage
-	gcovr --xml-pretty -e ".*test\.cpp" --exclude-unreachable-branches -o coverage.xml  -r src -j ${shell nproc} -s cmake-build-coverage
+	gcovr --xml-pretty -e ".*test\.cpp" --exclude-unreachable-branches -r src -j ${shell nproc} -s cmake-build-coverage -o cmake-build-coverage/coverage.xml
 
 
 .PHONY: report
