@@ -8,8 +8,10 @@
 #include <span>
 
 namespace mc {
-using std::dynamic_extent;
-using std::span;
+MC_INLINE_VAR constexpr auto DynamicExtent = std::dynamic_extent;
+
+template<typename T, std::size_t Extent = DynamicExtent>
+using Span = std::span<T, Extent>;
 
 #if defined(__cpp_lib_byte)
 using std::as_bytes;
@@ -22,8 +24,10 @@ using std::as_writable_bytes;
 #include <boost/core/span.hpp>
 
 namespace mc {
-using boost::dynamic_extent;
-using boost::span;
+MC_INLINE_VAR constexpr auto DynamicExtent = boost::dynamic_extent;
+
+template<typename T, std::size_t Extent = DynamicExtent>
+using Span = boost::span<T, Extent>;
 
 #if defined(__cpp_lib_byte)
 using boost::as_bytes;
