@@ -57,6 +57,8 @@ target_sources(mc-core-tests
         "src/mc/core/iterator.test.cpp"
         "src/mc/core/numbers.test.cpp"
         "src/mc/core/numeric.test.cpp"
+        "src/mc/core/_random/xorshift32.test.cpp"
+        "src/mc/core/_random/xorshift64.test.cpp"
         "src/mc/core/queue.test.cpp"
         "src/mc/core/scope.test.cpp"
         "src/mc/core/units.test.cpp"
