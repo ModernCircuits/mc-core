@@ -33,7 +33,7 @@ template<typename T>
 constexpr auto BasicXorShift64<T>::discard(unsigned long long z) noexcept
     -> void
 {
-    for (auto i{0ULL}; i < z; ++i) { (void)(*this)(); }
+    for (auto i{0ULL}; i < z; ++i) { (void)((*this)()); }
 }
 
 template<typename T>
