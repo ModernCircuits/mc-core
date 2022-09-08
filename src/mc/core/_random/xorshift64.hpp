@@ -24,12 +24,17 @@ struct BasicXorShift64
 
     [[nodiscard]] constexpr auto operator()() noexcept -> result_type;
 
-    friend constexpr auto
-    operator==(BasicXorShift64 const& lhs, BasicXorShift64 const& rhs) noexcept
-        -> bool;
-    friend constexpr auto
-    operator!=(BasicXorShift64 const& lhs, BasicXorShift64 const& rhs) noexcept
-        -> bool;
+    template<typename U>
+    friend constexpr auto operator==(
+        BasicXorShift64<U> const& lhs,
+        BasicXorShift64<U> const& rhs
+    ) noexcept -> bool;
+
+    template<typename U>
+    friend constexpr auto operator!=(
+        BasicXorShift64<U> const& lhs,
+        BasicXorShift64<U> const& rhs
+    ) noexcept -> bool;
 
 private:
     result_type _state{default_seed};
