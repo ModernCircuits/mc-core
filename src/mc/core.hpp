@@ -6,6 +6,7 @@
 #include <mc/core/array.hpp>
 #include <mc/core/atomic.hpp>
 #include <mc/core/bit.hpp>
+#include <mc/core/bitset.hpp>
 #include <mc/core/cassert.hpp>
 #include <mc/core/cctype.hpp>
 #include <mc/core/cfloat.hpp>
