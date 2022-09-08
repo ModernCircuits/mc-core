@@ -14,15 +14,17 @@ jobs:
         std: [14, 17, 20]
         sanitizer:
           [
-            { "name": "asan", "flags": "MC_CORE_ENABLE_ASAN=ON" },
-            { "name": "tsan", "flags": "MC_CORE_ENABLE_TSAN=ON" },
-            { "name": "ubsan", "flags": "MC_CORE_ENABLE_UBSAN=ON" },
+            { "name": "asan", "flags": "MODERNCIRCUITS_ENABLE_ASAN=ON" },
+            { "name": "tsan", "flags": "MODERNCIRCUITS_ENABLE_TSAN=ON" },
+            { "name": "ubsan", "flags": "MODERNCIRCUITS_ENABLE_UBSAN=ON" },
           ]
       fail-fast: false
     name: GCC ${{ matrix.sanitizer.name }}
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       - name: Install system dependencies
         run: |
@@ -49,7 +51,7 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -S. -B build -G"Ninja" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -D CMAKE_CXX_STANDARD="${{ matrix.std }}" -D "${{ matrix.sanitizer.flags }}" -DMC_CORE_ENABLE_WERROR=ON
+          cmake -S. -B build -G"Ninja" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -D CMAKE_CXX_STANDARD="${{ matrix.std }}" -D "${{ matrix.sanitizer.flags }}" -DMODERNCIRCUITS_ENABLE_WERROR=ON
 
       - name: Show compile commands
         run: cat build/compile_commands.json

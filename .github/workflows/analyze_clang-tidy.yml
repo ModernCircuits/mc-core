@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       - name: Install system dependencies
         run: |
@@ -57,7 +59,7 @@ jobs:
           -D CMAKE_CXX_COMPILER="clang++-15"
           -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake"
           -D CMAKE_CXX_STANDARD=14
-          -D MC_CORE_ENABLE_WERROR=ON
+          -D MODERNCIRCUITS_ENABLE_WERROR=ON
 
       - name: Clang-Tidy -- Release
         run: >

@@ -3,12 +3,12 @@
 cmake_minimum_required(VERSION 3.21)
 project(mc-core-dev LANGUAGES CXX)
 
-option(MC_CORE_ENABLE_COVERAGE    "Build with coverage enabled"                       OFF)
-option(MC_CORE_ENABLE_ASAN        "Build with address sanitizer enabled"              OFF)
-option(MC_CORE_ENABLE_UBSAN       "Build with undefined behavior sanitizer enabled"   OFF)
-option(MC_CORE_ENABLE_TSAN        "Build with thread sanitizer enabled"               OFF)
-option(MC_CORE_ENABLE_MSAN        "Build with memory sanitizer enabled"               OFF)
-option(MC_CORE_ENABLE_WERROR      "Build with warnings as errors"                     OFF)
+option(MODERNCIRCUITS_ENABLE_COVERAGE    "Build with coverage enabled"                       OFF)
+option(MODERNCIRCUITS_ENABLE_ASAN        "Build with address sanitizer enabled"              OFF)
+option(MODERNCIRCUITS_ENABLE_UBSAN       "Build with undefined behavior sanitizer enabled"   OFF)
+option(MODERNCIRCUITS_ENABLE_TSAN        "Build with thread sanitizer enabled"               OFF)
+option(MODERNCIRCUITS_ENABLE_MSAN        "Build with memory sanitizer enabled"               OFF)
+option(MODERNCIRCUITS_ENABLE_WERROR      "Build with warnings as errors"                     OFF)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -25,10 +25,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 enable_testing()
 include(CTest)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-include(mcCompilerOptions)
-include(mcCompilerWarnings)
-include(mcCodeCoverage)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake)
+include(compiler_options)
+include(compiler_warnings)
+include(code_coverage)
 
 add_subdirectory(src)
 
