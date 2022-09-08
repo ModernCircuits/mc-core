@@ -116,3 +116,9 @@ class ModernCircuitsSTL(ConanFile):
 
         cmake = CMake(self)
         cmake.install()
+
+    def package_info(self):
+        self.cpp_info.names["cmake_find_package"] = "mc-core"
+        self.cpp_info.names["cmake_find_package_multi"] = "mc-core"
+        self.cpp_info.names["pkg_config"] = "mc-core"
+        self.cpp_info.set_property("cmake_target_name", "mc::core")

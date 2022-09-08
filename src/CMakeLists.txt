@@ -7,9 +7,9 @@ if(NOT EMSCRIPTEN)
     find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
 endif()
 
+find_package(concurrentqueue REQUIRED)
 find_package(fmt REQUIRED)
 find_package(gcem REQUIRED)
-find_package(concurrentqueue REQUIRED)
 find_package(readerwriterqueue REQUIRED)
 find_package(Threads REQUIRED)
 find_package(xsimd REQUIRED)
@@ -20,25 +20,11 @@ include(CMakePackageConfigHelpers)
 add_library(mc-core INTERFACE)
 add_library(mc::core ALIAS mc-core)
 
-set_target_properties(mc-core PROPERTIES
-    CXX_VISIBILITY_PRESET
-        hidden
-    VISIBILITY_INLINES_HIDDEN
-        YES
-    VERSION
-        ${PROJECT_VERSION}
-    SOVERSION
-        ${PROJECT_VERSION_MAJOR}
-    EXPORT_NAME
-        core
-)
-
 target_include_directories(mc-core
     INTERFACE
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
-
 
 target_link_libraries(mc-core
     INTERFACE
@@ -55,7 +41,6 @@ target_link_libraries(mc-core
         xsimd
 )
 
-
 if(EMSCRIPTEN)
     target_compile_options(mc-core
         INTERFACE
@@ -68,6 +53,19 @@ if(EMSCRIPTEN)
             "SHELL:-s DISABLE_EXCEPTION_CATCHING=0"
     )
 endif()
+
+set_target_properties(mc-core PROPERTIES
+    CXX_VISIBILITY_PRESET
+        hidden
+    VISIBILITY_INLINES_HIDDEN
+        YES
+    VERSION
+        ${PROJECT_VERSION}
+    SOVERSION
+        ${PROJECT_VERSION_MAJOR}
+    EXPORT_NAME
+        core
+)
 
 install(
     TARGETS
