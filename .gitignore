@@ -13,3 +13,4 @@
 /out
 /docs/doxygen/doc
 /venv
+/CMakeUserPresets.json
