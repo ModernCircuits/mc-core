@@ -29,7 +29,6 @@
 #include <mc/core/iomanip.hpp>
 #include <mc/core/iostream.hpp>
 #include <mc/core/iterator.hpp>
-#include <mc/core/json.hpp>
 #include <mc/core/limits.hpp>
 #include <mc/core/map.hpp>
 #include <mc/core/memory.hpp>
