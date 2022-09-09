@@ -43,7 +43,7 @@ jobs:
           conan install
           -if build
           --build=missing
-          -e mc-core:CONAN_RUN_TESTS=True
+          -c user.build:all=True
           -pr:b=default
           -pr:h=default
           -s compiler.cppstd=14
