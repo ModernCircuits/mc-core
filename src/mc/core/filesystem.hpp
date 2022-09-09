@@ -9,10 +9,4 @@
 namespace mc {
 namespace fs = std::filesystem;
 }  // namespace mc
-#else
-#include <boost/filesystem.hpp>
-
-namespace mc {
-namespace fs = boost::filesystem;
-}  // namespace mc
 #endif

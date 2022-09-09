@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.21)
 project(mc-core VERSION 0.5.0 LANGUAGES CXX)
 
 if(NOT EMSCRIPTEN)
-    find_package(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
+    find_package(Boost 1.78 REQUIRED COMPONENTS boost)
 endif()
 
 find_package(concurrentqueue REQUIRED)
@@ -29,9 +29,6 @@ target_include_directories(mc-core
 target_link_libraries(mc-core
     INTERFACE
         $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::headers>
-        $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::container>
-        $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::filesystem>
-        $<$<NOT:$<BOOL:${EMSCRIPTEN}>>:Boost::json>
 
         concurrentqueue::concurrentqueue
         fmt::fmt

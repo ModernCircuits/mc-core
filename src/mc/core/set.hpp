@@ -3,12 +3,4 @@
 
 #include <mc/core/_set/flat_set.hpp>
 
-#include <boost/container/pmr/set.hpp>
-
 #include <set>
-
-namespace mc {
-namespace pmr {
-using boost::container::pmr::set;
-}  // namespace pmr
-}  // namespace mc

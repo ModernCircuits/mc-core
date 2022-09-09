@@ -54,37 +54,7 @@ class ModernCircuitsSTL(ConanFile):
             self.test_requires("catch2/3.1.0")
 
     def config_options(self):
-        self.options["boost"].without_atomic = False
-        self.options["boost"].without_chrono = True
-        self.options["boost"].without_container = False
-        self.options["boost"].without_context = True
-        self.options["boost"].without_contract = True
-        self.options["boost"].without_coroutine = True
-        self.options["boost"].without_date_time = True
-        self.options["boost"].without_exception = False
-        self.options["boost"].without_fiber = True
-        self.options["boost"].without_filesystem = False
-        self.options["boost"].without_graph = True
-        self.options["boost"].without_graph_parallel = True
-        self.options["boost"].without_iostreams = False
-        self.options["boost"].without_json = False
-        self.options["boost"].without_locale = True
-        self.options["boost"].without_log = True
-        self.options["boost"].without_math = True
-        self.options["boost"].without_mpi = True
-        self.options["boost"].without_nowide = True
-        self.options["boost"].without_program_options = True
-        self.options["boost"].without_python = True
-        self.options["boost"].without_random = False
-        self.options["boost"].without_regex = False
-        self.options["boost"].without_serialization = True
-        self.options["boost"].without_stacktrace = True
-        self.options["boost"].without_system = False
-        self.options["boost"].without_test = True
-        self.options["boost"].without_thread = True
-        self.options["boost"].without_timer = True
-        self.options["boost"].without_type_erasure = True
-        self.options["boost"].without_wave = True
+        self.options["boost"].header_only = True
 
     def generate(self):
         tc = CMakeToolchain(self)

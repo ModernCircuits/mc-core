@@ -3,7 +3,7 @@
 include(CMakeFindDependencyMacro)
 
 if(NOT EMSCRIPTEN)
-    find_dependency(Boost 1.78 REQUIRED COMPONENTS container filesystem json)
+    find_dependency(Boost 1.78 REQUIRED COMPONENTS boost)
 endif()
 
 find_dependency(concurrentqueue REQUIRED)
