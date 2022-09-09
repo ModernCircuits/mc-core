@@ -59,3 +59,4 @@
 #include <mc/core/variant.hpp>
 #include <mc/core/vector.hpp>
 #include <mc/core/version.hpp>
+#include <mc/core/warning.hpp>

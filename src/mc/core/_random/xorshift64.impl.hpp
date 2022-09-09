@@ -1,5 +1,7 @@
 #pragma once
 
+#include <mc/core/_warning/ignore_unused.hpp>
+
 #include <limits>
 
 #include "xorshift64.hpp"
@@ -33,7 +35,10 @@ template<typename T>
 constexpr auto BasicXorShift64<T>::discard(unsigned long long z) noexcept
     -> void
 {
-    for (auto i{0ULL}; i < z; ++i) { (void)((*this)()); }
+    for (auto i{0ULL}; i < z; ++i) {
+        auto const x = (*this)();
+        ignoreUnused(x);
+    }
 }
 
 template<typename T>
