@@ -9,6 +9,7 @@
 # Build
 /build
 /build*
+/test_package/build*
 /cmake-build-*
 /out
 /docs/doxygen/doc
