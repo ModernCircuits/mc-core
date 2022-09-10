@@ -1,7 +1,5 @@
 #pragma once
 
-#include <mc/core/_warning/ignore_unused.hpp>
-
 #include <limits>
 
 #include "xorshift32.hpp"
@@ -37,7 +35,7 @@ constexpr auto BasicXorShift32<T>::discard(unsigned long long z) noexcept
 {
     for (auto i{0ULL}; i < z; ++i) {
         auto const x = (*this)();
-        ignoreUnused(x);
+        (void)(x);
     }
 }
 

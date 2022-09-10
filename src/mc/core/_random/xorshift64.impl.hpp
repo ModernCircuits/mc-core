@@ -1,6 +1,6 @@
-#pragma once
+// SPDX-License-Identifier: BSL-1.0
 
-#include <mc/core/_warning/ignore_unused.hpp>
+#pragma once
 
 #include <limits>
 
@@ -37,7 +37,7 @@ constexpr auto BasicXorShift64<T>::discard(unsigned long long z) noexcept
 {
     for (auto i{0ULL}; i < z; ++i) {
         auto const x = (*this)();
-        ignoreUnused(x);
+        (void)(x);
     }
 }
 
