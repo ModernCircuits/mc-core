@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: BSL-1.0
 
 cmake_minimum_required(VERSION 3.21)
-project(mc-core VERSION 0.5.0 LANGUAGES CXX)
+project(mc-core VERSION 0.6.0 LANGUAGES CXX)
 
 if(NOT EMSCRIPTEN)
     find_package(Boost 1.78 REQUIRED COMPONENTS boost)
