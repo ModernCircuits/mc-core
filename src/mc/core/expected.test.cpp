@@ -8,11 +8,8 @@ using namespace mc;
 
 static auto example(int i) -> Expected<int, char const*>
 {
-    if (i < 5) {
-        return 0;
-    } else {
-        return makeUnexpected("Error");
-    }
+    if (i < 5) { return 0; }
+    return makeUnexpected("Error");
 }
 
 TEST_CASE("expected.hpp: example", "[expected]")
