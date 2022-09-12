@@ -30,8 +30,9 @@ MC_NODISCARD constexpr auto lcm(M m, N n) -> std::enable_if_t<
     std::common_type_t<M, N>               //
     >
 {
+    using Common = std::common_type_t<M, N>;
     if ((m == M{}) || (n == N{})) { return 0; }
-    return (m * n) / gcd(m, n);
+    return static_cast<Common>(static_cast<Common>(m * n) / gcd(m, n));
 }
 
 }  // namespace mc
