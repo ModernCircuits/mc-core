@@ -61,7 +61,7 @@ IncludeCategories:
     Priority: 2
   - Regex: "^<mc/[[:alnum:].]+"
     Priority: 3
-  - Regex: "^<(boost|fmt|catch2)/"
+  - Regex: "^<(boost|fmt|range)/"
     Priority: 4
   - Regex: "^<[[:alnum:].]+>"
     Priority: 5
