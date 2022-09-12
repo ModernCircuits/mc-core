@@ -13,6 +13,7 @@ find_package(gcem REQUIRED)
 find_package(range-v3 REQUIRED)
 find_package(readerwriterqueue REQUIRED)
 find_package(tl-expected REQUIRED)
+find_package(tl-optional REQUIRED)
 find_package(Threads REQUIRED)
 find_package(xsimd REQUIRED)
 
@@ -38,6 +39,7 @@ target_link_libraries(mc-core
         range-v3::range-v3
         readerwriterqueue::readerwriterqueue
         tl::expected
+        tl::optional
         Threads::Threads
         xsimd
 )

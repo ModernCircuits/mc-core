@@ -12,6 +12,7 @@ find_dependency(gcem REQUIRED)
 find_dependency(range-v3 REQUIRED)
 find_dependency(readerwriterqueue REQUIRED)
 find_dependency(tl-expected REQUIRED)
+find_dependency(tl-optional REQUIRED)
 find_dependency(Threads REQUIRED)
 find_dependency(xsimd REQUIRED)
 
