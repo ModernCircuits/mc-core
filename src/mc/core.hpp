@@ -40,6 +40,7 @@
 #include <mc/core/ostream.hpp>
 #include <mc/core/queue.hpp>
 #include <mc/core/random.hpp>
+#include <mc/core/ranges.hpp>
 #include <mc/core/ratio.hpp>
 #include <mc/core/scope.hpp>
 #include <mc/core/set.hpp>

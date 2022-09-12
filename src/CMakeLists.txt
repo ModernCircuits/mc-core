@@ -10,6 +10,7 @@ endif()
 find_package(concurrentqueue REQUIRED)
 find_package(fmt REQUIRED)
 find_package(gcem REQUIRED)
+find_package(range-v3 REQUIRED)
 find_package(readerwriterqueue REQUIRED)
 find_package(Threads REQUIRED)
 find_package(xsimd REQUIRED)
@@ -33,6 +34,7 @@ target_link_libraries(mc-core
         concurrentqueue::concurrentqueue
         fmt::fmt
         gcem::gcem
+        range-v3::range-v3
         readerwriterqueue::readerwriterqueue
         Threads::Threads
         xsimd
