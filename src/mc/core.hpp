@@ -20,6 +20,7 @@
 #include <mc/core/cstdlib.hpp>
 #include <mc/core/cstring.hpp>
 #include <mc/core/exception.hpp>
+#include <mc/core/expected.hpp>
 #include <mc/core/filesystem.hpp>
 #include <mc/core/format.hpp>
 #include <mc/core/fstream.hpp>

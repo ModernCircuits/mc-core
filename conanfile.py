@@ -44,6 +44,7 @@ class ModernCircuitsCore(ConanFile):
         self.requires("gcem/1.14.1")
         self.requires("range-v3/0.12.0")
         self.requires("readerwriterqueue/1.0.6")
+        self.requires("tl-expected/1.0.0")
         self.requires("xsimd/8.1.0")
 
         if self.settings.os != "Emscripten":
