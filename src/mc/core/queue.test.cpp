@@ -26,7 +26,7 @@ TEMPLATE_TEST_CASE("queue.hpp: ThreadSafeQueue", "[queue]", int, std::string)
         REQUIRE(queue.size() == 2);
     }
 
-#if not defined(MC_EMSCRIPTEN)
+#if not defined(MC_PLATFORM_EMSCRIPTEN)
     SECTION("two thread")
     {
         mc::ThreadSafeQueue<TestType> queue{};
