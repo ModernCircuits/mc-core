@@ -63,5 +63,5 @@ auto operator+(ScopeFailFactory /*tag*/, FuncT&& fn)
 }  // namespace mc
 
 #define SCOPE_FAIL                                                             \
-    auto MC_ANONYMOUS_VARIABLE(SCOPE_FAIL_STATE)                               \
+    auto MC_ANONYMOUS_VAR(SCOPE_FAIL_STATE)                                    \
         = ::mc::detail::ScopeFailFactory{} + [&]()  // NOLINT

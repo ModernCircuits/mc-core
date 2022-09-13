@@ -40,5 +40,5 @@ auto operator+(ScopeExitFactory /*unused*/, Func&& func) -> ScopeExit<Func>
 }  // namespace mc
 
 #define SCOPE_EXIT                                                             \
-    auto MC_ANONYMOUS_VARIABLE(SCOPE_EXIT_STATE)                               \
+    auto MC_ANONYMOUS_VAR(SCOPE_EXIT_STATE)                                    \
         = ::mc::detail::ScopeExitFactory{} + [&]()  // NOLINT
