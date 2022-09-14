@@ -13,6 +13,7 @@ jobs:
       matrix:
         cxx_std: [17, 20]
         runner: ["windows-2019", "windows-2022"]
+        build_mode: ["Debug", "Release"]
       fail-fast: false
     runs-on: "${{ matrix.runner }}"
     steps:
@@ -36,8 +37,14 @@ jobs:
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
       - name: Build dependencies
-        run: |
-          conan install -if build --build=missing -pr:b=default -pr:h=default -c user.build:all=True -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
+        run: >
+          conan install -if build
+          --build=missing
+          -pr:b=default
+          -pr:h=default
+          -c user.build:all=True
+          -s compiler.cppstd="${{ matrix.cxx_std }}"
+          -s build_type="${{ matrix.build_mode }}" .
 
       - name: Build
         run: |
@@ -45,13 +52,14 @@ jobs:
 
       - name: Test
         run: |
-          ctest --test-dir build -C Release --output-on-failure
+          ctest --test-dir build -C "${{ matrix.build_mode }}" --output-on-failure
 
   clang-cl:
     name: ClangCL
     strategy:
       matrix:
         cxx_std: [17, 20, 23]
+        build_mode: ["Debug", "Release"]
       fail-fast: false
     runs-on: windows-2022
     steps:
@@ -81,7 +89,13 @@ jobs:
 
       - name: Build dependencies
         run: |
-          conan install -if build --build=missing -pr:b=default -pr:h=default -c user.build:all=True -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
+          conan install -if build
+          --build=missing
+          -pr:b=default
+          -pr:h=default
+          -c user.build:all=True
+          -s compiler.cppstd="${{ matrix.cxx_std }}"
+          -s build_type="${{ matrix.build_mode }}" .
 
       - name: Build
         run: |
@@ -89,5 +103,4 @@ jobs:
 
       - name: Test
         run: |
-          ctest --test-dir build -C Debug --output-on-failure
-          ctest --test-dir build -C Release --output-on-failure
+          ctest --test-dir build -C "${{ matrix.build_mode }}" --output-on-failure
