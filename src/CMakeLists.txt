@@ -17,9 +17,6 @@ find_package(tl-optional REQUIRED)
 find_package(Threads REQUIRED)
 find_package(xsimd REQUIRED)
 
-include(GNUInstallDirs)
-include(CMakePackageConfigHelpers)
-
 add_library(mc-core INTERFACE)
 add_library(mc::core ALIAS mc-core)
 
@@ -69,6 +66,9 @@ set_target_properties(mc-core PROPERTIES
     EXPORT_NAME
         core
 )
+
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
 
 install(
     TARGETS
