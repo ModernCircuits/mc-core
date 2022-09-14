@@ -7,12 +7,18 @@
 #include <string_view>
 
 namespace mc {
+
+/// \ingroup group-strings
 using StringView = std::string_view;
+
 }  // namespace mc
 #else
 #include <boost/utility/string_view.hpp>
 
 namespace mc {
+
+/// \ingroup group-strings
 using StringView = boost::string_view;
+
 }  // namespace mc
 #endif

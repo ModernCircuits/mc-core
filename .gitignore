@@ -15,3 +15,4 @@
 /docs/doxygen/doc
 /venv
 /CMakeUserPresets.json
+/docs/build

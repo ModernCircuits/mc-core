@@ -8,8 +8,10 @@
 #include <span>
 
 namespace mc {
+/// \ingroup group-containers
 MC_INLINE_VAR constexpr auto DynamicExtent = std::dynamic_extent;
 
+/// \ingroup group-containers
 template<typename T, std::size_t Extent = DynamicExtent>
 using Span = std::span<T, Extent>;
 
@@ -24,8 +26,10 @@ using std::as_writable_bytes;
 #include <boost/core/span.hpp>
 
 namespace mc {
+/// \ingroup group-containers
 MC_INLINE_VAR constexpr auto DynamicExtent = boost::dynamic_extent;
 
+/// \ingroup group-containers
 template<typename T, std::size_t Extent = DynamicExtent>
 using Span = boost::span<T, Extent>;
 

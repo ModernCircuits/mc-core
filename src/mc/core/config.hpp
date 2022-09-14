@@ -36,6 +36,7 @@
 #endif
 
 #include <mc/core/_config/debug_break.hpp>
+#include <mc/core/_config/documentation.hpp>
 #include <mc/core/_config/preprocessor.hpp>
 
 #if defined(__cpp_if_consteval)

@@ -64,6 +64,7 @@
     }
 
 namespace mc {
+
 MC_MAKE_CMATH_FUNC_ARGS1(ceil)
 MC_MAKE_CMATH_FUNC_ARGS1(floor)
 MC_MAKE_CMATH_FUNC_ARGS1(trunc)
@@ -99,4 +100,5 @@ MC_MAKE_CMATH_FUNC_ARGS2(pow)
 // MC_MAKE_CMATH_FUNC_ARGS2(hypot)
 
 // MC_MAKE_CMATH_FUNC_ARGS3(fma)
+
 }  // namespace mc

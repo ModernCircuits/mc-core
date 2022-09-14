@@ -5,9 +5,11 @@
 
 namespace mc {
 
+/// \ingroup group-memory
 template<typename T>
 using SharedPtr = std::shared_ptr<T>;
 
+/// \ingroup group-memory
 template<typename T, typename... Args>
 auto makeShared(Args&&... args) -> SharedPtr<T>
 {

@@ -2,7 +2,3 @@
 #pragma once
 
 #include <range/v3/all.hpp>
-
-namespace mc {
-namespace ranges = ::ranges;
-}

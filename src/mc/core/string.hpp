@@ -7,6 +7,7 @@
 
 namespace mc {
 
+/// \ingroup group-strings
 using String = std::string;
 
 }  // namespace mc
