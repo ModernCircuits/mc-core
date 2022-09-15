@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.0 (2022-09-15)
+
+- Drop C++14 support
+
 ## 0.9.0 (2022-09-14)
 
 - Add library [tl-optional](https://github.com/TartanLlama/optional)
