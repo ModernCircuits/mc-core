@@ -15,7 +15,7 @@ jobs:
           [
             { "os": "ubuntu-20.04", "cxx": 17 },
             { "os": "ubuntu-22.04", "cxx": 20 },
-            { "os": "ubuntu-20.04", "cxx": 23 },
+            { "os": "ubuntu-22.04", "cxx": 23 },
           ]
       fail-fast: false
     runs-on: ${{ matrix.target.os }}
