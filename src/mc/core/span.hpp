@@ -9,7 +9,7 @@
 
 namespace mc {
 /// \ingroup group-containers
-MC_INLINE_VAR constexpr auto DynamicExtent = std::dynamic_extent;
+inline constexpr auto DynamicExtent = std::dynamic_extent;
 
 /// \ingroup group-containers
 template<typename T, std::size_t Extent = DynamicExtent>
@@ -27,7 +27,7 @@ using std::as_writable_bytes;
 
 namespace mc {
 /// \ingroup group-containers
-MC_INLINE_VAR constexpr auto DynamicExtent = boost::dynamic_extent;
+inline constexpr auto DynamicExtent = boost::dynamic_extent;
 
 /// \ingroup group-containers
 template<typename T, std::size_t Extent = DynamicExtent>

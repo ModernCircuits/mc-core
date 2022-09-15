@@ -20,61 +20,21 @@ using std::cmp_not_equal;
 #include <type_traits>
 
 namespace mc {
-namespace detail {
-template<typename T, typename U, bool IsSignedT, bool IsSignedU>
-struct IntegerCompareImpl;
-
-template<typename T, typename U>
-struct IntegerCompareImpl<T, U, true, true>
-{
-    static auto equal(T t, U u) noexcept -> bool { return t == u; }
-
-    static auto less(T t, U u) noexcept -> bool { return t < u; }
-};
-
-template<typename T, typename U>
-struct IntegerCompareImpl<T, U, true, false>
-{
-    using UT = std::make_unsigned_t<T>;
-
-    static auto equal(T t, U u) noexcept -> bool
-    {
-        return t < 0 ? false : UT(t) == u;
-    }
-
-    static auto less(T t, U u) noexcept -> bool
-    {
-        return t < 0 ? true : UT(t) < u;
-    }
-};
-
-template<typename T, typename U>
-struct IntegerCompareImpl<T, U, false, false>
-{
-    using UU = std::make_unsigned_t<U>;
-
-    static auto equal(T t, U u) noexcept -> bool
-    {
-        return u < 0 ? false : t == UU(u);
-    }
-
-    static auto less(T t, U u) noexcept -> bool
-    {
-        return u < 0 ? false : t < UU(u);
-    }
-};
-}  // namespace detail
 
 template<typename T, typename U>
 [[nodiscard]] constexpr auto cmp_equal(T t, U u) noexcept  // NOLINT
     -> bool
 {
-    using cmp = detail::IntegerCompareImpl<
-        T,
-        U,
-        std::is_signed<T>::value,
-        std::is_signed<U>::value>;
-    return cmp::equal(t, u);
+    if constexpr (std::is_signed_v<T> and std::is_signed_v<U>) {
+        return t == u;
+    } else if (std::is_signed_v<T> and not std::is_signed_v<U>) {
+        using UT = std::make_unsigned_t<T>;
+        return t < 0 ? false : UT(t) == u;
+    } else {
+        static_assert(not std::is_signed_v<T> and not std::is_signed_v<U>);
+        using UU = std::make_unsigned_t<U>;
+        return u < 0 ? false : t == UU(u);
+    }
 }
 
 template<typename T, typename U>
@@ -88,12 +48,17 @@ template<typename T, typename U>
 [[nodiscard]] constexpr auto cmp_less(T t, U u) noexcept  // NOLINT
     -> bool
 {
-    using cmp = detail::IntegerCompareImpl<
-        T,
-        U,
-        std::is_signed<T>::value,
-        std::is_signed<U>::value>;
-    return cmp::less(t, u);
+
+    if constexpr (std::is_signed_v<T> and std::is_signed_v<U>) {
+        return t < u;
+    } else if (std::is_signed_v<T> and not std::is_signed_v<U>) {
+        using UT = std::make_unsigned_t<T>;
+        return t < 0 ? true : UT(t) < u;
+    } else {
+        static_assert(not std::is_signed_v<T> and not std::is_signed_v<U>);
+        using UU = std::make_unsigned_t<U>;
+        return u < 0 ? false : t < UU(u);
+    }
 }
 
 template<typename T, typename U>

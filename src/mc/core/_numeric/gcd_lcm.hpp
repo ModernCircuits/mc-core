@@ -23,11 +23,11 @@ template<typename M, typename N>
 
 template<typename M, typename N>
 [[nodiscard]] constexpr auto lcm(M m, N n) -> std::enable_if_t<
-    std::is_integral<M>::value             //
-        && !std::is_same<M, bool>::value   //
-        && std::is_integral<N>::value      //
-        && !std::is_same<N, bool>::value,  //
-    std::common_type_t<M, N>               //
+    std::is_integral_v<M>             //
+        && !std::is_same_v<M, bool>   //
+        && std::is_integral_v<N>      //
+        && !std::is_same_v<N, bool>,  //
+    std::common_type_t<M, N>          //
     >
 {
     using Common = std::common_type_t<M, N>;

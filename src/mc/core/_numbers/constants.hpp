@@ -26,19 +26,19 @@ using std::numbers::sqrt3;
 
 namespace mc::numbers {
 // clang-format off
-    MC_INLINE_VAR constexpr double e           = boost::math::constants::e<double>();               // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double log2e       = boost::math::constants::log2_e<double>();          // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double log10e      = boost::math::constants::log10_e<double>();         // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double pi          = boost::math::constants::pi<double>();              // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double inv_sqrtpi  = boost::math::constants::one_div_root_pi<double>(); // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double inv_pi      = boost::math::constants::one_div_pi<double>();      // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double ln2         = boost::math::constants::ln_two<double>();          // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double ln10        = boost::math::constants::ln_ten<double>();          // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double sqrt2       = boost::math::constants::root_two<double>();        // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double sqrt3       = boost::math::constants::root_three<double>();      // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double egamma      = boost::math::constants::euler<double>();           // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double phi         = boost::math::constants::phi<double>();             // NOLINT(readability-identifier-naming)
-    MC_INLINE_VAR constexpr double inv_sqrt3   = 1.0/boost::math::constants::root_three<double>();  // NOLINT(readability-identifier-naming)
+    inline constexpr double e           = boost::math::constants::e<double>();               // NOLINT(readability-identifier-naming)
+    inline constexpr double log2e       = boost::math::constants::log2_e<double>();          // NOLINT(readability-identifier-naming)
+    inline constexpr double log10e      = boost::math::constants::log10_e<double>();         // NOLINT(readability-identifier-naming)
+    inline constexpr double pi          = boost::math::constants::pi<double>();              // NOLINT(readability-identifier-naming)
+    inline constexpr double inv_sqrtpi  = boost::math::constants::one_div_root_pi<double>(); // NOLINT(readability-identifier-naming)
+    inline constexpr double inv_pi      = boost::math::constants::one_div_pi<double>();      // NOLINT(readability-identifier-naming)
+    inline constexpr double ln2         = boost::math::constants::ln_two<double>();          // NOLINT(readability-identifier-naming)
+    inline constexpr double ln10        = boost::math::constants::ln_ten<double>();          // NOLINT(readability-identifier-naming)
+    inline constexpr double sqrt2       = boost::math::constants::root_two<double>();        // NOLINT(readability-identifier-naming)
+    inline constexpr double sqrt3       = boost::math::constants::root_three<double>();      // NOLINT(readability-identifier-naming)
+    inline constexpr double egamma      = boost::math::constants::euler<double>();           // NOLINT(readability-identifier-naming)
+    inline constexpr double phi         = boost::math::constants::phi<double>();             // NOLINT(readability-identifier-naming)
+    inline constexpr double inv_sqrt3   = 1.0/boost::math::constants::root_three<double>();  // NOLINT(readability-identifier-naming)
 // clang-format on
 }  // namespace mc::numbers
 #endif

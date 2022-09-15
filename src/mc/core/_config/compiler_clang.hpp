@@ -23,9 +23,3 @@
 #define MC_MAY_ALIAS             __attribute__((__may_alias__))
 #define MC_UNREACHABLE_RETURN(x) __builtin_unreachable();
 #define MC_FUNC_SIG              __PRETTY_FUNCTION__
-
-#if defined(__cpp_inline_variables)
-#define MC_INLINE_VAR inline
-#else
-#define MC_INLINE_VAR
-#endif
