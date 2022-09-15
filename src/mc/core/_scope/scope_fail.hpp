@@ -9,9 +9,7 @@
 
 #include <type_traits>
 
-namespace mc {
-
-namespace detail {
+namespace mc::detail {
 
 struct UncaughtExceptionCounter
 {
@@ -58,9 +56,7 @@ auto operator+(ScopeFailFactory /*tag*/, FuncT&& fn)
     return ScopeFail<std::decay_t<FuncT>, true>(static_cast<FuncT&&>(fn));
 }
 
-}  // namespace detail
-
-}  // namespace mc
+}  // namespace mc::detail
 
 #define SCOPE_FAIL                                                             \
     auto MC_ANONYMOUS_VAR(SCOPE_FAIL_STATE)                                    \
