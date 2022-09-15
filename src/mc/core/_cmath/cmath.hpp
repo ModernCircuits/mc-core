@@ -7,34 +7,34 @@
 #include <gcem.hpp>
 
 #define MC_MAKE_CMATH_FUNC_ARGS1(func)                                         \
-    MC_NODISCARD constexpr auto func(float arg)->float                         \
+    [[nodiscard]] constexpr auto func(float arg)->float                        \
     {                                                                          \
         MC_IF_CONSTEVAL { return gcem::func(arg); }                            \
         return std::func(arg);                                                 \
     }                                                                          \
-    MC_NODISCARD constexpr auto func(double arg)->double                       \
+    [[nodiscard]] constexpr auto func(double arg)->double                      \
     {                                                                          \
         MC_IF_CONSTEVAL { return gcem::func(arg); }                            \
         return std::func(arg);                                                 \
     }                                                                          \
-    MC_NODISCARD constexpr auto func(long double arg)->long double             \
+    [[nodiscard]] constexpr auto func(long double arg)->long double            \
     {                                                                          \
         MC_IF_CONSTEVAL { return gcem::func(arg); }                            \
         return std::func(arg);                                                 \
     }
 
 #define MC_MAKE_CMATH_FUNC_ARGS2(func)                                         \
-    MC_NODISCARD constexpr auto func(float x, float y)->float                  \
+    [[nodiscard]] constexpr auto func(float x, float y)->float                 \
     {                                                                          \
         MC_IF_CONSTEVAL { return gcem::func(x, y); }                           \
         return std::func(x, y);                                                \
     }                                                                          \
-    MC_NODISCARD constexpr auto func(double x, double y)->double               \
+    [[nodiscard]] constexpr auto func(double x, double y)->double              \
     {                                                                          \
         MC_IF_CONSTEVAL { return gcem::func(x, y); }                           \
         return std::func(x, y);                                                \
     }                                                                          \
-    MC_NODISCARD constexpr auto func(long double x, long double y)             \
+    [[nodiscard]] constexpr auto func(long double x, long double y)            \
         ->long double                                                          \
     {                                                                          \
         MC_IF_CONSTEVAL { return gcem::func(x, y); }                           \
@@ -42,17 +42,17 @@
     }
 
 #define MC_MAKE_CMATH_FUNC_ARGS3(func)                                         \
-    MC_NODISCARD constexpr auto func(float x, float y, float z)->float         \
+    [[nodiscard]] constexpr auto func(float x, float y, float z)->float        \
     {                                                                          \
         MC_IF_CONSTEVAL { return gcem::func(x, y, z); }                        \
         return std::func(x, y, z);                                             \
     }                                                                          \
-    MC_NODISCARD constexpr auto func(double x, double y, double z)->double     \
+    [[nodiscard]] constexpr auto func(double x, double y, double z)->double    \
     {                                                                          \
         MC_IF_CONSTEVAL { return gcem::func(x, y, z); }                        \
         return std::func(x, y, z);                                             \
     }                                                                          \
-    MC_NODISCARD constexpr auto func(                                          \
+    [[nodiscard]] constexpr auto func(                                         \
         long double x,                                                         \
         long double y,                                                         \
         long double z                                                          \

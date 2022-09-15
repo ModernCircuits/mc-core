@@ -22,58 +22,58 @@ namespace mc {
 // NOLINTBEGIN(*-avoid-c-arrays)
 
 template<typename C>
-MC_NODISCARD constexpr auto size(C const& c) -> decltype(c.size())
+[[nodiscard]] constexpr auto size(C const& c) -> decltype(c.size())
 {
     return c.size();
 }
 
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto size(T const (&array)[N]) noexcept -> std::size_t
+[[nodiscard]] constexpr auto size(T const (&array)[N]) noexcept -> std::size_t
 {
     (void)array;
     return N;
 }
 
 template<typename C>
-MC_NODISCARD constexpr auto data(C& c) -> decltype(c.data())
+[[nodiscard]] constexpr auto data(C& c) -> decltype(c.data())
 {
     return c.data();
 }
 
 template<typename C>
-MC_NODISCARD constexpr auto data(C const& c) -> decltype(c.data())
+[[nodiscard]] constexpr auto data(C const& c) -> decltype(c.data())
 {
     return c.data();
 }
 
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto data(T (&array)[N]) noexcept -> T*
+[[nodiscard]] constexpr auto data(T (&array)[N]) noexcept -> T*
 {
     return array;  // NOLINT(cppcoreguidelines-pro-bounds-array-to-pointer-decay)
 }
 
 template<typename E>
-MC_NODISCARD constexpr auto data(std::initializer_list<E> il) noexcept
+[[nodiscard]] constexpr auto data(std::initializer_list<E> il) noexcept
     -> E const*
 {
     return il.begin();
 }
 
 template<typename C>
-MC_NODISCARD constexpr auto empty(const C& c) -> decltype(c.empty())
+[[nodiscard]] constexpr auto empty(const C& c) -> decltype(c.empty())
 {
     return c.empty();
 }
 
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto empty(const T (&array)[N]) noexcept -> bool
+[[nodiscard]] constexpr auto empty(const T (&array)[N]) noexcept -> bool
 {
     (void)array;
     return false;
 }
 
 template<typename E>
-MC_NODISCARD constexpr auto empty(std::initializer_list<E> il) noexcept -> bool
+[[nodiscard]] constexpr auto empty(std::initializer_list<E> il) noexcept -> bool
 {
     return il.size() == 0;
 }

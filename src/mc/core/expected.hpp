@@ -13,7 +13,7 @@ template<typename E>
 using Unexpected = tl::unexpected<E>;
 
 template<typename E>
-MC_NODISCARD constexpr auto makeUnexpected(E&& e)
+[[nodiscard]] constexpr auto makeUnexpected(E&& e)
     -> decltype(tl::make_unexpected(std::forward<E>(e)))
 {
     return tl::make_unexpected(std::forward<E>(e));

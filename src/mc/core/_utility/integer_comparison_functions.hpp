@@ -66,7 +66,7 @@ struct IntegerCompareImpl<T, U, false, false>
 }  // namespace detail
 
 template<typename T, typename U>
-MC_NODISCARD constexpr auto cmp_equal(T t, U u) noexcept  // NOLINT
+[[nodiscard]] constexpr auto cmp_equal(T t, U u) noexcept  // NOLINT
     -> bool
 {
     using cmp = detail::IntegerCompareImpl<
@@ -78,14 +78,14 @@ MC_NODISCARD constexpr auto cmp_equal(T t, U u) noexcept  // NOLINT
 }
 
 template<typename T, typename U>
-MC_NODISCARD constexpr auto cmp_not_equal(T t, U u) noexcept  // NOLINT
+[[nodiscard]] constexpr auto cmp_not_equal(T t, U u) noexcept  // NOLINT
     -> bool
 {
     return !cmp_equal(t, u);
 }
 
 template<typename T, typename U>
-MC_NODISCARD constexpr auto cmp_less(T t, U u) noexcept  // NOLINT
+[[nodiscard]] constexpr auto cmp_less(T t, U u) noexcept  // NOLINT
     -> bool
 {
     using cmp = detail::IntegerCompareImpl<
@@ -97,21 +97,21 @@ MC_NODISCARD constexpr auto cmp_less(T t, U u) noexcept  // NOLINT
 }
 
 template<typename T, typename U>
-MC_NODISCARD constexpr auto cmp_greater(T t, U u) noexcept  // NOLINT
+[[nodiscard]] constexpr auto cmp_greater(T t, U u) noexcept  // NOLINT
     -> bool
 {
     return cmp_less(u, t);
 }
 
 template<typename T, typename U>
-MC_NODISCARD constexpr auto cmp_less_equal(T t, U u) noexcept  // NOLINT
+[[nodiscard]] constexpr auto cmp_less_equal(T t, U u) noexcept  // NOLINT
     -> bool
 {
     return !cmp_greater(t, u);
 }
 
 template<typename T, typename U>
-MC_NODISCARD constexpr auto cmp_greater_equal(T t, U u) noexcept  // NOLINT
+[[nodiscard]] constexpr auto cmp_greater_equal(T t, U u) noexcept  // NOLINT
     -> bool
 {
     return !cmp_less(t, u);

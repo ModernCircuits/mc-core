@@ -15,7 +15,7 @@ struct UncaughtExceptionCounter
 {
     UncaughtExceptionCounter() = default;
 
-    MC_NODISCARD auto newUncaughtException() const noexcept -> bool
+    [[nodiscard]] auto newUncaughtException() const noexcept -> bool
     {
         return uncaught_exceptions() > _exceptionCount;
     }

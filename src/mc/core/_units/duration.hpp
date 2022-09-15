@@ -30,7 +30,7 @@ using Seconds = Duration<T, std::ratio<1>>;
 /// \brief Converts a duration to milliseconds.
 /// \ingroup group-units
 template<typename T, typename R>
-MC_NODISCARD constexpr auto toMilliseconds(Duration<T, R> const& d) noexcept
+[[nodiscard]] constexpr auto toMilliseconds(Duration<T, R> const& d) noexcept
 {
     return std::chrono::duration_cast<Milliseconds<T>>(d);
 }
@@ -38,7 +38,7 @@ MC_NODISCARD constexpr auto toMilliseconds(Duration<T, R> const& d) noexcept
 /// \brief Converts a duration to seconds.
 /// \ingroup group-units
 template<typename T, typename R>
-MC_NODISCARD constexpr auto toSeconds(Duration<T, R> const& d) noexcept
+[[nodiscard]] constexpr auto toSeconds(Duration<T, R> const& d) noexcept
 {
     return std::chrono::duration_cast<Seconds<T>>(d);
 }

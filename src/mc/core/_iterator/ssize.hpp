@@ -15,7 +15,7 @@ using std::ssize;
 
 namespace mc {
 template<typename C>
-MC_NODISCARD constexpr auto ssize(C const& c
+[[nodiscard]] constexpr auto ssize(C const& c
 ) -> std::common_type_t<std::ptrdiff_t, std::make_signed_t<decltype(c.size())> >
 {
     using R = std::
@@ -25,7 +25,7 @@ MC_NODISCARD constexpr auto ssize(C const& c
 
 // NOLINTBEGIN(*-avoid-c-arrays)
 template<typename T, std::size_t N>
-MC_NODISCARD constexpr auto ssize(T const (&array)[N]) noexcept
+[[nodiscard]] constexpr auto ssize(T const (&array)[N]) noexcept
     -> std::ptrdiff_t
 {
     (void)array;

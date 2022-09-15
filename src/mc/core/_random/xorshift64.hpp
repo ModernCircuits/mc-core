@@ -20,13 +20,13 @@ struct BasicXorShift64
     constexpr BasicXorShift64() = default;
     explicit constexpr BasicXorShift64(result_type seed) noexcept;
 
-    MC_NODISCARD static constexpr auto min() noexcept -> result_type;
-    MC_NODISCARD static constexpr auto max() noexcept -> result_type;
+    [[nodiscard]] static constexpr auto min() noexcept -> result_type;
+    [[nodiscard]] static constexpr auto max() noexcept -> result_type;
 
     constexpr auto seed(result_type value = default_seed) noexcept -> void;
     constexpr auto discard(unsigned long long z) noexcept -> void;
 
-    MC_NODISCARD constexpr auto operator()() noexcept -> result_type;
+    [[nodiscard]] constexpr auto operator()() noexcept -> result_type;
 
     template<typename U>
     friend constexpr auto operator==(

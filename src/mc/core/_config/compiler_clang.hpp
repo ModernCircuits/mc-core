@@ -22,9 +22,7 @@
 #define MC_ATTRIBUTE_UNUSED      __attribute__((__unused__))
 #define MC_MAY_ALIAS             __attribute__((__may_alias__))
 #define MC_UNREACHABLE_RETURN(x) __builtin_unreachable();
-#define MC_NODISCARD             __attribute__((warn_unused_result))  // NOLINT
-
-#define MC_FUNC_SIG __PRETTY_FUNCTION__
+#define MC_FUNC_SIG              __PRETTY_FUNCTION__
 
 #if defined(__cpp_inline_variables)
 #define MC_INLINE_VAR inline

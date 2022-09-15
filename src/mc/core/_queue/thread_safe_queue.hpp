@@ -25,7 +25,7 @@ struct ThreadSafeQueue
     ThreadSafeQueue(ThreadSafeQueue&& other)              = delete;
     auto operator=(ThreadSafeQueue&&) -> ThreadSafeQueue& = delete;
 
-    MC_NODISCARD auto pop() -> Optional<value_type>
+    [[nodiscard]] auto pop() -> Optional<value_type>
     {
         std::lock_guard<std::mutex> const lock(_mutex);
         if (_queue.empty()) { return Optional<value_type>{nullopt}; }
@@ -46,7 +46,7 @@ struct ThreadSafeQueue
         _queue.push(std::move(item));
     }
 
-    MC_NODISCARD auto size() const -> size_type
+    [[nodiscard]] auto size() const -> size_type
     {
         std::lock_guard<std::mutex> const lock(_mutex);
         return _queue.size();
@@ -54,7 +54,7 @@ struct ThreadSafeQueue
 
 private:
     // Moved out of public interface to prevent races between this and pop().
-    MC_NODISCARD auto empty() const -> bool { return _queue.empty(); }
+    [[nodiscard]] auto empty() const -> bool { return _queue.empty(); }
 
     std::queue<value_type> _queue{};
     std::mutex mutable _mutex{};

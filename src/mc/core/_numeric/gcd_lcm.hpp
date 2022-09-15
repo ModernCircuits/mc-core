@@ -15,14 +15,14 @@ using std::lcm;
 
 namespace mc {
 template<typename M, typename N>
-MC_NODISCARD constexpr auto gcd(M m, N n) noexcept -> std::common_type_t<M, N>
+[[nodiscard]] constexpr auto gcd(M m, N n) noexcept -> std::common_type_t<M, N>
 {
     if (n == 0) { return m; }
     return gcd<M, N>(n, m % n);
 }
 
 template<typename M, typename N>
-MC_NODISCARD constexpr auto lcm(M m, N n) -> std::enable_if_t<
+[[nodiscard]] constexpr auto lcm(M m, N n) -> std::enable_if_t<
     std::is_integral<M>::value             //
         && !std::is_same<M, bool>::value   //
         && std::is_integral<N>::value      //

@@ -17,7 +17,7 @@ using std::as_const;
 
 namespace mc {
 template<typename T>
-MC_NODISCARD constexpr auto as_const(T& t) noexcept  // NOLINT
+[[nodiscard]] constexpr auto as_const(T& t) noexcept  // NOLINT
     -> std::add_const_t<T>&
 {
     return t;
