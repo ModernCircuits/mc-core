@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: BSL-1.0
 #pragma once
 
-#define CF_EXCLUDE_CSTD_HEADERS
 #include <TargetConditionals.h>
 
 // https://riptutorial.com/xcode/example/1219/targetconditionals
