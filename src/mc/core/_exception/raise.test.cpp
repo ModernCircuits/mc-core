@@ -6,6 +6,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers.hpp>
 
+#if not defined(MC_PLATFORM_EMSCRIPTEN)
+
 TEST_CASE("exception.hpp: raise", "[exception]", )
 {
     auto foo = [] { mc::raise<mc::InvalidArgument>("foo"); };
@@ -21,3 +23,5 @@ TEST_CASE("exception.hpp: raisef", "[exception]", )
     REQUIRE_THROWS_AS(fooBar(), mc::InvalidArgument);
     REQUIRE_THROWS_WITH(fooBar(), "foo bar");
 }
+
+#endif
