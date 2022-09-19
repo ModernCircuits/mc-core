@@ -3,11 +3,10 @@
 ## 0.11.0 (tbd)
 
 - Modernize to C++17
-- `exception.hpp`: Add raise & raisef
+- `exception.hpp`: Add `mc::raise` & `mc::raisef`
 - `print.hpp`: Add header
-- `cstdint.hpp`: Add fixed-width integer types
-- `cstddef.hpp`: Add size_t, ssize_t, ptrdiff_t & Byte
-- Add library [mdspan](https://github.com/kokkos/mdspan)
+- `cstdint.hpp`: Add fixed-width integer types to `mc` namespace
+- `cstddef.hpp`: Add `size_t`, `ssize_t`, `ptrdiff_t` & `Byte` to `mc` namespace
 
 ## 0.10.0 (2022-09-15)
 

@@ -32,7 +32,6 @@
 #include <mc/core/iterator.hpp>
 #include <mc/core/limits.hpp>
 #include <mc/core/map.hpp>
-#include <mc/core/mdspan.hpp>
 #include <mc/core/memory.hpp>
 #include <mc/core/memory_resource.hpp>
 #include <mc/core/mutex.hpp>

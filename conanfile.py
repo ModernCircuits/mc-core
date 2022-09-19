@@ -42,7 +42,6 @@ class ModernCircuitsCore(ConanFile):
         self.requires("concurrentqueue/1.0.3")
         self.requires("fmt/9.1.0")
         self.requires("gcem/1.14.1")
-        self.requires("mdspan/0.1.0")
         self.requires("range-v3/0.12.0")
         self.requires("readerwriterqueue/1.0.6")
         self.requires("tl-expected/1.0.0")

@@ -57,7 +57,6 @@ target_sources(mc-core-tests
         "src/mc/core/expected.test.cpp"
         "src/mc/core/format.test.cpp"
         "src/mc/core/iterator.test.cpp"
-        "src/mc/core/mdspan.test.cpp"
         "src/mc/core/numbers.test.cpp"
         "src/mc/core/numeric.test.cpp"
         "src/mc/core/_random/xorshift32.test.cpp"
