@@ -18,6 +18,7 @@ Checks: >
   -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-macro-usage,
   -cppcoreguidelines-special-member-functions,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
 
   misc-*,
   -misc-no-recursion,
@@ -31,6 +32,7 @@ Checks: >
   -readability-function-cognitive-complexity,
   -readability-identifier-length,
   -readability-magic-numbers,
+
 WarningsAsErrors: "*"
 FormatStyle: none
 CheckOptions:
