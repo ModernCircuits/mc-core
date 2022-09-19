@@ -1,4 +1,4 @@
 // SPDX-License-Identifier: BSL-1.0
 #pragma once
 
-#include <cstdint>
+#include <mc/core/_cstdint/int_t.hpp>
