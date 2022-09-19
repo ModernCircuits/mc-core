@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.0 (tbd)
+
+- Modernize to C++17
+- `exception.hpp`: Add `mc::raise` & `mc::raisef`
+- `print.hpp`: Add header
+
 ## 0.10.0 (2022-09-15)
 
 - Drop C++14 support
