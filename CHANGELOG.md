@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.11.0 (tbd)
+## 0.11.0 (2022-09-27)
 
 - Modernize to C++17
 - `exception.hpp`: Add raise & raisef
