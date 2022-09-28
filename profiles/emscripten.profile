@@ -9,7 +9,7 @@ compiler.libcxx=libc++
 [options]
 
 [tool_requires]
-emsdk/3.1.16
+emsdk/3.1.23
 
 [env]
 
