@@ -3,6 +3,7 @@
 ## 0.12.0 (tbd)
 
 - `utility.hpp`: Add pair alias
+- `bit.hpp`: Add byteswap (from C++23)
 
 ## 0.11.0 (2022-09-27)
 

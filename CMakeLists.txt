@@ -51,6 +51,7 @@ target_sources(mc-core-tests
     PRIVATE
         "src/mc/core.test.cpp"
 
+        "src/mc/core/_bit/byteswap.test.cpp"
         "src/mc/core/bit.test.cpp"
         "src/mc/core/cmath.test.cpp"
         "src/mc/core/_exception/raise.test.cpp"
