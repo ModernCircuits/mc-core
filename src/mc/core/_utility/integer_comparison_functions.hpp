@@ -31,7 +31,6 @@ template<typename T, typename U>
         using UT = std::make_unsigned_t<T>;
         return t < 0 ? false : UT(t) == u;
     } else {
-        static_assert(not std::is_signed_v<T> and not std::is_signed_v<U>);
         using UU = std::make_unsigned_t<U>;
         return u < 0 ? false : t == UU(u);
     }

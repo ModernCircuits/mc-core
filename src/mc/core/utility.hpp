@@ -2,5 +2,6 @@
 #pragma once
 
 #include <mc/core/_utility/integer_comparison_functions.hpp>
+#include <mc/core/_utility/pair.hpp>
 
 #include <utility>

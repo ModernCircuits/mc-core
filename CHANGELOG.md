@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.0 (tbd)
+
+- `utility.hpp`: Add pair alias
+
 ## 0.11.0 (2022-09-27)
 
 - Modernize to C++17
