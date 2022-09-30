@@ -1,9 +1,11 @@
 # Changelog
 
-## 0.12.0 (tbd)
+## 0.12.0 (2022-09-30)
 
 - `utility.hpp`: Add pair alias
 - `bit.hpp`: Add byteswap (from C++23)
+- Improve tests of fallback implementations
+- Cleanup folder structure
 
 ## 0.11.0 (2022-09-27)
 
