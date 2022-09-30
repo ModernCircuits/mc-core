@@ -66,4 +66,5 @@ target_sources(mc-core-tests
         "src/mc/core/queue.test.cpp"
         "src/mc/core/scope.test.cpp"
         "src/mc/core/units.test.cpp"
+        "src/mc/core/_utility/integer_comparison_functions.test.cpp"
 )
