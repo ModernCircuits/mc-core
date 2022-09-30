@@ -27,7 +27,7 @@ template<typename T, typename U>
 {
     if constexpr (std::is_signed_v<T> and std::is_signed_v<U>) {
         return t == u;
-    } else if (std::is_signed_v<T> and not std::is_signed_v<U>) {
+    } else if constexpr (std::is_signed_v<T> and not std::is_signed_v<U>) {
         using UT = std::make_unsigned_t<T>;
         return t < 0 ? false : UT(t) == u;
     } else {
