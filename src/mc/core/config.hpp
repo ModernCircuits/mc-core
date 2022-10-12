@@ -38,11 +38,10 @@
 #include <mc/core/_config/debug_break.hpp>
 #include <mc/core/_config/documentation.hpp>
 #include <mc/core/_config/preprocessor.hpp>
+#include <mc/core/_config/thread_safety_attributes.hpp>
 
 #if defined(__cpp_if_consteval)
-#define MC_IF_CONSTEVAL                                                        \
-    if                                                                         \
-    consteval
+#define MC_IF_CONSTEVAL if consteval
 #else
 #define MC_IF_CONSTEVAL if (__builtin_is_constant_evaluated())
 #endif
