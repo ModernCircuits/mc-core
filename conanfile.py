@@ -41,12 +41,12 @@ class ModernCircuitsCore(ConanFile):
     def requirements(self):
         self.requires("concurrentqueue/1.0.3")
         self.requires("fmt/9.1.0")
-        self.requires("gcem/1.14.1")
+        self.requires("gcem/1.16.0")
         self.requires("range-v3/0.12.0")
         self.requires("readerwriterqueue/1.0.6")
         self.requires("tl-expected/1.0.0")
         self.requires("tl-optional/1.0.0")
-        self.requires("xsimd/8.1.0")
+        self.requires("xsimd/9.0.1")
 
         if self.settings.os != "Emscripten":
             self.requires("boost/1.80.0")

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.0 (2022-10-28)
+
+- Add clang thread-safety attributes
+- Update gcem to 0.16.0
+- Update xsimd to 9.0.1
+
 ## 0.12.0 (2022-09-30)
 
 - `utility.hpp`: Add pair alias
