@@ -48,4 +48,4 @@ using XorShift32 = BasicXorShift32<std::uint32_t>;
 
 }  // namespace mc
 
-#include "xorshift32.impl.hpp"
+#include "xorshift32.ipp"

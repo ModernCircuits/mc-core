@@ -86,6 +86,13 @@ class ModernCircuitsCore(ConanFile):
             dst=os.path.join(self.package_folder, "include"),
         )
 
+        copy(
+            conanfile=self,
+            pattern="*.ipp",
+            src=os.path.join(self.source_folder, "src"),
+            dst=os.path.join(self.package_folder, "include"),
+        )
+
         cmake = CMake(self)
         cmake.install()
 
