@@ -101,3 +101,6 @@ class ModernCircuitsCore(ConanFile):
         self.cpp_info.names["cmake_find_package_multi"] = "mc-core"
         self.cpp_info.names["pkg_config"] = "mc-core"
         self.cpp_info.set_property("cmake_target_name", "mc::core")
+
+    def imports(self):
+        self.copy("license*", dst="licenses", folder=True, ignore_case=True)
