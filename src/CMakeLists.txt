@@ -32,7 +32,7 @@ target_link_libraries(mc-core
 
         concurrentqueue::concurrentqueue
         fmt::fmt
-        gcem::gcem
+        gcem
         range-v3::range-v3
         readerwriterqueue::readerwriterqueue
         tl::expected

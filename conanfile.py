@@ -15,7 +15,7 @@ class ModernCircuitsCore(ConanFile):
     url = "https://github.com/ModernCircuits/mc-core"
     description = "Wrapper around the STL, Boost & other useful libraries."
     license = "BSL-1.0"
-
+    generators = "markdown"
     settings = "os", "compiler", "build_type", "arch"
 
     no_copy_source = True
