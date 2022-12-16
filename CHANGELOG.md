@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.14.0 (tbd)
+## 0.14.0 (2022-12-16)
 
 - Update xsimd to 10.0.0
 - Update catch2 to 3.2.1
