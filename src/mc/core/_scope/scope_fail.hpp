@@ -47,7 +47,8 @@ private:
 };
 
 enum struct ScopeFailFactory
-{};
+{
+};
 
 template<typename FuncT>
 auto operator+(ScopeFailFactory /*tag*/, FuncT&& fn)

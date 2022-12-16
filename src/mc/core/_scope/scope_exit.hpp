@@ -27,7 +27,8 @@ private:
 namespace detail {
 
 enum struct ScopeExitFactory
-{};
+{
+};
 
 template<typename Func>
 auto operator+(ScopeExitFactory /*unused*/, Func&& func) -> ScopeExit<Func>
