@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.14.0 (tbd)
+
+- Update xsimd to 10.0.0
+- Update catch2 to 3.2.1
+
 ## 0.13.0 (2022-10-28)
 
 - Add clang thread-safety attributes

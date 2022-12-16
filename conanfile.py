@@ -44,16 +44,16 @@ class ModernCircuitsCore(ConanFile):
         self.requires("gcem/1.16.0")
         self.requires("range-v3/0.12.0")
         self.requires("readerwriterqueue/1.0.6")
-        self.requires("tl-expected/1.0.0")
+        self.requires("tl-expected/20190710")
         self.requires("tl-optional/1.0.0")
-        self.requires("xsimd/9.0.1")
+        self.requires("xsimd/10.0.0")
 
         if self.settings.os != "Emscripten":
             self.requires("boost/1.80.0")
 
     def build_requirements(self):
         if self._build_all:
-            self.test_requires("catch2/3.1.0")
+            self.test_requires("catch2/3.2.1")
 
     def config_options(self):
         self.options["boost"].header_only = True
