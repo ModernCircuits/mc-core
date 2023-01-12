@@ -49,7 +49,7 @@ class ModernCircuitsCore(ConanFile):
         self.requires("xsimd/10.0.0")
 
         if self.settings.os != "Emscripten":
-            self.requires("boost/1.80.0")
+            self.requires("boost/1.81.0")
 
     def build_requirements(self):
         if self._build_all:

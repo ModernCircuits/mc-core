@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.0 (tbd)
+
+- Update boost to 1.81.0
+
 ## 0.14.0 (2022-12-16)
 
 - Update xsimd to 10.0.0
