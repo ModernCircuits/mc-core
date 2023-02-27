@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         cxx_std: [17, 20, 23]
+        build_type: ["Debug", "Release"]
       fail-fast: false
     runs-on: ubuntu-22.04
     steps:
@@ -30,18 +31,16 @@ jobs:
           pip install conan
           conan profile detect --force
 
-      - name: Build dependencies
-        run: |
-          conan install -of build --build=missing -pr:b=default -pr:h=default -c tools.cmake.cmaketoolchain:generator=Ninja -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Debug .
-          conan install -of build --build=missing -pr:b=default -pr:h=default -c tools.cmake.cmaketoolchain:generator=Ninja -s compiler.cppstd="${{ matrix.cxx_std }}" -s build_type=Release .
+      - name: Build Dependencies
+        run: >
+          conan install
+          -of build
+          --build=missing
+          -pr:b=default
+          -pr:h=default
+          -c tools.cmake.cmaketoolchain:generator=Ninja
+          -s compiler.cppstd="${{ matrix.target.cxx }}"
+          -s build_type="${{ matrix.build_type }}" .
 
-      - name: Build
-        run: |
-          cmake -S. -Bbuild -G"Ninja Multi-Config" -DCMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -DCMAKE_CXX_STANDARD="${{ matrix.cxx_std }}" -DMODERNCIRCUITS_ENABLE_WERROR=ON
-          cmake --build build --config Debug
-          cmake --build build --config Release
-
-      - name: Test
-        run: |
-          ctest --test-dir build -C Debug --output-on-failure
-          ctest --test-dir build -C Release --output-on-failure
+      - name: Build & Test
+        run: conan build . -of build

@@ -11,6 +11,7 @@ jobs:
     name: Build & Test
     strategy:
       matrix:
+        build_type: ["Debug", "Release"]
         target:
           [
             { "runner": "macos-10.15", "target": "10.14", "cxx": 17 },
@@ -34,7 +35,7 @@ jobs:
           pip3 install --upgrade conan
           conan profile detect --force
 
-      - name: Build dependencies - Debug
+      - name: Build Dependencies
         run: >
           conan install
           -of build
@@ -43,35 +44,7 @@ jobs:
           -pr:h=default
           -c tools.cmake.cmaketoolchain:generator=Ninja
           -s compiler.cppstd="${{ matrix.target.cxx }}"
-          -s build_type=Debug .
+          -s build_type="${{ matrix.build_type }}" .
 
-      - name: Build dependencies - Release
-        run: >
-          conan install
-          -of build
-          --build=missing
-          -pr:b=default
-          -pr:h=default
-          -c tools.cmake.cmaketoolchain:generator=Ninja
-          -s compiler.cppstd="${{ matrix.target.cxx }}"
-          -s build_type=Release .
-
-      - name: Build
-        run: >
-          cmake -S . -B build
-          -G "Ninja Multi-Config"
-          -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake"
-          -D CMAKE_CXX_STANDARD="${{ matrix.target.cxx }}"
-          -D MODERNCIRCUITS_ENABLE_WERROR=ON
-
-      - name: Build dependencies - Debug
-        run: cmake --build build --config Debug
-
-      - name: Build dependencies - Release
-        run: cmake --build build --config Release
-
-      - name: Test - Debug
-        run: ctest --test-dir build -C Debug --output-on-failure
-
-      - name: Test - Release
-        run: ctest --test-dir build -C Release --output-on-failure
+      - name: Build & Test
+        run: conan build . -of build

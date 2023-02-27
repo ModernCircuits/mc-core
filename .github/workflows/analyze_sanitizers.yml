@@ -48,15 +48,5 @@ jobs:
           -s compiler.cppstd="${{ matrix.std }}"
           -s build_type=Debug .
 
-      - name: Configure CMake
-        run: |
-          cmake -S. -B build -G"Ninja" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -D CMAKE_CXX_STANDARD="${{ matrix.std }}" -D "${{ matrix.sanitizer.flags }}" -DMODERNCIRCUITS_ENABLE_WERROR=ON
-
-      - name: Show compile commands
-        run: cat build/compile_commands.json
-
       - name: Build
-        run: cmake --build build --config Debug
-
-      - name: Run tests
-        run: ctest --test-dir build -C Debug
+        run: conan build . -of build
