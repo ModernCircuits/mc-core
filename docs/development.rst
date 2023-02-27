@@ -16,8 +16,8 @@ Compile
 
 .. code-block:: shell
 
-    conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd=20 -s build_type=Debug .
-    conan install -if build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd=20 -s build_type=Release .
+    conan install -of build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd=20 -s build_type=Debug .
+    conan install -of build --build=missing -pr:b=default -pr:h=default -s compiler.cppstd=20 -s build_type=Release .
 
     cmake -S . -Bbuild -G "Ninja Multi-Config" -DCMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake" -DCMAKE_CXX_STANDARD=20
 

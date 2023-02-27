@@ -37,7 +37,7 @@ jobs:
       - name: Build dependencies - Debug
         run: >
           conan install
-          -if build
+          -of build
           --build=missing
           -pr:b=default
           -pr:h=default
@@ -48,7 +48,7 @@ jobs:
       - name: Build dependencies - Release
         run: >
           conan install
-          -if build
+          -of build
           --build=missing
           -pr:b=default
           -pr:h=default

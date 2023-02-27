@@ -40,7 +40,7 @@ jobs:
       - name: Build dependencies
         run: >
           conan install
-          -if build
+          -of build
           --build=missing
           -c tools.cmake.cmaketoolchain:generator=Ninja
           -pr:b=default
