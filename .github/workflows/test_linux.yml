@@ -39,8 +39,8 @@ jobs:
           -pr:b=default
           -pr:h=default
           -c tools.cmake.cmaketoolchain:generator=Ninja
-          -s compiler.cppstd="${{ matrix.target.cxx }}"
+          -s compiler.cppstd="${{ matrix.cxx_std }}"
           -s build_type="${{ matrix.build_type }}" .
 
       - name: Build & Test
-        run: conan build . -of build
+        run: conan build . -of build --build=missing

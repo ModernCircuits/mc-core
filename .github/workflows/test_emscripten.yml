@@ -39,4 +39,4 @@ jobs:
           .
 
       - name: Build & Test
-        run: conan build -of build .
+        run: conan build -of build . --build=missing

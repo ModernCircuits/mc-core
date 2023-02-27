@@ -35,7 +35,6 @@ jobs:
         run: |
           pip install conan
           conan profile detect --force
-          conan profile show default
 
       - name: Build dependencies
         run: >
@@ -49,4 +48,4 @@ jobs:
           -s build_type=Debug .
 
       - name: Build
-        run: conan build . -of build
+        run: conan build . -of build --build=missing
