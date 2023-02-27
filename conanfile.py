@@ -6,8 +6,7 @@ import os
 from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain
 from conan.tools.files import copy, load
-
-required_conan_version = ">=1.50.0"
+from conan.tools.build import check_min_cppstd
 
 
 class ModernCircuitsCore(ConanFile):
@@ -15,7 +14,6 @@ class ModernCircuitsCore(ConanFile):
     url = "https://github.com/ModernCircuits/mc-core"
     description = "Wrapper around the STL, Boost & other useful libraries."
     license = "BSL-1.0"
-    generators = "markdown"
     settings = "os", "compiler", "build_type", "arch"
 
     no_copy_source = True
@@ -27,9 +25,7 @@ class ModernCircuitsCore(ConanFile):
         "CMakeLists.txt",
     ]
 
-    @property
-    def _build_all(self):
-        return bool(self.conf["user.build:all"])
+    generators = "CMakeDeps"
 
     def set_version(self):
         path = os.path.join(self.recipe_folder, "src/CMakeLists.txt")
@@ -38,12 +34,14 @@ class ModernCircuitsCore(ConanFile):
         ver = re.search(regex, content).group(1)
         self.version = ver.strip()
 
+    def validate(self):
+        check_min_cppstd(self, "17")
+
     def requirements(self):
         self.requires("concurrentqueue/1.0.3")
         self.requires("fmt/9.1.0")
         self.requires("gcem/1.16.0")
         self.requires("range-v3/0.12.0")
-        self.requires("readerwriterqueue/1.0.6")
         self.requires("tl-expected/20190710")
         self.requires("tl-optional/1.0.0")
         self.requires("xsimd/10.0.0")
@@ -51,9 +49,7 @@ class ModernCircuitsCore(ConanFile):
         if self.settings.os != "Emscripten":
             self.requires("boost/1.81.0")
 
-    def build_requirements(self):
-        if self._build_all:
-            self.test_requires("catch2/3.2.1")
+        self.test_requires("catch2/3.3.1")
 
     def config_options(self):
         self.options["boost"].header_only = True
@@ -61,15 +57,13 @@ class ModernCircuitsCore(ConanFile):
     def generate(self):
         tc = CMakeToolchain(self)
         tc.generate()
-        deps = CMakeDeps(self)
-        deps.generate()
 
     def build(self):
+        skip_tests = self.conf.get("tools.build:skip_test", default=False)
         cmake = CMake(self)
-        cmake.configure(build_script_folder=None if self._build_all else "src")
+        cmake.configure(build_script_folder=None if skip_tests else "src")
         cmake.build()
-        if self._build_all:
-            cmake.test()
+        cmake.test()
 
     def package(self):
         copy(

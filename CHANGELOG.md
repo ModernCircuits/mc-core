@@ -3,6 +3,9 @@
 ## 0.15.0 (tbd)
 
 - Update boost to 1.81.0
+- Update catch2 to 3.3.1
+- Remove readerwriterqueue
+- Prepare for conan v2
 
 ## 0.14.0 (2022-12-16)
 

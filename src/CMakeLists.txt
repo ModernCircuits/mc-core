@@ -11,7 +11,6 @@ find_package(concurrentqueue REQUIRED)
 find_package(fmt REQUIRED)
 find_package(gcem REQUIRED)
 find_package(range-v3 REQUIRED)
-find_package(readerwriterqueue REQUIRED)
 find_package(tl-expected REQUIRED)
 find_package(tl-optional REQUIRED)
 find_package(Threads REQUIRED)
@@ -34,7 +33,6 @@ target_link_libraries(mc-core
         fmt::fmt
         gcem
         range-v3::range-v3
-        readerwriterqueue::readerwriterqueue
         tl::expected
         tl::optional
         Threads::Threads

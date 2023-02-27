@@ -9,8 +9,6 @@
 #endif
 
 #include <moodycamel/concurrentqueue.h>
-#include <readerwriterqueue/readerwritercircularbuffer.h>
-#include <readerwriterqueue/readerwriterqueue.h>
 
 #if defined(MC_COMPILER_MSVC)
 #pragma warning(pop)
