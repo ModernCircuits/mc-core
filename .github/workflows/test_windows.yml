@@ -33,7 +33,6 @@ jobs:
         run: |
           pip install --upgrade conan
           conan profile detect --force
-          conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
       - name: Build dependencies
         run: >
@@ -41,7 +40,7 @@ jobs:
           --build=missing
           -pr:b=default
           -pr:h=default
-          -c user.build:all=True
+          -c tools.cmake.cmaketoolchain:generator=Ninja
           -s compiler.cppstd="${{ matrix.cxx_std }}"
           -s build_type="${{ matrix.build_mode }}" .
 
@@ -92,7 +91,6 @@ jobs:
           --build=missing
           -pr:b=default
           -pr:h=default
-          -c user.build:all=True
           -s compiler.cppstd="${{ matrix.cxx_std }}"
           -s build_type="${{ matrix.build_mode }}" .
 

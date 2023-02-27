@@ -4,7 +4,7 @@ import re
 import os
 
 from conan import ConanFile
-from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain
+from conan.tools.cmake import CMake, CMakeToolchain, cmake_layout
 from conan.tools.files import copy, load
 from conan.tools.build import check_min_cppstd
 
@@ -54,14 +54,17 @@ class ModernCircuitsCore(ConanFile):
     def config_options(self):
         self.options["boost"].header_only = True
 
+    def layout(self):
+        skip_tests = self.conf.get("tools.build:skip_test", default=False)
+        cmake_layout(self, src_folder="src" if skip_tests else ".")
+
     def generate(self):
         tc = CMakeToolchain(self)
         tc.generate()
 
     def build(self):
-        skip_tests = self.conf.get("tools.build:skip_test", default=False)
         cmake = CMake(self)
-        cmake.configure(build_script_folder=None if skip_tests else "src")
+        cmake.configure()
         cmake.build()
         cmake.test()
 

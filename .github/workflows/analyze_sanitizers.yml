@@ -35,7 +35,6 @@ jobs:
         run: |
           pip install conan
           conan profile detect --force
-          conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
           conan profile show default
 
       - name: Build dependencies
@@ -43,7 +42,7 @@ jobs:
           conan install
           -if build
           --build=missing
-          -c user.build:all=True
+          -c tools.cmake.cmaketoolchain:generator=Ninja
           -pr:b=default
           -pr:h=default
           -s compiler.cppstd="${{ matrix.std }}"

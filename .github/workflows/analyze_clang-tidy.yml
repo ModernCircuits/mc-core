@@ -31,19 +31,18 @@ jobs:
         run: |
           pip install conan
           conan profile detect --force
-          conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
-          conan profile update settings.compiler=clang default
-          conan profile update settings.compiler.version=15 default
-          conan profile update env.CXX=/usr/bin/clang++-15 default
-          conan profile update env.CC=/usr/bin/clang-15 default
-          conan profile show default
+          # conan profile update settings.compiler=clang default
+          # conan profile update settings.compiler.version=15 default
+          # conan profile update env.CXX=/usr/bin/clang++-15 default
+          # conan profile update env.CC=/usr/bin/clang-15 default
+          # conan profile show default
 
       - name: Build dependencies
         run: >
           conan install
           -if build
           --build=missing
-          -c user.build:all=True
+          -c tools.cmake.cmaketoolchain:generator=Ninja
           -pr:b=default
           -pr:h=default
           -s compiler.cppstd=17

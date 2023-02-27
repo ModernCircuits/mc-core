@@ -25,7 +25,6 @@ jobs:
         run: |
           pip install conan
           conan profile detect --force
-          conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
       - name: Build dependencies
         run: >
@@ -36,7 +35,7 @@ jobs:
           -pr:h="profiles/emscripten.profile"
           -s compiler.cppstd=20
           -s build_type=Release
-          -c user.build:all=True
+          -c tools.cmake.cmaketoolchain:generator=Ninja
           .
 
       - name: Build & Test
