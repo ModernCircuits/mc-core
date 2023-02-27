@@ -8,7 +8,7 @@ Setup
 
     sudo apt install cmake ninja
     pip install conan
-    conan config init
+    conan profile detect --force
     conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
 Compile

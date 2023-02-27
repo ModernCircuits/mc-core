@@ -34,7 +34,7 @@ jobs:
       - name: Install conan
         run: |
           pip install conan
-          conan config init
+          conan profile detect --force
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
           conan profile show default
 

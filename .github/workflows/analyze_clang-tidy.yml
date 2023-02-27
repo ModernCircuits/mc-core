@@ -30,7 +30,7 @@ jobs:
       - name: Install Conan
         run: |
           pip install conan
-          conan config init
+          conan profile detect --force
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
           conan profile update settings.compiler=clang default
           conan profile update settings.compiler.version=15 default
