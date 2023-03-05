@@ -1,4 +1,4 @@
-CXX_STD ?= 17
+CXX_STD ?= 20
 
 BUILD_DIR ?= cmake-build-debug
 

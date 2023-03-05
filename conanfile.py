@@ -9,6 +9,9 @@ from conan.tools.files import copy, load
 from conan.tools.build import check_min_cppstd
 
 
+required_conan_version = ">=2.0.0"
+
+
 class ModernCircuitsCore(ConanFile):
     name = "mc-core"
     url = "https://github.com/ModernCircuits/mc-core"
@@ -35,7 +38,7 @@ class ModernCircuitsCore(ConanFile):
         self.version = ver.strip()
 
     def validate(self):
-        check_min_cppstd(self, "17")
+        check_min_cppstd(self, "20")
 
     def requirements(self):
         self.requires("concurrentqueue/1.0.3")

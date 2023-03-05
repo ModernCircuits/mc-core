@@ -8,11 +8,16 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: ${{ matrix.profile.name }} / ${{ matrix.cxx_std }} / ${{ matrix.build_mode }}
     strategy:
       matrix:
-        profile: ["default", "profiles/win_clangcl.profile"]
-        cxx_std: [17, 20, 23]
+        profile:
+          [
+            { name: "msvc", file: "profiles/win_msvc" },
+            { name: "clang", file: "profiles/win_clang" },
+            { name: "clang-cl", file: "profiles/win_clangcl" },
+          ]
+        cxx_std: [20, 23]
         build_mode: ["Debug", "Release"]
       fail-fast: false
     runs-on: windows-2022
@@ -28,12 +33,12 @@ jobs:
       - name: Install conan
         run: |
           pip install --upgrade conan
-          conan profile detect --force
 
       - name: Build dependencies
         run: >
           conan build -of build .
           --build=missing
-          -pr="${{ matrix.profile }}"
+          -pr "${{ matrix.profile.file }}"
           -s compiler.cppstd="${{ matrix.cxx_std }}"
+          -s compiler.runtime_type="${{ matrix.build_mode }}"
           -s build_type="${{ matrix.build_mode }}"

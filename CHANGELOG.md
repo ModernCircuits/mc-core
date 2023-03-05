@@ -6,6 +6,7 @@
 - Update catch2 to 3.3.1
 - Remove readerwriterqueue
 - Prepare for conan v2
+- Set minimum C++ version to 20
 
 ## 0.14.0 (2022-12-16)
 

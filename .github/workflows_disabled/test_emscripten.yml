@@ -32,7 +32,7 @@ jobs:
           -of build
           --build=missing
           -pr:b=default
-          -pr:h="profiles/emscripten.profile"
+          -pr:h="profiles/emscripten"
           -s compiler.cppstd=20
           -s build_type=Release
           -c tools.cmake.cmaketoolchain:generator=Ninja
