@@ -38,7 +38,8 @@ jobs:
         run: >
           conan build -of build .
           --build=missing
-          -pr "${{ matrix.profile.file }}"
+          -pr:b "${{ matrix.profile.file }}"
+          -pr:h "${{ matrix.profile.file }}"
           -s compiler.cppstd="${{ matrix.cxx_std }}"
           -s compiler.runtime_type="${{ matrix.build_mode }}"
           -s build_type="${{ matrix.build_mode }}"
